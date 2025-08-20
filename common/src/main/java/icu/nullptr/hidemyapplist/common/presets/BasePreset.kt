@@ -5,7 +5,7 @@ import android.content.pm.ApplicationInfo
 abstract class BasePreset(val name: String) {
     val packageNames = mutableSetOf<String>()
 
-    abstract fun onAddExactPackages()
+    open fun addExactPackages() {}
 
-    abstract fun onReloadPreset(appInfo: ApplicationInfo): Boolean
+    abstract fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean
 }

@@ -4,7 +4,7 @@ import android.content.pm.ApplicationInfo
 import java.util.zip.ZipFile
 
 class RootAppsPreset() : BasePreset("root_apps") {
-    override fun onAddExactPackages() {
+    override fun addExactPackages() {
         // rooted apps
         packageNames += arrayOf(
             "io.github.a13e300.ksuwebui",
@@ -48,7 +48,7 @@ class RootAppsPreset() : BasePreset("root_apps") {
         // TODO: Add more rooted apps and other root managers
     }
 
-    override fun onReloadPreset(appInfo: ApplicationInfo): Boolean {
+    override fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean {
         val packageName = appInfo.packageName
 
         if (packageNames.contains(packageName)) {
@@ -57,49 +57,46 @@ class RootAppsPreset() : BasePreset("root_apps") {
 
         // Iconify
         if (packageName.startsWith("com.drdisagree.iconify")) {
-            packageNames.add(packageName)
             return true
         }
 
         // MMRL
         if (packageName.startsWith("com.dergoogler.mmrl")) {
-            packageNames.add(packageName)
+            return true
+        }
+
+        // MT Manager
+        if (packageName.startsWith("bin.mt.plus")) {
             return true
         }
 
         // Magisk
         if (packageName.endsWith(".magisk")) {
-            packageNames.add(packageName)
             return true
         }
 
         // APatch
         if (packageName.contains(".apatch.") || packageName.endsWith(".apatch")) {
-            packageNames.add(packageName)
             return true
         }
 
         // DataBackup
-        if (packageName.contains("com.xayah.databackup")) {
-            packageNames.add(packageName)
+        if (packageName.startsWith("com.xayah.databackup")) {
             return true
         }
 
         // SmartPack Kernel Manager + Busybox Installer
         if (packageName.startsWith("com.smartpack.")) {
-            packageNames.add(packageName)
             return true
         }
 
         // F-Droid Privileged
         if (packageName.startsWith("org.fdroid.fdroid.privileged")) {
-            packageNames.add(packageName)
             return true
         }
 
         ZipFile(appInfo.sourceDir).use { zipFile ->
-            if (findRootManagerFromLibs(zipFile)) {
-                packageNames.add(appInfo.packageName)
+            if (findAppsFromLibs(zipFile) || findAppsFromAssets(zipFile)) {
                 return true
             }
         }
@@ -107,12 +104,13 @@ class RootAppsPreset() : BasePreset("root_apps") {
         return false
     }
 
-    private fun findRootManagerFromLibs(zipFile: ZipFile): Boolean {
+    private fun findAppsFromLibs(zipFile: ZipFile): Boolean {
         val entryNames = listOf(
             "libkernelsu.so",
             "libapd.so",
             "libmagisk.so",
-            "libmmrl-kernelsu.so"
+            "libmmrl-kernelsu.so",
+            "liblsplant.so",
         )
         val architectures = listOf("arm64-v8a", "armeabi-v7a")
 
@@ -121,6 +119,21 @@ class RootAppsPreset() : BasePreset("root_apps") {
                 if (zipFile.getEntry("lib/$arch/$entry") != null) {
                     return true
                 }
+            }
+        }
+
+        return false
+    }
+
+    private fun findAppsFromAssets(zipFile: ZipFile): Boolean {
+        val entryNames = listOf(
+            "gamma_profiles.json",
+            "main.jar",
+        )
+
+        for (entry in entryNames) {
+            if (zipFile.getEntry("assets/$entry") != null) {
+                return true
             }
         }
 

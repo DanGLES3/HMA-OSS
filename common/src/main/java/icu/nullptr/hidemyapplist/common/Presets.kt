@@ -36,7 +36,7 @@ class Presets private constructor() {
 
         presetList.forEach {
             if (it.packageNames.isEmpty()) {
-                it.onAddExactPackages()
+                it.addExactPackages()
 
                 if (appsList == null) {
                     appsList = getInstalledApplicationsCompat(pms, 0, 0)
@@ -44,7 +44,8 @@ class Presets private constructor() {
 
                 for (appInfo in appsList) {
                     runCatching {
-                        it.onReloadPreset(appInfo)
+                        if (it.canBeAddedIntoPreset(appInfo))
+                            it.packageNames.add(appInfo.packageName)
                     }.onFailure { fail ->
                         loggerFunction?.invoke(fail.toString())
                     }
@@ -66,7 +67,8 @@ class Presets private constructor() {
 
                 if (appInfo != null) {
                     runCatching {
-                        if (it.onReloadPreset(appInfo!!)) {
+                        if (it.canBeAddedIntoPreset(appInfo!!)) {
+                            it.packageNames.add(appInfo!!.packageName)
                             loggerFunction?.invoke("Package $packageName added into ${it.name}!")
                             addedInAList = true
                         }
