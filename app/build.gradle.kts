@@ -18,7 +18,6 @@ android {
         buildConfig = true
         viewBinding = true
     }
-
     packaging {
         dex.useLegacyPackaging = true
         resources {
