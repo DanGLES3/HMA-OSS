@@ -5,7 +5,7 @@ import android.os.Binder
 import android.os.Parcel
 import com.github.kyuubiran.ezxhelper.utils.findMethod
 import com.github.kyuubiran.ezxhelper.utils.hookBefore
-import icu.nullptr.hidemyapplist.common.BuildConfig
+import org.frknkrc44.hma_oss.BuildConfig
 import icu.nullptr.hidemyapplist.common.Constants
 
 object BridgeService {
