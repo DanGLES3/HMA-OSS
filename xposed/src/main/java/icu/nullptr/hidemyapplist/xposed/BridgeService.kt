@@ -5,8 +5,8 @@ import android.os.Binder
 import android.os.Parcel
 import com.github.kyuubiran.ezxhelper.utils.findMethod
 import com.github.kyuubiran.ezxhelper.utils.hookBefore
-import org.frknkrc44.hma_oss.BuildConfig
 import icu.nullptr.hidemyapplist.common.Constants
+import icu.nullptr.hidemyapplist.common.Utils
 
 object BridgeService {
 
@@ -15,12 +15,10 @@ object BridgeService {
     private var appUid = 0
 
     fun register(pms: IPackageManager) {
-        logI(TAG, "Initialize HMAService - Version ${BuildConfig.SERVICE_VERSION}")
         val service = HMAService(pms)
         appUid = Utils.getPackageUidCompat(service.pms, Constants.APP_PACKAGE_NAME, 0, 0)
         val appPackage = Utils.getPackageInfoCompat(service.pms, Constants.APP_PACKAGE_NAME, 0, 0)
-        if (!Utils.verifyAppSignature(appPackage.applicationInfo.sourceDir)) {
-            logE(TAG, "Fatal: App signature mismatch")
+        if (!Utils.verifyAppSignature(appPackage.applicationInfo?.sourceDir.toString())) {
             return
         }
         logD(TAG, "Client uid: $appUid")
