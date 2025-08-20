@@ -35,15 +35,14 @@ jobs:
           java-version: '21'
 
       - name: Write key
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+        if: github.event_name != 'pull_request'
         run: |
           echo officialBuild=true >> local.properties
           echo buildWithGitSuffix=true >> local.properties
-          echo storePassword='${{ secrets.KEY_STORE_PASSWORD }}' >> local.properties
-          echo keyAlias='${{ secrets.ALIAS }}' >> local.properties
-          echo keyPassword='${{ secrets.ALIAS_KEY_PASSWORD }}' >> local.properties
+          echo storePassword='android' >> local.properties
+          echo keyAlias='androiddebugkey' >> local.properties
+          echo keyPassword='android' >> local.properties
           echo fileDir=`pwd`/key.jks >> local.properties
-          echo "${{ secrets.KEY_STORE }}" | base64 --decode > key.jks
 
       - name: Cache gradle
         uses: actions/cache@v4
