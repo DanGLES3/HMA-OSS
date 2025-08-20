@@ -57,12 +57,11 @@ jobs:
         run: |
           ./gradlew prebuild
 
-      - name: Build all
-        id: buildAll
+      - name: Build release
+        id: buildRelease
         run: |
-          ./gradlew assemble
-          echo "releaseName=$(ls app/build/outputs/apk/release/*.apk | awk -F '(/|.apk)' '{print $5}')" >> $GITHUB_OUTPUT
-          echo "debugName=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $5}')" >> $GITHUB_OUTPUT
+          ./gradlew :app:buildRelease
+          echo "releaseName=$(ls app/build/apk/release/HMAL*.apk | awk -F '(/|.apk)' '{print $5}')" >> $GITHUB_OUTPUT
 
       - name: Upload release
         if: success()
@@ -70,13 +69,6 @@ jobs:
         with:
           name: ${{ steps.buildAll.outputs.releaseName }}
           path: "app/build/outputs/apk/release/*.apk"
-
-      - name: Upload debug
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.buildAll.outputs.debugName }}
-          path: "app/build/outputs/apk/debug/*.apk"
 
       - name: Upload mappings
         uses: actions/upload-artifact@v4
