@@ -3,7 +3,6 @@ import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 plugins {
     alias(libs.plugins.agp.app)
     alias(libs.plugins.autoresconfig)
-    alias(libs.plugins.materialthemebuilder)
     alias(libs.plugins.refine)
     alias(libs.plugins.kotlin)
     alias(libs.plugins.kotlin.serialization)
@@ -42,41 +41,6 @@ autoResConfig {
     generatedArrayFirstItem.set("SYSTEM")
 }
 
-materialThemeBuilder {
-    themes {
-        for ((name, color) in listOf(
-            "Red" to "F44336",
-            "Pink" to "E91E63",
-            "Purple" to "9C27B0",
-            "DeepPurple" to "673AB7",
-            "Indigo" to "3F51B5",
-            "Blue" to "2196F3",
-            "LightBlue" to "03A9F4",
-            "Cyan" to "00BCD4",
-            "Teal" to "009688",
-            "Green" to "4FAF50",
-            "LightGreen" to "8BC3A4",
-            "Lime" to "CDDC39",
-            "Yellow" to "FFEB3B",
-            "Amber" to "FFC107",
-            "Orange" to "FF9800",
-            "DeepOrange" to "FF5722",
-            "Brown" to "795548",
-            "BlueGrey" to "607D8F",
-            "Sakura" to "FF9CA8"
-        )) {
-            create("Material$name") {
-                lightThemeFormat = "ThemeOverlay.Light.%s"
-                darkThemeFormat = "ThemeOverlay.Dark.%s"
-                primaryColor = "#$color"
-            }
-        }
-    }
-    // Add Material Design 3 color tokens (such as palettePrimary100) in generated theme
-    // rikka.material >= 2.0.0 provides such attributes
-    generatePalette = true
-}
-
 dependencies {
     implementation(projects.common)
     runtimeOnly(projects.xposed)
@@ -93,11 +57,11 @@ dependencies {
     implementation(libs.com.github.topjohnwu.libsu.core)
     implementation(libs.com.squareup.okhttp3)
     implementation(libs.dev.rikka.hidden.compat)
-    implementation(libs.dev.rikka.rikkax.material)
-    implementation(libs.dev.rikka.rikkax.material.preference)
     implementation(libs.me.zhanghai.android.appiconloader)
     compileOnly(libs.dev.rikka.hidden.stub)
     ksp(libs.com.github.liujingxing.rxhttp.compiler)
+
+    implementation(libs.androidx.appcompat.appcompat)
     implementation(libs.material)
 }
 
@@ -107,8 +71,4 @@ android.applicationVariants.all {
             outputFileName = "${rootProject.name.replace(" ", "_")}-v${versionName}-${buildType.name}.apk"
         }
     }
-}
-
-configurations.all {
-    exclude("androidx.appcompat", "appcompat")
 }

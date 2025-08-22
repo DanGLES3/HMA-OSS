@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import me.zhanghai.android.appiconloader.AppIconLoader
 import org.frknkrc44.hma_oss.R
-import rikka.material.app.LocaleDelegate
 import java.util.Locale
 import kotlin.system.exitProcess
 
@@ -41,14 +40,13 @@ class MyApp : Application() {
         ConfigManager.init()
 
         AppCompatDelegate.setDefaultNightMode(PrefManager.darkTheme)
-        LocaleDelegate.defaultLocale = getLocale(PrefManager.locale)
         val config = resources.configuration
-        config.setLocale(LocaleDelegate.defaultLocale)
+        config.setLocale(getLocale(PrefManager.locale))
         resources.updateConfiguration(config, resources.displayMetrics)
     }
 
     fun getLocale(tag: String): Locale {
-        return if (tag == "SYSTEM") LocaleDelegate.systemLocale
+        return if (tag == "SYSTEM") Locale.getDefault()
         else Locale.forLanguageTag(tag)
     }
 }

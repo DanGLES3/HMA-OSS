@@ -183,4 +183,10 @@
     <string name="color_deep_orange">Deep orange</string>
     <string name="color_brown">Brown</string>
     <string name="color_blue_grey">Blue grey</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Dark theme</string>
+    <string name="dark_theme_off">Off</string>
+    <string name="dark_theme_on">On</string>
+    <string name="dark_theme_follow_system">Follow system</string>
 </resources>
