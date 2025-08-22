@@ -3,23 +3,25 @@ package org.frknkrc44.hma_oss.ui.fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import icu.nullptr.hidemyapplist.hmaApp
+import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.service.ServiceClient
 import icu.nullptr.hidemyapplist.ui.activity.AboutActivity
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.getColor
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.setCircleBackground
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.themeColor
+import icu.nullptr.hidemyapplist.ui.util.makeToast
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
 import org.frknkrc44.hma_oss.BuildConfig
 import org.frknkrc44.hma_oss.R
 import org.frknkrc44.hma_oss.databinding.FragmentHomeBinding
+import java.io.IOException
+import java.util.Calendar
 
 /**
  * A simple [Fragment] subclass.
@@ -28,6 +30,46 @@ import org.frknkrc44.hma_oss.databinding.FragmentHomeBinding
  */
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding<FragmentHomeBinding>()
+
+    private val backupSAFLauncher =
+        registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) backup@{ uri ->
+            if (uri == null) return@backup
+            ConfigManager.configFile.inputStream().use { input ->
+                hmaApp.contentResolver.openOutputStream(uri).use { output ->
+                    if (output == null) makeToast(R.string.home_export_failed)
+                    else input.copyTo(output)
+                }
+            }
+            makeToast(R.string.home_exported)
+        }
+
+    private val restoreSAFLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) restore@{ uri ->
+            if (uri == null) return@restore
+            runCatching {
+                val backup = hmaApp.contentResolver
+                    .openInputStream(uri)?.reader().use { it?.readText() }
+                    ?: throw IOException(getString(R.string.home_import_file_damaged))
+                ConfigManager.importConfig(backup)
+                makeToast(R.string.home_import_successful)
+            }.onFailure {
+                it.printStackTrace()
+                MaterialAlertDialogBuilder(requireContext())
+                    .setCancelable(false)
+                    .setTitle(R.string.home_import_failed)
+                    .setMessage(it.message)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .setNegativeButton(R.string.show_crash_log) { _, _ ->
+                        MaterialAlertDialogBuilder(requireActivity())
+                            .setCancelable(false)
+                            .setTitle(R.string.home_import_failed)
+                            .setMessage(it.stackTraceToString())
+                            .setPositiveButton(android.R.string.ok, null)
+                            .show()
+                    }
+                    .show()
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupToolbar(
@@ -107,6 +149,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             text1.text = getString(R.string.title_template_manage)
             itemIcon.setImageResource(R.drawable.ic_outline_layers_24)
             itemIcon.setCircleBackground(getColor(R.color.invalid))
+        }
+
+        binding.backupConfig.setOnClickListener {
+            backupSAFLauncher.launch("HMA_Config_${Calendar.getInstance().timeInMillis}.json")
+        }
+
+        binding.restoreConfig.setOnClickListener {
+            restoreSAFLauncher.launch("application/json")
         }
     }
 

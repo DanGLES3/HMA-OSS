@@ -1,6 +1,5 @@
 package org.frknkrc44.hma_oss.ui.activity
 
-import android.content.res.Resources
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
