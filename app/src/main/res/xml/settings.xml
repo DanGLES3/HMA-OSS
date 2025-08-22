@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory android:title="@string/settings_language">
-        <rikka.preference.SimpleMenuPreference
+        <ListPreference
             android:defaultValue="SYSTEM"
             android:icon="@drawable/outline_language_24"
             android:key="language"
@@ -17,22 +17,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_theme">
-        <SwitchPreference
-            android:defaultValue="true"
-            android:disableDependentsState="true"
-            android:icon="@drawable/outline_palette_24"
-            android:key="followSystemAccent"
-            android:title="@string/settings_system_theme_color" />
-        <rikka.preference.SimpleMenuPreference
-            android:defaultValue="MATERIAL_BLUE"
-            android:dependency="followSystemAccent"
-            android:entries="@array/color_texts"
-            android:entryValues="@array/color_values"
-            android:icon="@drawable/outline_format_color_fill_24"
-            android:key="themeColor"
-            android:summary="%s"
-            android:title="@string/settings_theme_color" />
-        <rikka.preference.SimpleMenuPreference
+        <ListPreference
             android:defaultValue="-1"
             android:entries="@array/theme_texts"
             android:entryValues="@array/theme_values"
@@ -40,7 +25,7 @@
             android:key="darkTheme"
             android:summary="%s"
             android:title="@string/dark_theme" />
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/outline_invert_colors_24"
             android:key="blackDarkTheme"
             android:summary="@string/settings_pure_black_dark_theme_summary"
@@ -53,11 +38,11 @@
             android:key="dataIsolation"
             android:title="@string/settings_data_isolation"
             app:fragment="icu.nullptr.hidemyapplist.ui.fragment.SettingsFragment$DataIsolationPreferenceFragment" />
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/outline_bug_report_24"
             android:key="detailLog"
             android:title="@string/settings_detail_log" />
-        <rikka.preference.SimpleMenuPreference
+        <ListPreference
             android:defaultValue="512"
             android:entries="@array/max_log_size_entries"
             android:entryValues="@array/max_log_size_values"
@@ -65,7 +50,7 @@
             android:key="maxLogSize"
             android:summary="%s"
             android:title="@string/settings_max_log_size" />
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/outline_hide_image_24"
             android:key="hideIcon"
             android:summary="@string/settings_hide_icon_summary"
@@ -84,20 +69,4 @@
             android:summary="@string/settings_force_clean_env_summary"
             android:title="@string/settings_force_clean_env" />
     </PreferenceCategory>
-
-    <!--
-    <PreferenceCategory android:title="@string/settings_update">
-        <SwitchPreference
-            android:disableDependentsState="true"
-            android:icon="@drawable/outline_update_disabled_24"
-            android:key="disableUpdate"
-            android:title="@string/settings_disable_update" />
-        <SwitchPreference
-            android:dependency="disableUpdate"
-            android:icon="@drawable/outline_speed_24"
-            android:key="receiveBetaUpdate"
-            android:summary="@string/settings_receive_beta_update_summary"
-            android:title="@string/settings_receive_beta_update" />
-    </PreferenceCategory>
-    -->
 </PreferenceScreen>

@@ -7,6 +7,7 @@ import icu.nullptr.hidemyapplist.receiver.AppChangeReceiver
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.service.PrefManager
 import icu.nullptr.hidemyapplist.ui.util.makeToast
+import icu.nullptr.hidemyapplist.util.ConfigUtils.Companion.getLocale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import me.zhanghai.android.appiconloader.AppIconLoader
@@ -41,12 +42,7 @@ class MyApp : Application() {
 
         AppCompatDelegate.setDefaultNightMode(PrefManager.darkTheme)
         val config = resources.configuration
-        config.setLocale(getLocale(PrefManager.locale))
+        config.setLocale(getLocale())
         resources.updateConfiguration(config, resources.displayMetrics)
-    }
-
-    fun getLocale(tag: String): Locale {
-        return if (tag == "SYSTEM") Locale.getDefault()
-        else Locale.forLanguageTag(tag)
     }
 }

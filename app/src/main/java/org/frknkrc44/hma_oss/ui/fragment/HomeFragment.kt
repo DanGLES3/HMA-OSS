@@ -21,7 +21,6 @@ import org.frknkrc44.hma_oss.BuildConfig
 import org.frknkrc44.hma_oss.R
 import org.frknkrc44.hma_oss.databinding.FragmentHomeBinding
 import java.io.IOException
-import java.util.Calendar
 
 /**
  * A simple [Fragment] subclass.
@@ -152,7 +151,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         binding.backupConfig.setOnClickListener {
-            backupSAFLauncher.launch("HMA_Config_${Calendar.getInstance().timeInMillis}.json")
+            backupSAFLauncher.launch("HMA_Config_${System.currentTimeMillis()}.json")
         }
 
         binding.restoreConfig.setOnClickListener {
