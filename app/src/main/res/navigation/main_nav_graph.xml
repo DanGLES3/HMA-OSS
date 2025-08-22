@@ -5,6 +5,7 @@
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/home_nav_graph">
     <include app:graph="@navigation/home_nav_graph" />
+    <!--
     <fragment
         android:id="@+id/nav_logs"
         android:name="icu.nullptr.hidemyapplist.ui.fragment.LogsFragment"
@@ -14,4 +15,5 @@
         android:id="@+id/nav_settings"
         android:name="icu.nullptr.hidemyapplist.ui.fragment.SettingsFragment"
         android:label="@string/title_settings" />
+    -->
 </navigation>
