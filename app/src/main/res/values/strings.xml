@@ -5,9 +5,9 @@
     <string name="title_home">Home</string>
     <string name="title_logs">Logs</string>
     <string name="title_settings">Settings</string>
-    <string name="title_template_manage">Template manage</string>
+    <string name="title_template_manage">Manage templates</string>
     <string name="title_template_settings">Template settings</string>
-    <string name="title_app_manage">App manage</string>
+    <string name="title_app_manage">Manage apps</string>
     <string name="title_app_select">Select apps</string>
     <string name="title_app_settings">App settings</string>
     <string name="title_about">About</string>
@@ -33,7 +33,7 @@
     <string name="system">System</string>
 
     <!-- Home -->
-    <string name="home_xposed_activated">Module Activated [%s-%d]</string>
+    <string name="home_xposed_activated">Module Activated [%s]</string>
     <string name="home_xposed_not_activated">Module Not Activated</string>
     <string name="home_xposed_service_on">System service running [%d]</string>
     <string name="home_xposed_service_off">System service not running</string>
@@ -65,7 +65,7 @@
     <string name="list_sort_by_install_time">By install time</string>
     <string name="list_sort_by_update_time">By update time</string>
 
-    <!-- Template manage -->
+    <!-- Manage templates -->
     <string name="template_usage_hint">Establish templates for \"restless\" apps, controlling applist they can obtain.\n\nBlacklist (recommended): the apps selected in the template will be invisible to the apps applying the template.\nWhitelist: the apps not selected in the template will be invisible to the apps applying the template.</string>
     <string name="template_new_blacklist">Create a blacklist template</string>
     <string name="template_new_whitelist">Create a whitelist template</string>
@@ -154,7 +154,7 @@
     </string>
     <string name="about_how_to_use_title">How to use this module</string>
     <string name="about_how_to_use_description_1">
-        You can create templates in \"Template manage\".\nThen apply the templates to apps in \"App manage\". (You can also select extra apps for targets.)\nYou should and ONLY should check \"System Framework\" in Xposed module scope / whitelist.
+        You can create templates in \"Manage templates\".\nThen apply the templates to apps in \"Manage apps\". (You can also select extra apps for targets.)\nYou should and ONLY should check \"System Framework\" in Xposed module scope / whitelist.
     </string>
     <string name="about_how_to_use_description_2">
         Config modification effective in real time.

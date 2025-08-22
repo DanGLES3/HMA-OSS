@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,7 +24,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="20dp"
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -34,45 +32,46 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
-                app:cardCornerRadius="24dp"
-                android:layout_margin="8dp"
+            <include
                 android:id="@+id/status_card"
+                layout="@layout/view_status_card" />
+
+            <include
+                android:id="@+id/how_to_use"
+                layout="@layout/view_home_item" />
+
+            <include
+                android:id="@+id/manage_apps"
+                layout="@layout/view_home_item" />
+
+            <include
+                android:id="@+id/manage_templates"
+                layout="@layout/view_home_item" />
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
+                <com.google.android.material.button.MaterialButton
+                    app:icon="@drawable/outline_backup_24"
+                    android:text="@string/home_backup_config"
+                    android:layout_marginRight="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/item_padding_vertical"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
-                    <TextView
-                        android:id="@+id/app_version"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                        android:textColor="?android:colorBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                <com.google.android.material.button.MaterialButton
+                    app:icon="@drawable/outline_settings_backup_restore_24"
+                    android:text="@string/home_restore_config"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
-                    <TextView
-                        android:id="@+id/service_status"
-                        android:layout_marginTop="8dp"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                        android:textColor="?android:colorBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/filter_count"
-                        android:layout_marginTop="8dp"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                        android:textColor="?android:colorBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
         </LinearLayout>
 

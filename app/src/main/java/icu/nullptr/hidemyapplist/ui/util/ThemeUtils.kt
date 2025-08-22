@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.widget.ImageView
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -30,6 +33,13 @@ object ThemeUtils {
     fun getNightThemeStyleRes(context: Context): Int {
         return /*if (PrefManager.blackDarkTheme && isNightMode(context))
             R.style.Base_AppTheme else*/ R.style.Base_AppTheme
+    }
+
+    fun ImageView.setCircleBackground(@ColorInt color: Int) {
+        val gradientDrawable = GradientDrawable()
+        gradientDrawable.setColor(color)
+        gradientDrawable.cornerRadius = resources.displayMetrics.density * 96
+        background = gradientDrawable
     }
 
     /**
