@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -185,7 +184,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
             preferenceManager.preferenceDataStore = SettingsPreferenceDataStore()
             setPreferencesFromResource(R.xml.settings, rootKey)
 
-            @Suppress("DEPRECATION")
             findPreference<ListPreference>("language")?.let {
                 val userLocale = getLocale()
                 val entries = buildList {
@@ -193,7 +191,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                         if (lang == "SYSTEM") add(getString(R.string.dark_theme_follow_system))
                         else {
                             val locale = Locale.forLanguageTag(lang)
-                            add(HtmlCompat.fromHtml(locale.getDisplayName(locale), HtmlCompat.FROM_HTML_MODE_LEGACY))
+                            add(locale.getDisplayName(locale))
                         }
                     }
                 }
