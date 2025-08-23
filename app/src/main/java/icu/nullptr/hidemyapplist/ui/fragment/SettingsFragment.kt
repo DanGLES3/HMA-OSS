@@ -46,14 +46,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 .replace(R.id.settings_container, SettingsPreferenceFragment())
                 .commit()
         }
-
-        val insets = binding.root.rootWindowInsets.getInsets(WindowInsets.Type.systemBars())
-        binding.settingsContainer.setPadding(
-            insets.left,
-            0,
-            insets.right,
-            insets.bottom,
-        )
     }
 
     override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat, pref: Preference): Boolean {

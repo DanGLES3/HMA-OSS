@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import icu.nullptr.hidemyapplist.hmaApp
@@ -14,10 +13,8 @@ import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.service.ServiceClient
 import icu.nullptr.hidemyapplist.ui.activity.AboutActivity
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.getColor
-import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.setCircleBackground
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.themeColor
 import icu.nullptr.hidemyapplist.ui.util.makeToast
-import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.navigate
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
 import org.frknkrc44.hma_oss.BuildConfig
@@ -101,10 +98,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             root.outlineSpotShadowColor = color
 
             if (hmaApp.isHooked) {
+                moduleStatusIcon.setImageResource(R.drawable.outline_done_all_24)
                 val versionNameSimple = BuildConfig.VERSION_NAME.substringBefore(".r")
                 moduleStatus.text =
                     getString(R.string.home_xposed_activated, versionNameSimple)
             } else {
+                moduleStatusIcon.setImageResource(R.drawable.outline_done_all_24)
                 moduleStatus.setText(R.string.home_xposed_not_activated)
             }
 
@@ -159,15 +158,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             // itemIcon.setCircleBackground(getColor(R.color.error))
             root.setOnClickListener {
                 navigate(R.id.nav_logs)
-            }
-        }
-
-        with(binding.navSettings) {
-            text1.text = getString(R.string.title_settings)
-            itemIcon.setImageResource(R.drawable.outline_settings_24)
-            // itemIcon.setCircleBackground(getColor(R.color.gray))
-            root.setOnClickListener {
-                navigate(R.id.nav_settings)
             }
         }
 

@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         DynamicColors.applyToActivityIfAvailable(this)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        setupWithNavController(binding.bottomNav, navController)
     }
 
     override fun onApplyThemeResource(theme: Resources.Theme, resid: Int, first: Boolean) {

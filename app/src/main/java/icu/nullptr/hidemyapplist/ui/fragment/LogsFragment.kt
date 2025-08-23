@@ -3,6 +3,7 @@ package icu.nullptr.hidemyapplist.ui.fragment
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowInsets
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -139,5 +140,14 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
         binding.list.adapter = adapter
         binding.list.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         updateLogs()
+
+
+        val insets = binding.root.rootWindowInsets
+        binding.root.setPadding(
+            insets.systemWindowInsetLeft,
+            insets.systemWindowInsetTop,
+            insets.systemWindowInsetRight,
+            0,
+        )
     }
 }
