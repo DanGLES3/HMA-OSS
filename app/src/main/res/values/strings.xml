@@ -31,6 +31,7 @@
     <string name="no">No</string>
     <string name="search">Search</string>
     <string name="system">System</string>
+    <string name="follow_system">Follow system</string>
 
     <!-- Home -->
     <string name="home_xposed_activated">Module Activated [%s]</string>
@@ -188,5 +189,4 @@
     <string name="dark_theme">Dark theme</string>
     <string name="dark_theme_off">Always off</string>
     <string name="dark_theme_on">Always on</string>
-    <string name="dark_theme_follow_system">Follow system</string>
 </resources>
