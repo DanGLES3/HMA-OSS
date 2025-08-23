@@ -95,12 +95,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             root.outlineSpotShadowColor = color
 
             if (hmaApp.isHooked) {
-                moduleStatusIcon.setImageResource(R.drawable.outline_done_all_24)
+                moduleStatusIcon.setImageResource(R.drawable.sentiment_calm_24px)
                 val versionNameSimple = BuildConfig.VERSION_NAME.substringBefore(".r")
                 moduleStatus.text =
                     getString(R.string.home_xposed_activated, versionNameSimple)
             } else {
-                moduleStatusIcon.setImageResource(R.drawable.outline_done_all_24)
+                moduleStatusIcon.setImageResource(R.drawable.sentiment_very_dissatisfied_24px)
                 moduleStatus.setText(R.string.home_xposed_not_activated)
             }
 

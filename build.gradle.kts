@@ -18,7 +18,7 @@ fun String.execute(currentWorkingDir: File = file("./")): String {
 }
 
 fun getUncommittedSuffix(): String {
-    val result = "git status -suno".execute()
+    val result = "git status -s".execute()
     if (result.isEmpty()) {
         return ""
     }
