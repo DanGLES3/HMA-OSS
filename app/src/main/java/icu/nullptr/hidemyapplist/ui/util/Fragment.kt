@@ -19,10 +19,10 @@ val Fragment.navController get() = NavHostFragment.findNavController(this)
 
 fun Fragment.navigate(@IdRes resId: Int, args: Bundle? = null) {
     val navOptions = NavOptions.Builder().apply {
-        setEnterAnim(R.anim.slide_in_right)
-        setExitAnim(R.anim.slide_out_left)
-        setPopEnterAnim(R.anim.slide_in_left)
-        setPopExitAnim(R.anim.slide_out_right)
+        setEnterAnim(androidx.navigation.ui.R.anim.nav_default_enter_anim)
+        setExitAnim(androidx.navigation.ui.R.anim.nav_default_exit_anim)
+        setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
+        setPopExitAnim(androidx.navigation.ui.R.anim.nav_default_pop_exit_anim)
     }.build()
 
     navController.navigate(resId, args, navOptions)
