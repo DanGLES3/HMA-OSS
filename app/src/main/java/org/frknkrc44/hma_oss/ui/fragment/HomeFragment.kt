@@ -1,7 +1,6 @@
 package org.frknkrc44.hma_oss.ui.fragment
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -11,7 +10,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import icu.nullptr.hidemyapplist.hmaApp
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.service.ServiceClient
-import icu.nullptr.hidemyapplist.ui.activity.AboutActivity
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.getColor
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.themeColor
 import icu.nullptr.hidemyapplist.ui.util.makeToast
@@ -71,14 +69,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupToolbar(
-            toolbar = binding.toolbar,
-            title = getString(R.string.app_name),
-            menuRes = R.menu.menu_about,
-            onMenuOptionSelected = {
-                startActivity(Intent(requireContext(), AboutActivity::class.java))
-            }
-        )
+        with(binding.toolbar) {
+            setupToolbar(
+                toolbar = binding.toolbar,
+                title = getString(R.string.app_name),
+            )
+            isTitleCentered = true
+        }
     }
 
     @SuppressLint("StringFormatInvalid")

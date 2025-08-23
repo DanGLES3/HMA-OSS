@@ -1,10 +1,10 @@
 package icu.nullptr.hidemyapplist.ui.fragment
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.preference.ListPreference
@@ -20,8 +20,8 @@ import icu.nullptr.hidemyapplist.hmaApp
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.service.PrefManager
 import icu.nullptr.hidemyapplist.service.ServiceClient
+import icu.nullptr.hidemyapplist.ui.activity.AboutActivity
 import icu.nullptr.hidemyapplist.ui.util.makeToast
-import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
 import icu.nullptr.hidemyapplist.util.ConfigUtils.Companion.getLocale
 import icu.nullptr.hidemyapplist.util.LangList
@@ -36,9 +36,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         with(binding.toolbar) {
-            setupToolbar(this, getString(R.string.title_settings))
-            setNavigationIcon(R.drawable.baseline_arrow_back_24)
-            setNavigationOnClickListener { navController.popBackStack() }
+            setupToolbar(
+                toolbar = this,
+                title = getString(R.string.title_settings),
+                menuRes = R.menu.menu_about,
+                onMenuOptionSelected = {
+                    startActivity(Intent(requireContext(), AboutActivity::class.java))
+                }
+            )
+            isTitleCentered = true
         }
 
         if (childFragmentManager.findFragmentById(R.id.settings_container) == null) {
