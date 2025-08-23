@@ -10,27 +10,26 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
-import com.google.android.material.color.DynamicColors
 import icu.nullptr.hidemyapplist.service.PrefManager
 import org.frknkrc44.hma_oss.R
 
 object ThemeUtils {
     private const val THEME_DEFAULT = "DEFAULT"
-    // private const val THEME_BLACK = "BLACK"
-
-    val isSystemAccent get() = DynamicColors.isDynamicColorAvailable() && PrefManager.followSystemAccent
+    private const val THEME_BLACK = "BLACK"
 
     fun isNightMode(context: Context) = (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
+    fun isUsingBlackTheme(context: Context) = PrefManager.blackDarkTheme && isNightMode(context)
+
     fun getNightTheme(context: Context): String {
-        return /*if (PrefManager.blackDarkTheme && isNightMode(context))
-            THEME_BLACK else*/ THEME_DEFAULT
+        return if (isUsingBlackTheme(context))
+            THEME_BLACK else THEME_DEFAULT
     }
 
     @StyleRes
     fun getNightThemeStyleRes(context: Context): Int {
-        return /*if (PrefManager.blackDarkTheme && isNightMode(context))
-            R.style.Base_AppTheme else*/ R.style.Base_AppTheme
+        return if (isUsingBlackTheme(context))
+            R.style.ThemeOverlay_Black else R.style.ThemeOverlay
     }
 
     fun ImageView.setCircleBackground(@ColorInt color: Int) {

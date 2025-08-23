@@ -12,7 +12,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import me.zhanghai.android.appiconloader.AppIconLoader
 import org.frknkrc44.hma_oss.R
-import java.util.Locale
 import kotlin.system.exitProcess
 
 lateinit var hmaApp: MyApp
