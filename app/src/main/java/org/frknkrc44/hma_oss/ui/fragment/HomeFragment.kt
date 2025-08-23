@@ -1,16 +1,25 @@
 package org.frknkrc44.hma_oss.ui.fragment
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.marginLeft
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import icu.nullptr.hidemyapplist.hmaApp
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.service.ServiceClient
+import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.attrDrawable
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.getColor
+import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.homeItemBackgroundColor
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.themeColor
 import icu.nullptr.hidemyapplist.ui.util.makeToast
 import icu.nullptr.hidemyapplist.ui.util.navigate
@@ -121,9 +130,99 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
+        with(binding.howToUse.root.parent as ViewGroup) {
+            val childCount = childCount
+
+            val softCorner: Float = resources.displayMetrics.density * 24
+            val squareCorner: Float = resources.displayMetrics.density * 8
+            val pad = (resources.displayMetrics.density * 16).toInt()
+
+            for (i in 0..< childCount) {
+                getChildAt(i).apply {
+                    (this as ViewGroup).apply {
+                        findViewById<TextView>(android.R.id.text1).setTextColor(
+                            themeColor(
+                                com.google.android.material.R.attr.colorOnSurface,
+                            ),
+                        )
+
+                        findViewById<ImageView>(android.R.id.icon).setColorFilter(
+                            themeColor(
+                                com.google.android.material.R.attr.colorOnSurface,
+                            ),
+                        )
+                    }
+
+                    (layoutParams as LinearLayout.LayoutParams).apply {
+                        if (i == 0) {
+                            setMargins(pad, pad, pad, 0)
+                        } else if (i == childCount - 1) {
+                            setMargins(pad, 0, pad, pad)
+                        } else {
+                            setMargins(pad, 0, pad, 0)
+                        }
+                    }
+
+                    val backgroundDrawable = GradientDrawable()
+                    backgroundDrawable.setColor(homeItemBackgroundColor())
+
+                    if (i == 0) {
+                        backgroundDrawable.setCornerRadii(
+                            floatArrayOf(
+                                softCorner,
+                                softCorner,
+                                softCorner,
+                                softCorner,
+                                squareCorner,
+                                squareCorner,
+                                squareCorner,
+                                squareCorner
+                            )
+                        )
+                    } else if (i == childCount - 1) {
+                        backgroundDrawable.setCornerRadii(
+                            floatArrayOf(
+                                squareCorner,
+                                squareCorner,
+                                squareCorner,
+                                squareCorner,
+                                softCorner,
+                                softCorner,
+                                softCorner,
+                                softCorner
+                            )
+                        )
+                    } else {
+                        backgroundDrawable.setCornerRadii(
+                            floatArrayOf(
+                                squareCorner,
+                                squareCorner,
+                                squareCorner,
+                                squareCorner,
+                                squareCorner,
+                                squareCorner,
+                                squareCorner,
+                                squareCorner
+                            )
+                        )
+                    }
+
+                    val ripple = attrDrawable(android.R.attr.selectableItemBackground)
+                    val layerDrawable = LayerDrawable(arrayOf(
+                        backgroundDrawable,
+                        ripple,
+                    ))
+
+                    background = layerDrawable
+                    clipToOutline = true
+                }
+
+            }
+        }
+
         with(binding.howToUse) {
             text1.text = getString(R.string.about_how_to_use_title)
-            itemIcon.setImageResource(R.drawable.outline_info_24)
+            icon.setImageResource(R.drawable.outline_info_24)
             // itemIcon.setCircleBackground(getColor(R.color.info))
             root.setOnClickListener {
                 MaterialAlertDialogBuilder(requireContext())
@@ -139,19 +238,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         with(binding.manageApps) {
             text1.text = getString(R.string.title_app_manage)
-            itemIcon.setImageResource(R.drawable.outline_android_24)
+            icon.setImageResource(R.drawable.outline_android_24)
             // itemIcon.setCircleBackground(getColor(R.color.warn))
         }
 
         with(binding.manageTemplates) {
             text1.text = getString(R.string.title_template_manage)
-            itemIcon.setImageResource(R.drawable.ic_outline_layers_24)
+            icon.setImageResource(R.drawable.ic_outline_layers_24)
             // itemIcon.setCircleBackground(getColor(R.color.invalid))
         }
 
         with(binding.navLogs) {
             text1.text = getString(R.string.title_logs)
-            itemIcon.setImageResource(R.drawable.outline_assignment_24)
+            icon.setImageResource(R.drawable.outline_assignment_24)
             // itemIcon.setCircleBackground(getColor(R.color.error))
             root.setOnClickListener {
                 navigate(R.id.nav_logs)

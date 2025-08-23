@@ -3,6 +3,7 @@ package icu.nullptr.hidemyapplist.ui.util
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.widget.ImageView
 import androidx.annotation.AttrRes
@@ -10,6 +11,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
+import icu.nullptr.hidemyapplist.hmaApp
 import icu.nullptr.hidemyapplist.service.PrefManager
 import org.frknkrc44.hma_oss.R
 
@@ -32,13 +34,6 @@ object ThemeUtils {
             R.style.ThemeOverlay_Black else R.style.ThemeOverlay
     }
 
-    fun ImageView.setCircleBackground(@ColorInt color: Int) {
-        val gradientDrawable = GradientDrawable()
-        gradientDrawable.setColor(color)
-        gradientDrawable.cornerRadius = resources.displayMetrics.density * 96
-        background = gradientDrawable
-    }
-
     /**
      * Retrieve a color from the current [android.content.res.Resources.Theme].
      */
@@ -57,8 +52,27 @@ object ThemeUtils {
         @AttrRes themeAttrId: Int
     ) = requireContext().themeColor(themeAttrId)
 
+    fun Context.attrDrawable(
+        @AttrRes themeAttrId: Int
+    ): Drawable? {
+        val style = obtainStyledAttributes(intArrayOf(themeAttrId))
+        val drawable = style.getDrawable(0)
+        style.recycle()
+        return drawable
+    }
+
+    fun Fragment.attrDrawable(
+        @AttrRes themeAttrId: Int
+    ) = requireContext().attrDrawable(themeAttrId)
+
     @ColorInt
     fun Fragment.getColor(
         @ColorRes colorId: Int
     ) = requireContext().getColor(colorId)
+
+    fun Fragment.homeItemBackgroundColor() = if (isNightMode(requireContext())) {
+        themeColor(com.google.android.material.R.attr.colorSurfaceContainerHighest)
+    } else {
+        themeColor(com.google.android.material.R.attr.colorSurfaceContainer)
+    }
 }

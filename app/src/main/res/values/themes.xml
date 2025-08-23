@@ -10,10 +10,6 @@
 
         <!-- Preference title -->
         <item name="android:textAppearanceListItem">?textAppearanceSubtitle1</item>
-        <!-- Preference category title -->
-        <item name="android:colorAccent">?colorPrimary</item>
-        <!-- Preference switch -->
-        <item name="android:colorControlActivated">?colorPrimary</item>
 
         <item name="alertDialogTheme">@style/AppTheme.AlertDialog.Light</item>
         <item name="dialogCornerRadius">24dp</item>
@@ -29,10 +25,6 @@
 
         <!-- Preference title -->
         <item name="android:textAppearanceListItem">?textAppearanceSubtitle1</item>
-        <!-- Preference category title -->
-        <item name="android:colorAccent">?colorPrimary</item>
-        <!-- Preference switch -->
-        <item name="android:colorControlActivated">?colorPrimary</item>
 
         <item name="alertDialogTheme">@style/AppTheme.AlertDialog</item>
         <item name="dialogCornerRadius">24dp</item>

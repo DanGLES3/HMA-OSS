@@ -1,9 +1,12 @@
 package icu.nullptr.hidemyapplist.ui.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowInsets
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -123,6 +126,7 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
             )
             setNavigationIcon(R.drawable.baseline_arrow_back_24)
             setNavigationOnClickListener { navController.popBackStack() }
+            isTitleCentered = true
         }
 
         with(binding.toolbar.menu) {
@@ -140,13 +144,23 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
         binding.list.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         updateLogs()
 
-
         val insets = binding.root.rootWindowInsets
-        binding.root.setPadding(
-            insets.systemWindowInsetLeft,
-            insets.systemWindowInsetTop,
-            insets.systemWindowInsetRight,
-            0,
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val barInsets = insets.getInsets(WindowInsets.Type.systemBars())
+            binding.root.setPadding(
+                barInsets.left,
+                barInsets.top,
+                barInsets.right,
+                0,
+            )
+        } else {
+            @Suppress("deprecation")
+            binding.root.setPadding(
+                insets.systemWindowInsetLeft,
+                insets.systemWindowInsetTop,
+                insets.systemWindowInsetRight,
+                0,
+            )
+        }
     }
 }
