@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.preference.ListPreference
@@ -20,6 +21,7 @@ import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.service.PrefManager
 import icu.nullptr.hidemyapplist.service.ServiceClient
 import icu.nullptr.hidemyapplist.ui.util.makeToast
+import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
 import icu.nullptr.hidemyapplist.util.ConfigUtils.Companion.getLocale
 import icu.nullptr.hidemyapplist.util.LangList
@@ -33,13 +35,25 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
     private val binding by viewBinding<FragmentSettingsBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupToolbar(binding.toolbar, getString(R.string.title_settings))
+        with(binding.toolbar) {
+            setupToolbar(this, getString(R.string.title_settings))
+            setNavigationIcon(R.drawable.baseline_arrow_back_24)
+            setNavigationOnClickListener { navController.popBackStack() }
+        }
 
         if (childFragmentManager.findFragmentById(R.id.settings_container) == null) {
             childFragmentManager.beginTransaction()
                 .replace(R.id.settings_container, SettingsPreferenceFragment())
                 .commit()
         }
+
+        val insets = binding.root.rootWindowInsets.getInsets(WindowInsets.Type.systemBars())
+        binding.settingsContainer.setPadding(
+            insets.left,
+            0,
+            insets.right,
+            insets.bottom,
+        )
     }
 
     override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat, pref: Preference): Boolean {

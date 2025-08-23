@@ -1,17 +1,32 @@
 package icu.nullptr.hidemyapplist.ui.util
 
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
+import org.frknkrc44.hma_oss.R
 
 val Fragment.navController get() = NavHostFragment.findNavController(this)
+
+fun Fragment.navigate(@IdRes resId: Int, args: Bundle? = null) {
+    val navOptions = NavOptions.Builder().apply {
+        setEnterAnim(R.anim.slide_in_right)
+        setExitAnim(R.anim.slide_out_left)
+        setPopEnterAnim(R.anim.slide_in_left)
+        setPopExitAnim(R.anim.slide_out_right)
+    }.build()
+
+    navController.navigate(resId, args, navOptions)
+}
 
 fun Fragment.setupToolbar(
     toolbar: Toolbar,

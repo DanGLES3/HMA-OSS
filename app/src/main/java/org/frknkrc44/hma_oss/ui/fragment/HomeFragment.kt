@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import icu.nullptr.hidemyapplist.hmaApp
@@ -16,6 +17,8 @@ import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.getColor
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.setCircleBackground
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.themeColor
 import icu.nullptr.hidemyapplist.ui.util.makeToast
+import icu.nullptr.hidemyapplist.ui.util.navController
+import icu.nullptr.hidemyapplist.ui.util.navigate
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
 import org.frknkrc44.hma_oss.BuildConfig
 import org.frknkrc44.hma_oss.R
@@ -125,7 +128,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         with(binding.howToUse) {
             text1.text = getString(R.string.about_how_to_use_title)
             itemIcon.setImageResource(R.drawable.outline_info_24)
-            itemIcon.setCircleBackground(getColor(R.color.info))
+            // itemIcon.setCircleBackground(getColor(R.color.info))
             root.setOnClickListener {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.about_how_to_use_title)
@@ -141,13 +144,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         with(binding.manageApps) {
             text1.text = getString(R.string.title_app_manage)
             itemIcon.setImageResource(R.drawable.outline_android_24)
-            itemIcon.setCircleBackground(getColor(R.color.warn))
+            // itemIcon.setCircleBackground(getColor(R.color.warn))
         }
 
         with(binding.manageTemplates) {
             text1.text = getString(R.string.title_template_manage)
             itemIcon.setImageResource(R.drawable.ic_outline_layers_24)
-            itemIcon.setCircleBackground(getColor(R.color.invalid))
+            // itemIcon.setCircleBackground(getColor(R.color.invalid))
+        }
+
+        with(binding.navLogs) {
+            text1.text = getString(R.string.title_logs)
+            itemIcon.setImageResource(R.drawable.outline_assignment_24)
+            // itemIcon.setCircleBackground(getColor(R.color.error))
+            root.setOnClickListener {
+                navigate(R.id.nav_logs)
+            }
+        }
+
+        with(binding.navSettings) {
+            text1.text = getString(R.string.title_settings)
+            itemIcon.setImageResource(R.drawable.outline_settings_24)
+            // itemIcon.setCircleBackground(getColor(R.color.gray))
+            root.setOnClickListener {
+                navigate(R.id.nav_settings)
+            }
         }
 
         binding.backupConfig.setOnClickListener {

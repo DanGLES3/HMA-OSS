@@ -36,17 +36,41 @@
                 android:id="@+id/status_card"
                 layout="@layout/view_status_card" />
 
-            <include
-                android:id="@+id/how_to_use"
-                layout="@layout/view_home_item" />
+            <com.google.android.material.card.MaterialCardView
+                app:cardCornerRadius="24dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/manage_apps"
-                layout="@layout/view_home_item" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginVertical="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <include
-                android:id="@+id/manage_templates"
-                layout="@layout/view_home_item" />
+                    <include
+                        android:id="@+id/how_to_use"
+                        layout="@layout/view_home_item" />
+
+                    <include
+                        android:id="@+id/manage_apps"
+                        layout="@layout/view_home_item" />
+
+                    <include
+                        android:id="@+id/manage_templates"
+                        layout="@layout/view_home_item" />
+
+                    <include
+                        android:id="@+id/nav_logs"
+                        layout="@layout/view_home_item" />
+
+                    <include
+                        android:id="@+id/nav_settings"
+                        layout="@layout/view_home_item" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_marginTop="16dp"
