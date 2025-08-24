@@ -12,7 +12,7 @@ abstract class BasePreset(val name: String) {
 
     protected abstract fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean
 
-    fun isEmpty() = packageNames.isEmpty()
+    fun isEmpty() = packageNames.isEmpty() || exactPackageNames == packageNames
 
     fun containsPackage(packageName: String) = packageNames.contains(packageName)
 
