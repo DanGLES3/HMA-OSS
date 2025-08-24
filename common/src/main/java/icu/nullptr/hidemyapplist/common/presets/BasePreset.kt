@@ -5,23 +5,17 @@ import android.content.pm.ApplicationInfo
 abstract class BasePreset(val name: String) {
     protected abstract val exactPackageNames: Set<String>
     protected val packageNames = mutableSetOf<String>()
-    private var dynamicListFilled = false
-
-    init {
-        packageNames += exactPackageNames
-    }
 
     protected abstract fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean
 
-    fun isEmpty() = packageNames.isEmpty() || !dynamicListFilled
+    fun isEmpty() = packageNames.isEmpty()
 
-    fun containsPackage(packageName: String) = packageNames.contains(packageName)
+    fun containsPackage(packageName: String) = exactPackageNames.contains(packageName) || packageNames.contains(packageName)
 
     fun addPackageInfoPreset(appInfo: ApplicationInfo): Boolean {
         val packageName = appInfo.packageName
         if (!exactPackageNames.contains(packageName) && canBeAddedIntoPreset(appInfo)) {
             packageNames.add(packageName)
-            dynamicListFilled = true
             return true
         }
 
