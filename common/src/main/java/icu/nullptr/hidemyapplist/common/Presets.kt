@@ -35,7 +35,7 @@ class Presets private constructor() {
         var appsList: List<ApplicationInfo>? = null
 
         presetList.forEach {
-            if (it.isEmpty()) {
+            if (it.isDynamicListEmpty()) {
                 if (appsList == null) {
                     appsList = getInstalledApplicationsCompat(pms, 0, 0)
                 }
