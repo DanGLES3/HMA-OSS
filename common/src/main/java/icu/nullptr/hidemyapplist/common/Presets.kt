@@ -35,24 +35,21 @@ class Presets private constructor() {
         var appsList: List<ApplicationInfo>? = null
 
         presetList.forEach {
-            if (it.packageNames.isEmpty()) {
-                it.addExactPackages()
-
+            if (it.isEmpty()) {
                 if (appsList == null) {
                     appsList = getInstalledApplicationsCompat(pms, 0, 0)
                 }
 
                 for (appInfo in appsList) {
                     runCatching {
-                        if (it.canBeAddedIntoPreset(appInfo))
-                            it.packageNames.add(appInfo.packageName)
+                        it.addPackageInfoPreset(appInfo)
                     }.onFailure { fail ->
                         loggerFunction?.invoke(fail.toString())
                     }
                 }
             }
 
-            loggerFunction?.invoke("Package list for ${it.name}: ${it.packageNames}")
+            loggerFunction?.invoke(it.toString())
         }
     }
 
@@ -61,14 +58,13 @@ class Presets private constructor() {
         var addedInAList = false
 
         presetList.forEach {
-            if (!it.packageNames.contains(packageName)) {
+            if (!it.containsPackage(packageName)) {
                 if (appInfo == null)
                     appInfo = getPackageInfoCompat(pms, packageName, 0, 0).applicationInfo
 
                 if (appInfo != null) {
                     runCatching {
-                        if (it.canBeAddedIntoPreset(appInfo!!)) {
-                            it.packageNames.add(appInfo!!.packageName)
+                        if (it.addPackageInfoPreset(appInfo!!)) {
                             loggerFunction?.invoke("Package $packageName added into ${it.name}!")
                             addedInAList = true
                         }
@@ -87,7 +83,7 @@ class Presets private constructor() {
         var itWasInAList = false
 
         presetList.forEach {
-            if (it.packageNames.remove(packageName))
+            if (it.removePackageFromPreset(packageName))
                 itWasInAList = true
         }
 

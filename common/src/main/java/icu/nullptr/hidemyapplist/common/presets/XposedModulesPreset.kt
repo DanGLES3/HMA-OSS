@@ -4,6 +4,8 @@ import android.content.pm.ApplicationInfo
 import java.util.zip.ZipFile
 
 class XposedModulesPreset() : BasePreset("xposed") {
+    override val exactPackageNames = setOf<String>()
+
     override fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean {
         ZipFile(appInfo.sourceDir).use { zipFile ->
             val manifestFile = zipFile.getInputStream(

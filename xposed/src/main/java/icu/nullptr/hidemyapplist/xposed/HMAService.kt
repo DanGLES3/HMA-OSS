@@ -175,9 +175,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
 
         for (presetName in appConfig.applyPresets) {
             val preset = Presets.instance.getPresetByName(presetName) ?: continue
-
-            if (query in preset.packageNames)
-                return !appConfig.useWhitelist
+            if (preset.containsPackage(query)) return !appConfig.useWhitelist
         }
 
         return appConfig.useWhitelist
