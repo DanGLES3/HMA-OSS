@@ -1,8 +1,10 @@
 package icu.nullptr.hidemyapplist.ui.fragment
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.WindowInsets
 import androidx.activity.addCallback
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
@@ -72,6 +74,25 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
             childFragmentManager.beginTransaction()
                 .replace(R.id.settings_container, AppPreferenceFragment())
                 .commit()
+        }
+
+        val insets = binding.root.rootWindowInsets
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val barInsets = insets.getInsets(WindowInsets.Type.systemBars())
+            binding.root.setPadding(
+                barInsets.left,
+                barInsets.top,
+                barInsets.right,
+                barInsets.bottom,
+            )
+        } else {
+            @Suppress("deprecation")
+            binding.root.setPadding(
+                insets.systemWindowInsetLeft,
+                insets.systemWindowInsetTop,
+                insets.systemWindowInsetRight,
+                insets.systemWindowInsetBottom,
+            )
         }
     }
 

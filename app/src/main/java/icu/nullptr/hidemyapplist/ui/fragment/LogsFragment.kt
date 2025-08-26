@@ -125,7 +125,7 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
             )
             setNavigationIcon(R.drawable.baseline_arrow_back_24)
             setNavigationOnClickListener { navController.popBackStack() }
-            isTitleCentered = true
+            // isTitleCentered = true
         }
 
         with(binding.toolbar.menu) {
@@ -150,7 +150,7 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
                 barInsets.left,
                 barInsets.top,
                 barInsets.right,
-                0,
+                barInsets.bottom,
             )
         } else {
             @Suppress("deprecation")
@@ -158,7 +158,7 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
                 insets.systemWindowInsetLeft,
                 insets.systemWindowInsetTop,
                 insets.systemWindowInsetRight,
-                0,
+                insets.systemWindowInsetBottom,
             )
         }
     }

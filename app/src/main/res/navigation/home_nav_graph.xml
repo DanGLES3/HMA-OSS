@@ -14,6 +14,11 @@
         android:label="@string/title_logs" />
 
     <fragment
+        android:id="@+id/nav_settings"
+        android:name="icu.nullptr.hidemyapplist.ui.fragment.SettingsFragment"
+        android:label="@string/title_settings" />
+
+    <fragment
         android:id="@+id/nav_template_manage"
         android:name="icu.nullptr.hidemyapplist.ui.fragment.TemplateManageFragment"
         android:label="@string/title_template_manage" />

@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.preference.ListPreference
@@ -22,6 +23,7 @@ import icu.nullptr.hidemyapplist.service.PrefManager
 import icu.nullptr.hidemyapplist.service.ServiceClient
 import icu.nullptr.hidemyapplist.ui.activity.AboutActivity
 import icu.nullptr.hidemyapplist.ui.util.makeToast
+import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
 import icu.nullptr.hidemyapplist.util.ConfigUtils.Companion.getLocale
 import icu.nullptr.hidemyapplist.util.LangList
@@ -42,15 +44,36 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 menuRes = R.menu.menu_about,
                 onMenuOptionSelected = {
                     startActivity(Intent(requireContext(), AboutActivity::class.java))
-                }
+                },
+                navigationIcon = R.drawable.baseline_arrow_back_24,
+                navigationOnClick = { navController.navigateUp() }
             )
-            isTitleCentered = true
+            // isTitleCentered = true
         }
 
         if (childFragmentManager.findFragmentById(R.id.settings_container) == null) {
             childFragmentManager.beginTransaction()
                 .replace(R.id.settings_container, SettingsPreferenceFragment())
                 .commit()
+        }
+
+        val insets = binding.root.rootWindowInsets
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val barInsets = insets.getInsets(WindowInsets.Type.systemBars())
+            binding.root.setPadding(
+                barInsets.left,
+                barInsets.top,
+                barInsets.right,
+                barInsets.bottom,
+            )
+        } else {
+            @Suppress("deprecation")
+            binding.root.setPadding(
+                insets.systemWindowInsetLeft,
+                insets.systemWindowInsetTop,
+                insets.systemWindowInsetRight,
+                insets.systemWindowInsetBottom,
+            )
         }
     }
 

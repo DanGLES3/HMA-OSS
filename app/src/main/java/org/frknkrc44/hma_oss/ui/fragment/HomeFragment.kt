@@ -3,9 +3,11 @@ package org.frknkrc44.hma_oss.ui.fragment
 import android.annotation.SuppressLint
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -82,7 +84,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 toolbar = binding.toolbar,
                 title = getString(R.string.app_name),
             )
-            isTitleCentered = true
+            // isTitleCentered = true
+        }
+
+        binding.root.setOnApplyWindowInsetsListener { v, insets ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val barInsets = insets.getInsets(WindowInsets.Type.systemBars())
+                binding.root.setPadding(
+                    barInsets.left,
+                    barInsets.top,
+                    barInsets.right,
+                    barInsets.bottom,
+                )
+            } else {
+                @Suppress("deprecation")
+                binding.root.setPadding(
+                    insets.systemWindowInsetLeft,
+                    insets.systemWindowInsetTop,
+                    insets.systemWindowInsetRight,
+                    insets.systemWindowInsetBottom,
+                )
+            }
+
+            insets
         }
     }
 
@@ -153,13 +177,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     }
 
                     (layoutParams as LinearLayout.LayoutParams).apply {
-                        if (i == 0) {
-                            setMargins(pad, pad, pad, 0)
-                        } else if (i == childCount - 1) {
-                            setMargins(pad, 0, pad, pad)
-                        } else {
-                            setMargins(pad, 0, pad, 0)
-                        }
+                        setMargins(pad, 0, pad, 0)
                     }
 
                     val backgroundDrawable = GradientDrawable()
@@ -255,6 +273,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             icon.setImageResource(R.drawable.outline_assignment_24)
             root.setOnClickListener {
                 navigate(R.id.nav_logs)
+            }
+        }
+
+        with(binding.navSettings) {
+            text1.text = getString(R.string.title_settings)
+            icon.setImageResource(R.drawable.outline_settings_24)
+            root.setOnClickListener {
+                navigate(R.id.nav_settings)
             }
         }
 
