@@ -87,7 +87,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "StringFormatMatches")
     override fun onStart() {
         super.onStart()
 
@@ -223,7 +223,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         with(binding.howToUse) {
             text1.text = getString(R.string.about_how_to_use_title)
             icon.setImageResource(R.drawable.outline_info_24)
-            // itemIcon.setCircleBackground(getColor(R.color.info))
             root.setOnClickListener {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.about_how_to_use_title)
@@ -239,19 +238,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         with(binding.manageApps) {
             text1.text = getString(R.string.title_app_manage)
             icon.setImageResource(R.drawable.outline_android_24)
-            // itemIcon.setCircleBackground(getColor(R.color.warn))
+            root.setOnClickListener {
+                navigate(R.id.nav_app_manage)
+            }
         }
 
         with(binding.manageTemplates) {
             text1.text = getString(R.string.title_template_manage)
             icon.setImageResource(R.drawable.ic_outline_layers_24)
-            // itemIcon.setCircleBackground(getColor(R.color.invalid))
+            root.setOnClickListener {
+                navigate(R.id.nav_template_manage)
+            }
         }
 
         with(binding.navLogs) {
             text1.text = getString(R.string.title_logs)
             icon.setImageResource(R.drawable.outline_assignment_24)
-            // itemIcon.setCircleBackground(getColor(R.color.error))
             root.setOnClickListener {
                 navigate(R.id.nav_logs)
             }

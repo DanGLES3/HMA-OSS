@@ -11,7 +11,7 @@ import icu.nullptr.hidemyapplist.common.presets.XposedModulesPreset
 
 // TODO: Update presets when package added/removed
 class Presets private constructor() {
-    val presetList = mutableListOf<BasePreset>()
+    private val presetList = mutableListOf<BasePreset>()
     var loggerFunction: ((String) -> Unit)? = null
 
     companion object {
