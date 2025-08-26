@@ -88,6 +88,7 @@
     <string name="app_exclude_system_apps_summary">Turn off this option only when really necessary. It is likely to cause crash with it disabled</string>
     <string name="app_template_using">Using %d templates</string>
     <string name="app_preset_using">Using %d presets</string>
+    <string name="app_settings_preset_using">Using %d settings presets</string>
     <string name="app_extra_apps_visible_count">%d additional apps visible</string>
     <string name="app_extra_apps_invisible_count">%d additional apps invisible</string>
 
@@ -95,6 +96,10 @@
     <string name="preset_xposed">LSPosed/Xposed modules</string>
     <string name="preset_root_apps">Root managers/Rooted apps</string>
     <string name="preset_custom_rom">Custom ROM apps</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_accessibility">Accessibility</string>
+    <string name="settings_preset_dev_options">Developer options</string>
 
     <!-- Logs -->
     <string name="logs_save">Save logs</string>

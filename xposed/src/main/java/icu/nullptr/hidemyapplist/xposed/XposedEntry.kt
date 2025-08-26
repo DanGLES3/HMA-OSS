@@ -43,6 +43,8 @@ class XposedEntry : IXposedHookZygoteInit, IXposedHookLoadPackage {
                     }
                 }
             }
+        } else if (lpparam.packageName == "com.android.providers.settings") {
+            HMASettingsProviderService().handleLoadPackage(lpparam)
         }
     }
 }

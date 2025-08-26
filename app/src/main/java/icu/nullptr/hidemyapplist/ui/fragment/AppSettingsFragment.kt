@@ -18,6 +18,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import icu.nullptr.hidemyapplist.common.AppPresets
 import icu.nullptr.hidemyapplist.common.JsonConfig
+import icu.nullptr.hidemyapplist.common.SettingsPresets
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
@@ -110,6 +111,11 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 getString(R.string.app_preset_using, pack.config.applyPresets.size)
         }
 
+        private fun updateApplySettingsPresets() {
+            findPreference<Preference>("applySettingsPresets")?.title =
+                getString(R.string.app_settings_preset_using, pack.config.applySettingsPresets.size)
+        }
+
         private fun updateExtraAppList(useWhiteList: Boolean) {
             findPreference<Preference>("extraAppList")?.title =
                 if (useWhiteList) getString(R.string.app_extra_apps_visible_count, pack.config.extraAppList.size)
@@ -187,6 +193,40 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                     .show()
                 true
             }
+            findPreference<Preference>("applySettingsPresets")?.setOnPreferenceClickListener {
+                val presetNames = SettingsPresets.instance.getAllPresetNames()
+                val presetTranslations = presetNames.map { name ->
+                    try {
+                        val id = resources.getIdentifier(
+                            "settings_preset_${name}",
+                            "string",
+                            BuildConfig.APPLICATION_ID
+                        )
+
+                        return@map if (id != 0) { getString(id) } else { name }
+                    } catch (ignore: Throwable) {}
+
+                    name
+                }
+
+                val presets = presetNames.zip(presetTranslations).toMap().toSortedMap()
+                val checked = presets.keys.map {
+                    pack.config.applySettingsPresets.contains(it)
+                }.toBooleanArray()
+                val presetValues = presets.values.toTypedArray()
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.app_choose_preset)
+                    .setMultiChoiceItems(presetValues, checked) { _, i, value -> checked[i] = value }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        pack.config.applySettingsPresets = presetValues.mapIndexedNotNullTo(mutableSetOf()) { i, name ->
+                            if (checked[i]) presets.filterValues { v -> v == name }.keys.first() else null
+                        }
+                        updateApplySettingsPresets()
+                    }
+                    .show()
+                true
+            }
             findPreference<Preference>("extraAppList")?.setOnPreferenceClickListener {
                 parent.setFragmentResultListener("app_select") { _, bundle ->
                     pack.config.extraAppList = bundle.getStringArrayList("checked")!!.toMutableSet()
@@ -203,6 +243,7 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
             }
             updateApplyTemplates()
             updateApplyPresets()
+            updateApplySettingsPresets()
             updateExtraAppList(pack.config.useWhitelist)
         }
     }
