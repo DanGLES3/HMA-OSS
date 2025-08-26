@@ -49,6 +49,11 @@ class RootAppsPreset() : BasePreset("root_apps") {
             return false
         }
 
+        // LSPosed and LSPatch
+        if (packageName.startsWith("org.lsposed")) {
+            return true
+        }
+
         // Iconify
         if (packageName.startsWith("com.drdisagree.iconify")) {
             return true
