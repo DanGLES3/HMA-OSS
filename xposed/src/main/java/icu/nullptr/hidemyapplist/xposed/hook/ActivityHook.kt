@@ -9,6 +9,7 @@ import de.robv.android.xposed.XposedHelpers.findClass
 import de.robv.android.xposed.XposedHelpers.getObjectField
 import de.robv.android.xposed.XposedHelpers.getStaticIntField
 import icu.nullptr.hidemyapplist.xposed.HMAService
+import icu.nullptr.hidemyapplist.xposed.logD
 import icu.nullptr.hidemyapplist.xposed.logE
 import icu.nullptr.hidemyapplist.xposed.logI
 
@@ -41,7 +42,7 @@ class ActivityHook(private val service: HMAService) : IFrameworkHook {
                 val targetApp = intent?.component?.packageName
 
                 if (service.shouldHide(caller, targetApp)) {
-                    logI(
+                    logD(
                         TAG,
                         "@executeRequest: insecure query from $caller, target: ${intent?.component}"
                     )
