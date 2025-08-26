@@ -25,10 +25,10 @@ class ActivityHook(private val service: HMAService) : IFrameworkHook {
         hook = findMethod(
             "com.android.server.wm.ActivityStarter"
         ) {
-            name == "executeRequest"
+            name == "execute"
         }.hookBefore { param ->
             runCatching {
-                val request = param.args[0]
+                val request = getObjectField(param.thisObject, "mRequest")
                 val caller = getObjectField(request, "callingPackage") as String?
                 val intent = getObjectField(request, "intent") as Intent?
                 val targetApp = intent?.component?.packageName
