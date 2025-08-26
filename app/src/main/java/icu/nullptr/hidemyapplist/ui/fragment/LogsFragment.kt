@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowInsets
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration

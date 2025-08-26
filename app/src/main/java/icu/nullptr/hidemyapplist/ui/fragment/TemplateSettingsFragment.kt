@@ -1,6 +1,5 @@
 package icu.nullptr.hidemyapplist.ui.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
@@ -14,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.transition.MaterialContainerTransform
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar

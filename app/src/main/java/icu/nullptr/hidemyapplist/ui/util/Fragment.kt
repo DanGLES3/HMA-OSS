@@ -13,7 +13,6 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import org.frknkrc44.hma_oss.R
 
 val Fragment.navController get() = NavHostFragment.findNavController(this)
 

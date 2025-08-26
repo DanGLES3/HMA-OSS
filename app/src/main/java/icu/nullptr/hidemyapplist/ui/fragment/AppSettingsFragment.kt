@@ -13,12 +13,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.preference.Preference
 import androidx.preference.PreferenceDataStore
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
 import androidx.preference.SwitchPreferenceCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import icu.nullptr.hidemyapplist.common.AppPresets
 import icu.nullptr.hidemyapplist.common.JsonConfig
-import icu.nullptr.hidemyapplist.common.Presets
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
@@ -155,7 +154,7 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 true
             }
             findPreference<Preference>("applyPresets")?.setOnPreferenceClickListener {
-                val presetNames = Presets.instance.getAllPresetNames()
+                val presetNames = AppPresets.instance.getAllPresetNames()
                 val presetTranslations = presetNames.map { name ->
                     try {
                         val id = resources.getIdentifier(

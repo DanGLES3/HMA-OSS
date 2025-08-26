@@ -4,23 +4,23 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.IPackageManager
 import icu.nullptr.hidemyapplist.common.Utils.getInstalledApplicationsCompat
 import icu.nullptr.hidemyapplist.common.Utils.getPackageInfoCompat
-import icu.nullptr.hidemyapplist.common.presets.BasePreset
-import icu.nullptr.hidemyapplist.common.presets.CustomROMPreset
-import icu.nullptr.hidemyapplist.common.presets.RootAppsPreset
-import icu.nullptr.hidemyapplist.common.presets.XposedModulesPreset
+import icu.nullptr.hidemyapplist.common.app_presets.BasePreset
+import icu.nullptr.hidemyapplist.common.app_presets.CustomROMPreset
+import icu.nullptr.hidemyapplist.common.app_presets.RootAppsPreset
+import icu.nullptr.hidemyapplist.common.app_presets.XposedModulesPreset
 
 // TODO: Update presets when package added/removed
-class Presets private constructor() {
+class AppPresets private constructor() {
     private val presetList = mutableListOf<BasePreset>()
     var loggerFunction: ((String) -> Unit)? = null
 
     companion object {
-        private var hiddenInstance: Presets? = null
+        private var hiddenInstance: AppPresets? = null
 
-        val instance: Presets
+        val instance: AppPresets
             get() {
                 if (hiddenInstance == null) {
-                    hiddenInstance = Presets()
+                    hiddenInstance = AppPresets()
                 }
 
                 return hiddenInstance!!

@@ -4,14 +4,11 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.widget.ImageView
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
-import icu.nullptr.hidemyapplist.hmaApp
 import icu.nullptr.hidemyapplist.service.PrefManager
 import org.frknkrc44.hma_oss.R
 

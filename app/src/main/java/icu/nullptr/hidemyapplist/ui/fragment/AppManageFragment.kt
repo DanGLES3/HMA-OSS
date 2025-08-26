@@ -1,7 +1,6 @@
 package icu.nullptr.hidemyapplist.ui.fragment
 
 import android.os.Bundle
-import com.google.android.material.transition.MaterialSharedAxis
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.ui.adapter.AppManageAdapter
 import icu.nullptr.hidemyapplist.ui.util.navController

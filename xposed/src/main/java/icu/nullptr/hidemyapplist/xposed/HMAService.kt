@@ -4,10 +4,10 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.IPackageManager
 import android.os.Build
+import icu.nullptr.hidemyapplist.common.AppPresets
 import icu.nullptr.hidemyapplist.common.Constants
 import icu.nullptr.hidemyapplist.common.IHMAService
 import icu.nullptr.hidemyapplist.common.JsonConfig
-import icu.nullptr.hidemyapplist.common.Presets
 import icu.nullptr.hidemyapplist.common.Utils
 import icu.nullptr.hidemyapplist.xposed.hook.ActivityHook
 import icu.nullptr.hidemyapplist.xposed.hook.IFrameworkHook
@@ -62,8 +62,8 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         instance = this
         loadConfig()
         installHooks()
-        Presets.instance.loggerFunction = { logD(TAG, it) }
-        Presets.instance.reloadPresetsIfEmpty(pms)
+        AppPresets.instance.loggerFunction = { logD(TAG, it) }
+        AppPresets.instance.reloadPresetsIfEmpty(pms)
         logI(TAG, "HMA service initialized")
     }
 
@@ -174,7 +174,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         }
 
         for (presetName in appConfig.applyPresets) {
-            val preset = Presets.instance.getPresetByName(presetName) ?: continue
+            val preset = AppPresets.instance.getPresetByName(presetName) ?: continue
             if (preset.containsPackage(query)) return !appConfig.useWhitelist
         }
 
@@ -240,8 +240,8 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         if (packageName == null) return
 
         when (eventType) {
-            Intent.ACTION_PACKAGE_ADDED -> Presets.instance.handlePackageAdded(pms, packageName)
-            Intent.ACTION_PACKAGE_REMOVED -> Presets.instance.handlePackageRemoved(packageName)
+            Intent.ACTION_PACKAGE_ADDED -> AppPresets.instance.handlePackageAdded(pms, packageName)
+            Intent.ACTION_PACKAGE_REMOVED -> AppPresets.instance.handlePackageRemoved(packageName)
         }
     }
 }
