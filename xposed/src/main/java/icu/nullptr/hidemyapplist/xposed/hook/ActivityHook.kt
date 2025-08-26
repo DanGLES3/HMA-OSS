@@ -15,6 +15,13 @@ import icu.nullptr.hidemyapplist.xposed.logI
 class ActivityHook(private val service: HMAService) : IFrameworkHook {
     companion object {
         private const val TAG = "ActivityHook"
+        private val fakeReturnCode = getStaticIntField(
+            findClass(
+                "android.app.ActivityManager",
+                InitFields.ezXClassLoader
+            ),
+            "START_INTENT_NOT_RESOLVED"
+        )
     }
 
     private var hook: XC_MethodHook.Unhook? = null
@@ -38,13 +45,7 @@ class ActivityHook(private val service: HMAService) : IFrameworkHook {
                         TAG,
                         "@executeRequest: insecure query from $caller, target: ${intent?.component}"
                     )
-                    param.result = getStaticIntField(
-                        findClass(
-                            "android.app.ActivityManager",
-                            InitFields.ezXClassLoader
-                        ),
-                        "START_INTENT_NOT_RESOLVED"
-                    )
+                    param.result = fakeReturnCode
                 }
             }.onFailure {
                 logE(TAG, "Fatal error occurred, ignore hook\n", it)
