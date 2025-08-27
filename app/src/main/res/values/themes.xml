@@ -1,7 +1,6 @@
-<resources>
-    <style name="Base.AppTheme.Light" parent="Theme.Material3.DynamicColors.Light.Rikka">
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.AppTheme.Light" parent="Theme.Material3.DynamicColors.Light">
         <item name="android:windowLightStatusBar">true</item>
-        <item name="colorPrimaryVariant">@color/primary_dark_light_light_status_bar</item>
 
         <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="android:windowActionBar">false</item>
@@ -11,15 +10,14 @@
 
         <!-- Preference title -->
         <item name="android:textAppearanceListItem">?textAppearanceSubtitle1</item>
-        <!-- Preference category title -->
-        <item name="android:colorAccent">?colorPrimary</item>
-        <!-- Preference switch -->
-        <item name="android:colorControlActivated">?colorPrimary</item>
+
+        <item name="alertDialogTheme">@style/AppTheme.AlertDialog.Light</item>
+        <item name="dialogCornerRadius">24dp</item>
     </style>
 
     <style name="Theme.Light" parent="Base.AppTheme.Light" />
 
-    <style name="Base.AppTheme" parent="Theme.Material3.DynamicColors.Dark.Rikka">
+    <style name="Base.AppTheme" parent="Theme.Material3.DynamicColors.Dark">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -27,10 +25,9 @@
 
         <!-- Preference title -->
         <item name="android:textAppearanceListItem">?textAppearanceSubtitle1</item>
-        <!-- Preference category title -->
-        <item name="android:colorAccent">?colorPrimary</item>
-        <!-- Preference switch -->
-        <item name="android:colorControlActivated">?colorPrimary</item>
+
+        <item name="alertDialogTheme">@style/AppTheme.AlertDialog</item>
+        <item name="dialogCornerRadius">24dp</item>
     </style>
 
     <style name="Theme" parent="Base.AppTheme" />
@@ -62,5 +59,17 @@
     <style name="AppTheme.OutlinedCard" parent="Widget.Material3.CardView.Outlined">
         <item name="cardCornerRadius">30dp</item>
         <item name="cardElevation">@dimen/secondary_elevation</item>
+    </style>
+
+    <style name="Preference.SwitchPreferenceCompat" parent="@style/Preference.SwitchPreferenceCompat.Material"
+        tools:ignore="ResourceCycle">
+        <item name="widgetLayout">@layout/switch_compat</item>
+    </style>
+
+    <style name="AppTheme.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="android:background">?colorPrimarySurface</item>
+    </style>
+
+    <style name="AppTheme.AlertDialog.Light" parent="ThemeOverlay.Material3.MaterialAlertDialog">
     </style>
 </resources>

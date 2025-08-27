@@ -1,8 +1,10 @@
 package icu.nullptr.hidemyapplist.ui.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowInsets
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +16,7 @@ import icu.nullptr.hidemyapplist.service.PrefManager
 import icu.nullptr.hidemyapplist.service.ServiceClient
 import icu.nullptr.hidemyapplist.ui.adapter.LogAdapter
 import icu.nullptr.hidemyapplist.ui.util.makeToast
+import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
 import kotlinx.coroutines.launch
 import org.frknkrc44.hma_oss.R
@@ -113,12 +116,17 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupToolbar(
-            toolbar = binding.toolbar,
-            title = getString(R.string.title_logs),
-            menuRes = R.menu.menu_logs,
-            onMenuOptionSelected = this::onMenuOptionSelected
-        )
+        with(binding.toolbar) {
+            setupToolbar(
+                toolbar = this,
+                title = getString(R.string.title_logs),
+                menuRes = R.menu.menu_logs,
+                onMenuOptionSelected = this@LogsFragment::onMenuOptionSelected
+            )
+            setNavigationIcon(R.drawable.baseline_arrow_back_24)
+            setNavigationOnClickListener { navController.popBackStack() }
+            // isTitleCentered = true
+        }
 
         with(binding.toolbar.menu) {
             when (PrefManager.logFilter_level) {
@@ -134,5 +142,24 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
         binding.list.adapter = adapter
         binding.list.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         updateLogs()
+
+        val insets = binding.root.rootWindowInsets
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val barInsets = insets.getInsets(WindowInsets.Type.systemBars())
+            binding.root.setPadding(
+                barInsets.left,
+                barInsets.top,
+                barInsets.right,
+                barInsets.bottom,
+            )
+        } else {
+            @Suppress("deprecation")
+            binding.root.setPadding(
+                insets.systemWindowInsetLeft,
+                insets.systemWindowInsetTop,
+                insets.systemWindowInsetRight,
+                insets.systemWindowInsetBottom,
+            )
+        }
     }
 }

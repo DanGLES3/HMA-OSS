@@ -17,8 +17,14 @@ fun String.execute(currentWorkingDir: File = file("./")): String {
     return out.standardOutput.asText.get().trim()
 }
 
+val localProperties = Properties()
+localProperties.load(file("local.properties").inputStream())
+val officialBuild by extra(localProperties.getProperty("officialBuild", "false") == "true")
+
 fun getUncommittedSuffix(): String {
-    val result = "git status -suno".execute()
+    if (officialBuild) return ""
+
+    val result = "git status -s".execute()
     if (result.isEmpty()) {
         return ""
     }
@@ -36,16 +42,12 @@ val targetSdkVer by extra(36)
 
 val appVerCode = gitCommitCount + 0x6f7373
 val appVerName by extra("3.3.1-oss-${gitCommitCountAfterOss}${gitHasUncommittedSuffix}")
-val configVerCode by extra(91)
+val configVerCode by extra(92)
 val serviceVerCode by extra(98)
 val minBackupVerCode by extra(65)
 
 val androidSourceCompatibility = JavaVersion.VERSION_21
 val androidTargetCompatibility = JavaVersion.VERSION_21
-
-val localProperties = Properties()
-localProperties.load(file("local.properties").inputStream())
-val officialBuild by extra(localProperties.getProperty("officialBuild", "false") == "true")
 
 tasks.register("clean", Delete::class) {
     delete(rootProject.layout.buildDirectory)

@@ -28,7 +28,7 @@
     <string name="search">Ara</string>
     <string name="system">System</string>
     <!-- Home -->
-    <string name="home_xposed_activated">Modül Aktif [%s-%d]</string>
+    <string name="home_xposed_activated">Modül Aktif [%s]</string>
     <string name="home_xposed_not_activated">Modül Aktif Değil</string>
     <string name="home_xposed_service_on">Sistem hizmeti çalışıyor [%d]</string>
     <string name="home_xposed_service_off">Sistem servisi çalışmıyor</string>
@@ -39,8 +39,8 @@
     <string name="home_download_test_app_title">Test uygulamasını indir</string>
     <string name="home_download_test_app_message">Bir tespit testi uygulaması geliştirdik ve tespit testini birleştirdik. İndirmek istiyor musun?</string>
     <string name="home_backup_and_restore">Yedekle &amp; Geri Yükle</string>
-    <string name="home_backup_config">Yedek ayarları</string>
-    <string name="home_restore_config">Geri yükleme ayarları</string>
+    <string name="home_backup_config">Yedekle</string>
+    <string name="home_restore_config">Geri yükle</string>
     <string name="home_import_successful">İçe aktarma başarılı</string>
     <string name="home_import_failed">İçe aktarma başarısız</string>
     <string name="home_import_app_version_too_old">Modül versiyonu yedekten eski</string>

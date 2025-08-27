@@ -9,12 +9,20 @@ import de.robv.android.xposed.XposedHelpers.findClass
 import de.robv.android.xposed.XposedHelpers.getObjectField
 import de.robv.android.xposed.XposedHelpers.getStaticIntField
 import icu.nullptr.hidemyapplist.xposed.HMAService
+import icu.nullptr.hidemyapplist.xposed.logD
 import icu.nullptr.hidemyapplist.xposed.logE
 import icu.nullptr.hidemyapplist.xposed.logI
 
 class ActivityHook(private val service: HMAService) : IFrameworkHook {
     companion object {
         private const val TAG = "ActivityHook"
+        private val fakeReturnCode = getStaticIntField(
+            findClass(
+                "android.app.ActivityManager",
+                InitFields.ezXClassLoader
+            ),
+            "START_INTENT_NOT_RESOLVED"
+        )
     }
 
     private var hook: XC_MethodHook.Unhook? = null
@@ -25,26 +33,20 @@ class ActivityHook(private val service: HMAService) : IFrameworkHook {
         hook = findMethod(
             "com.android.server.wm.ActivityStarter"
         ) {
-            name == "executeRequest"
+            name == "execute"
         }.hookBefore { param ->
             runCatching {
-                val request = param.args[0]
+                val request = getObjectField(param.thisObject, "mRequest")
                 val caller = getObjectField(request, "callingPackage") as String?
                 val intent = getObjectField(request, "intent") as Intent?
                 val targetApp = intent?.component?.packageName
 
                 if (service.shouldHide(caller, targetApp)) {
-                    logI(
+                    logD(
                         TAG,
                         "@executeRequest: insecure query from $caller, target: ${intent?.component}"
                     )
-                    param.result = getStaticIntField(
-                        findClass(
-                            "android.app.ActivityManager",
-                            InitFields.ezXClassLoader
-                        ),
-                        "START_INTENT_NOT_RESOLVED"
-                    )
+                    param.result = fakeReturnCode
                 }
             }.onFailure {
                 logE(TAG, "Fatal error occurred, ignore hook\n", it)

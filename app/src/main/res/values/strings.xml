@@ -5,9 +5,9 @@
     <string name="title_home">Home</string>
     <string name="title_logs">Logs</string>
     <string name="title_settings">Settings</string>
-    <string name="title_template_manage">Template manage</string>
+    <string name="title_template_manage">Manage templates</string>
     <string name="title_template_settings">Template settings</string>
-    <string name="title_app_manage">App manage</string>
+    <string name="title_app_manage">Manage apps</string>
     <string name="title_app_select">Select apps</string>
     <string name="title_app_settings">App settings</string>
     <string name="title_about">About</string>
@@ -31,9 +31,10 @@
     <string name="no">No</string>
     <string name="search">Search</string>
     <string name="system">System</string>
+    <string name="follow_system">Follow system</string>
 
     <!-- Home -->
-    <string name="home_xposed_activated">Module Activated [%s-%d]</string>
+    <string name="home_xposed_activated">Module Activated [%s]</string>
     <string name="home_xposed_not_activated">Module Not Activated</string>
     <string name="home_xposed_service_on">System service running [%d]</string>
     <string name="home_xposed_service_off">System service not running</string>
@@ -65,7 +66,7 @@
     <string name="list_sort_by_install_time">By install time</string>
     <string name="list_sort_by_update_time">By update time</string>
 
-    <!-- Template manage -->
+    <!-- Manage templates -->
     <string name="template_usage_hint">Establish templates for \"restless\" apps, controlling applist they can obtain.\n\nBlacklist (recommended): the apps selected in the template will be invisible to the apps applying the template.\nWhitelist: the apps not selected in the template will be invisible to the apps applying the template.</string>
     <string name="template_new_blacklist">Create a blacklist template</string>
     <string name="template_new_whitelist">Create a whitelist template</string>
@@ -87,6 +88,7 @@
     <string name="app_exclude_system_apps_summary">Turn off this option only when really necessary. It is likely to cause crash with it disabled</string>
     <string name="app_template_using">Using %d templates</string>
     <string name="app_preset_using">Using %d presets</string>
+    <string name="app_settings_preset_using">Using %d settings presets</string>
     <string name="app_extra_apps_visible_count">%d additional apps visible</string>
     <string name="app_extra_apps_invisible_count">%d additional apps invisible</string>
 
@@ -94,6 +96,10 @@
     <string name="preset_xposed">LSPosed/Xposed modules</string>
     <string name="preset_root_apps">Root managers/Rooted apps</string>
     <string name="preset_custom_rom">Custom ROM apps</string>
+
+    <!-- Settings preset names -->
+    <string name="settings_preset_accessibility">Accessibility</string>
+    <string name="settings_preset_dev_options">Developer options</string>
 
     <!-- Logs -->
     <string name="logs_save">Save logs</string>
@@ -154,7 +160,7 @@
     </string>
     <string name="about_how_to_use_title">How to use this module</string>
     <string name="about_how_to_use_description_1">
-        You can create templates in \"Template manage\".\nThen apply the templates to apps in \"App manage\". (You can also select extra apps for targets.)\nYou should and ONLY should check \"System Framework\" in Xposed module scope / whitelist.
+        You can create templates in \"Manage templates\".\nThen apply the templates to apps in \"Manage apps\". (You can also select extra apps for targets.)\nYou should and ONLY should check \"System Framework\" in Xposed module scope / whitelist.
     </string>
     <string name="about_how_to_use_description_2">
         Config modification effective in real time.
@@ -183,4 +189,9 @@
     <string name="color_deep_orange">Deep orange</string>
     <string name="color_brown">Brown</string>
     <string name="color_blue_grey">Blue grey</string>
+
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Dark theme</string>
+    <string name="dark_theme_off">Always off</string>
+    <string name="dark_theme_on">Always on</string>
 </resources>

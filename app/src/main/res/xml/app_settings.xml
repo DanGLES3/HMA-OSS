@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <PreferenceCategory android:title="@string/application">
         <Preference android:key="appInfo" />
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/outline_shield_24"
             android:key="enableHide"
             android:title="@string/app_enable_hide" />
@@ -12,13 +12,13 @@
     <PreferenceCategory
         android:dependency="enableHide"
         android:title="@string/preferences">
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/outline_settings_24"
             android:key="useWhiteList"
             android:summaryOff="@string/blacklist"
             android:summaryOn="@string/whitelist"
             android:title="@string/work_mode" />
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:dependency="useWhiteList"
             android:disableDependentsState="true"
             android:icon="@drawable/baseline_call_split_24"
@@ -38,6 +38,10 @@
             android:icon="@drawable/outline_assignment_24"
             android:key="applyPresets"
             tools:title="@string/app_preset_using" />
+        <Preference
+            android:icon="@drawable/outline_settings_24"
+            android:key="applySettingsPresets"
+            tools:title="@string/app_settings_preset_using" />
         <Preference
             android:icon="@drawable/baseline_apps_24"
             android:key="extraAppList"

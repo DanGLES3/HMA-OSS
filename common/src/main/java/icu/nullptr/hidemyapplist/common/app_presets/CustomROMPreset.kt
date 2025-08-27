@@ -1,9 +1,11 @@
-package icu.nullptr.hidemyapplist.common.presets
+package icu.nullptr.hidemyapplist.common.app_presets
 
 import android.content.pm.ApplicationInfo
 import icu.nullptr.hidemyapplist.common.Utils
 
 class CustomROMPreset() : BasePreset("custom_rom") {
+    override val exactPackageNames = setOf<String>()
+
     override fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean {
         val packageName = appInfo.packageName
 
