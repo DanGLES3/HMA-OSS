@@ -24,7 +24,7 @@ object ConfigManager {
         runCatching {
             config = JsonConfig.parse(configFile.readText())
             val configVersion = config.configVersion
-            if (configVersion < 65) throw RuntimeException("Config version too old")
+            if (configVersion < BuildConfig.MIN_BACKUP_VERSION) throw RuntimeException("Config version too old")
             config.configVersion = BuildConfig.CONFIG_VERSION
             saveConfig()
         }.onFailure {

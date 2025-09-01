@@ -191,7 +191,7 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                         )
 
                         return@map if (id != 0) { getString(id) } else { name }
-                    } catch (ignore: Throwable) {}
+                    } catch (_: Throwable) {}
 
                     name
                 }
@@ -225,7 +225,7 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                         )
 
                         return@map if (id != 0) { getString(id) } else { name }
-                    } catch (ignore: Throwable) {}
+                    } catch (_: Throwable) {}
 
                     name
                 }

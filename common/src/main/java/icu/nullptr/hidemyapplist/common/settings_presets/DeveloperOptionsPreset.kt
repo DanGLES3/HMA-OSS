@@ -15,6 +15,6 @@ class DeveloperOptionsPreset : BasePreset("dev_options") {
         ReplacementItem(
             name = Settings.Global.DEVELOPMENT_SETTINGS_ENABLED,
             value = "0",
-        )
+        ),
     )
 }

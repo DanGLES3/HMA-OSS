@@ -14,7 +14,7 @@ class AccessibilityPreset : BasePreset(NAME) {
         ),
         ReplacementItem(
             name = Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
-            value = null,
+            value = "",
         ),
     )
 }

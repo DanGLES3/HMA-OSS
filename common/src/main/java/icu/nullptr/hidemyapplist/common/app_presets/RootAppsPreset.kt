@@ -33,6 +33,7 @@ class RootAppsPreset() : BasePreset("root_apps") {
         "org.nuntius35.wrongpinshutdown",
         "ru.nsu.bobrofon.easysshfs",
         "x1125io.initdlight",
+        "com.lonelycatgames.Xplore",
 
         // kernel managers
         "flar2.exkernelmanager",
@@ -45,8 +46,28 @@ class RootAppsPreset() : BasePreset("root_apps") {
     override fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean {
         val packageName = appInfo.packageName
 
-        if (packageNames.contains(packageName)) {
+        if (containsPackage(packageName)) {
             return false
+        }
+
+        // FX File Manager
+        if (packageName.startsWith("nextapp.fx")) {
+            return true
+        }
+
+        // TotalCommander and its plugins
+        if (packageName.startsWith("com.ghisler.")) {
+            return true
+        }
+
+        // ZDevs apps (ZArchiver etc.)
+        if (packageName.startsWith("ru.zdevs.")) {
+            return true
+        }
+
+        // MiXplorer, MiXplorer Silver and its plugins
+        if (packageName.startsWith("com.mixplorer")) {
+            return true
         }
 
         // LSPosed and LSPatch

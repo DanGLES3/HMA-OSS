@@ -11,6 +11,7 @@ import icu.nullptr.hidemyapplist.common.JsonConfig
 import icu.nullptr.hidemyapplist.common.Utils
 import icu.nullptr.hidemyapplist.xposed.hook.AccessibilityHook
 import icu.nullptr.hidemyapplist.xposed.hook.ActivityHook
+import icu.nullptr.hidemyapplist.xposed.hook.ContentProviderHook
 import icu.nullptr.hidemyapplist.xposed.hook.IFrameworkHook
 import icu.nullptr.hidemyapplist.xposed.hook.PlatformCompatHook
 import icu.nullptr.hidemyapplist.xposed.hook.PmsHookTarget28
@@ -154,6 +155,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         frameworkHooks.add(ActivityHook(this))
         frameworkHooks.add(PmsPackageEventsHook(this))
         frameworkHooks.add(AccessibilityHook(this))
+        frameworkHooks.add(ContentProviderHook(this))
 
         frameworkHooks.forEach(IFrameworkHook::load)
         logI(TAG, "Hooks installed")
