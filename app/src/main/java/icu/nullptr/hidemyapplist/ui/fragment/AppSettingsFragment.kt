@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
@@ -76,23 +77,26 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 .commit()
         }
 
-        val insets = binding.root.rootWindowInsets
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val barInsets = insets.getInsets(WindowInsets.Type.systemBars())
-            binding.root.setPadding(
-                barInsets.left,
-                barInsets.top,
-                barInsets.right,
-                barInsets.bottom,
-            )
-        } else {
-            @Suppress("deprecation")
-            binding.root.setPadding(
-                insets.systemWindowInsetLeft,
-                insets.systemWindowInsetTop,
-                insets.systemWindowInsetRight,
-                insets.systemWindowInsetBottom,
-            )
+        binding.root.setOnApplyWindowInsetsListener { v, insets ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val barInsets = insets.getInsets(WindowInsets.Type.systemBars())
+                binding.root.setPadding(
+                    barInsets.left,
+                    barInsets.top,
+                    barInsets.right,
+                    barInsets.bottom,
+                )
+            } else {
+                @Suppress("deprecation")
+                binding.root.setPadding(
+                    insets.systemWindowInsetLeft,
+                    insets.systemWindowInsetTop,
+                    insets.systemWindowInsetRight,
+                    insets.systemWindowInsetBottom,
+                )
+            }
+
+            insets
         }
     }
 
@@ -155,6 +159,8 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 it.summary = PackageHelper.loadPackageInfo(pack.app).packageName
             }
             findPreference<SwitchPreferenceCompat>("hideInstallationSource")?.setOnPreferenceChangeListener { _, newValue ->
+                Toast.makeText(requireContext(),
+                    R.string.app_force_stop_warning, Toast.LENGTH_LONG).show()
                 true
             }
             findPreference<SwitchPreferenceCompat>("useWhiteList")?.setOnPreferenceChangeListener { _, newValue ->

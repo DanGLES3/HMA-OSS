@@ -15,6 +15,7 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/outline_shop_24"
             android:key="hideInstallationSource"
+            android:summary="@string/app_hide_installation_source_desc"
             android:title="@string/app_hide_installation_source" />
         <SwitchPreferenceCompat
             android:icon="@drawable/outline_settings_24"

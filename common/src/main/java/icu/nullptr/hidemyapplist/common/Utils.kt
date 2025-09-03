@@ -76,4 +76,16 @@ object Utils {
 
         return false
     }
+
+    fun endsWithMultiple(source: String, vararg targets: String): Boolean {
+        assert(source.isNotEmpty() && targets.isNotEmpty())
+
+        for (target in targets) {
+            if (source.endsWith(target)) {
+                return true
+            }
+        }
+
+        return false
+    }
 }
