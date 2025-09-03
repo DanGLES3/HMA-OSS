@@ -194,6 +194,17 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         if (caller == null || query == null) return false
         val appConfig = config.scope[caller] ?: return false
         if (query in systemApps) return false
+        logD(TAG, "@shouldHideInstallationSource $caller -> $query")
+        if (caller == query && appConfig.excludeTargetInstallationSource) return false
+
+        try {
+            val uid = Utils.getPackageUidCompat(pms, query, 0L, 0)
+            if (uid < 0) return false // invalid package installation source request
+            // logD(TAG, "@shouldHideInstallationSource UID for $query: $uid")
+        } catch (e: Throwable) {
+            // logD(TAG, "@shouldHideInstallationSource UID error", e)
+            return false
+        }
 
         return appConfig.hideInstallationSource
     }
