@@ -33,6 +33,11 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_module">
+        <SwitchPreferenceCompat
+            android:icon="@drawable/outline_bug_report_24"
+            android:key="bypassRiskyPackageWarning"
+            android:title="@string/settings_bypass_risky_package_warning"
+            android:summary="@string/settings_bypass_risky_package_warning_summary" />
         <Preference
             android:icon="@drawable/outline_storage_24"
             android:key="dataIsolation"

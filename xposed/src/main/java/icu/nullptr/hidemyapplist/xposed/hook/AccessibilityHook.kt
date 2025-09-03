@@ -39,6 +39,7 @@ class AccessibilityHook(private val service: HMAService) : IFrameworkHook {
             for (caller in callingApps) {
                 if (service.getEnabledSettingsPresets(caller).contains(AccessibilityPreset.NAME)) {
                     param.result = 0L
+                    service.filterCount++
                     break
                 }
             }
@@ -53,6 +54,7 @@ class AccessibilityHook(private val service: HMAService) : IFrameworkHook {
             for (caller in callingApps) {
                 if (service.getEnabledSettingsPresets(caller).contains(AccessibilityPreset.NAME)) {
                     param.result = java.util.ArrayList<AccessibilityServiceInfo>()
+                    service.filterCount++
                     break
                 }
             }
@@ -62,7 +64,7 @@ class AccessibilityHook(private val service: HMAService) : IFrameworkHook {
     }
 
     override fun unload() {
-        hookList.forEach { it.unhook() }
+        hookList.forEach(XC_MethodHook.Unhook::unhook)
         hookList.clear()
     }
 }

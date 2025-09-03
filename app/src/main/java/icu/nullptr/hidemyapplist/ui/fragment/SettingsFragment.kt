@@ -94,6 +94,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "blackDarkTheme" -> PrefManager.blackDarkTheme
                 "detailLog" -> ConfigManager.detailLog
                 "hideIcon" -> PrefManager.hideIcon
+                "bypassRiskyPackageWarning" -> PrefManager.bypassRiskyPackageWarning
                 "appDataIsolation" -> CommonUtils.isAppDataIsolationEnabled
                 "voldAppDataIsolation" -> CommonUtils.isVoldAppDataIsolationEnabled
                 "forceMountData" -> ConfigManager.forceMountData
@@ -118,6 +119,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
                 "detailLog" -> ConfigManager.detailLog = value
                 "forceMountData" -> ConfigManager.forceMountData = value
                 "hideIcon" -> PrefManager.hideIcon = value
+                "bypassRiskyPackageWarning" -> PrefManager.bypassRiskyPackageWarning = value
                 "appDataIsolation" -> Unit
                 "voldAppDataIsolation" -> Unit
                 else -> throw IllegalArgumentException("Invalid key: $key")
@@ -263,6 +265,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), PreferenceFragmen
             }
 
             configureDataIsolation()
+
+            findPreference<SwitchPreferenceCompat>("bypassRiskyPackageWarning")?.setOnPreferenceChangeListener { _, newValue ->
+                activity?.recreate()
+                true
+            }
 
             findPreference<Preference>("stopSystemService")?.setOnPreferenceClickListener {
                 if (ServiceClient.serviceVersion != 0) {

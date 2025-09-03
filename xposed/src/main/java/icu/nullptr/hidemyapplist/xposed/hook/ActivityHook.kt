@@ -47,6 +47,7 @@ class ActivityHook(private val service: HMAService) : IFrameworkHook {
                         "@executeRequest: insecure query from $caller, target: ${intent?.component}"
                     )
                     param.result = fakeReturnCode
+                    service.filterCount++
                 }
             }.onFailure {
                 logE(TAG, "Fatal error occurred, ignore hook\n", it)

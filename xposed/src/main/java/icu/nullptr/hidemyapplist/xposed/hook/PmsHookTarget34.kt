@@ -29,14 +29,13 @@ class PmsHookTarget34(private val service: HMAService) : IFrameworkHook {
         }
     }
 
-    private var hook: XC_MethodHook.Unhook? = null
-    private var exphook: XC_MethodHook.Unhook? = null
+    private val hookList = mutableSetOf<XC_MethodHook.Unhook>()
     private var lastFilteredApp: AtomicReference<String?> = AtomicReference(null)
 
     @Suppress("UNCHECKED_CAST")
     override fun load() {
         logI(TAG, "Load hook")
-        hook = findMethod("com.android.server.pm.AppsFilterImpl", findSuper = true) {
+        hookList += findMethod("com.android.server.pm.AppsFilterImpl", findSuper = true) {
             name == "shouldFilterApplication"
         }.hookBefore { param ->
             runCatching {
@@ -64,7 +63,7 @@ class PmsHookTarget34(private val service: HMAService) : IFrameworkHook {
         }
         // AOSP exploit - https://github.com/aosp-mirror/platform_frameworks_base/commit/5bc482bd99ea18fe0b4064d486b29d5ae2d65139
         // Only 14 QPR2+ has this method
-        exphook = findMethodOrNull("com.android.server.pm.PackageManagerService", findSuper = true) {
+        findMethodOrNull("com.android.server.pm.PackageManagerService", findSuper = true) {
             name == "getArchivedPackageInternal"
         }?.hookBefore { param ->
             runCatching {
@@ -88,13 +87,13 @@ class PmsHookTarget34(private val service: HMAService) : IFrameworkHook {
                 logE(TAG, "Fatal error occurred, disable hooks", it)
                 unload()
             }
+        }?.let {
+            hookList.add(it)
         }
     }
 
     override fun unload() {
-        hook?.unhook()
-        hook = null
-        exphook?.unhook()
-        exphook = null
+        hookList.forEach(XC_MethodHook.Unhook::unhook)
+        hookList.clear()
     }
 }

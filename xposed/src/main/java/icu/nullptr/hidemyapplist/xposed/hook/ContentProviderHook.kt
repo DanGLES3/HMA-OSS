@@ -32,7 +32,7 @@ class ContentProviderHook(private val service: HMAService): IFrameworkHook {
             val name = param.args[3] as String?
 
             for (caller in callingApps) {
-                logD(TAG, "@call caller: $caller, method: $method, name: $name")
+                // logD(TAG, "@call caller: $caller, method: $method, name: $name")
 
                 when (method) {
                     "GET_global", "GET_secure", "GET_system" -> {
@@ -43,6 +43,7 @@ class ContentProviderHook(private val service: HMAService): IFrameworkHook {
                                 putString(Settings.NameValueTable.VALUE, replacement.value)
                                 putInt("_generation_index", -1)
                             }
+                            service.filterCount++
                         }
                     }
                 }

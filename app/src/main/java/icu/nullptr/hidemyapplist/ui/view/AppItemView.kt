@@ -15,7 +15,7 @@ class AppItemView @JvmOverloads constructor(
     defStyleRes: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
 
-    private val binding by viewBinding<AppItemViewBinding>(createMethod = CreateMethod.INFLATE)
+    val binding by viewBinding<AppItemViewBinding>(createMethod = CreateMethod.INFLATE)
 
     var showEnabled: Boolean
         get() = binding.enabled.visibility == VISIBLE

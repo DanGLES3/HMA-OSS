@@ -91,6 +91,8 @@
     <string name="app_settings_preset_using">Using %d settings presets</string>
     <string name="app_extra_apps_visible_count">%d additional apps visible</string>
     <string name="app_extra_apps_invisible_count">%d additional apps invisible</string>
+    <string name="app_warning_risky_package_title">Risky package</string>
+    <string name="app_warning_risky_package_desc">This package is marked as risky and you can cause issues on hidden apps. Do you want to continue?</string>
 
     <!-- Preset names -->
     <string name="preset_xposed">LSPosed/Xposed modules</string>
@@ -125,6 +127,8 @@
     <string name="settings_max_log_size">Logger buffer sizes</string>
     <string name="settings_hide_icon">Hide module icon in launcher</string>
     <string name="settings_hide_icon_summary">You can still open the app in Xposed manager</string>
+    <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
+    <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
 
     <string name="settings_language">Language</string>
     <string name="settings_translate">Participate in translation</string>

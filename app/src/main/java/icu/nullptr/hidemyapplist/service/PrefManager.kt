@@ -19,6 +19,7 @@ object PrefManager {
     private const val PREF_THEME_COLOR = "theme_color"
 
     private const val PREF_HIDE_ICON = "hide_icon"
+    private const val PREF_BYPASS_RISKY_PACKAGE_WARNING = "bypass_risky_package_warning"
 
     private const val PREF_APP_FILTER_SHOW_SYSTEM = "app_filter_show_system"
     private const val PREF_APP_FILTER_SORT_METHOD = "app_filter_sort_method"
@@ -66,6 +67,10 @@ object PrefManager {
                 else PackageManager.COMPONENT_ENABLED_STATE_ENABLED
             hmaApp.packageManager.setComponentEnabledSetting(component, status, PackageManager.DONT_KILL_APP)
         }
+
+    var bypassRiskyPackageWarning: Boolean
+        get() = pref.getBoolean(PREF_BYPASS_RISKY_PACKAGE_WARNING, false)
+        set(value) = pref.edit().putBoolean(PREF_BYPASS_RISKY_PACKAGE_WARNING, value).apply()
 
     var appFilter_showSystem: Boolean
         get() = pref.getBoolean(PREF_APP_FILTER_SHOW_SYSTEM, false)
