@@ -103,6 +103,7 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 "enableHide" -> pack.enabled
                 "useWhiteList" -> pack.config.useWhitelist
                 "excludeSystemApps" -> pack.config.excludeSystemApps
+                "hideInstallationSource" -> pack.config.hideInstallationSource
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -112,6 +113,7 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 "enableHide" -> pack.enabled = value
                 "useWhiteList" -> pack.config.useWhitelist = value
                 "excludeSystemApps" -> pack.config.excludeSystemApps = value
+                "hideInstallationSource" -> pack.config.hideInstallationSource = value
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -151,6 +153,9 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 it.icon = PackageHelper.loadAppIcon(pack.app).toDrawable(resources)
                 it.title = PackageHelper.loadAppLabel(pack.app)
                 it.summary = PackageHelper.loadPackageInfo(pack.app).packageName
+            }
+            findPreference<SwitchPreferenceCompat>("hideInstallationSource")?.setOnPreferenceChangeListener { _, newValue ->
+                true
             }
             findPreference<SwitchPreferenceCompat>("useWhiteList")?.setOnPreferenceChangeListener { _, newValue ->
                 pack.config.applyTemplates.clear()

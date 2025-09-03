@@ -1,11 +1,16 @@
 package icu.nullptr.hidemyapplist.xposed.hook
 
+import android.os.Binder
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.github.kyuubiran.ezxhelper.utils.findConstructor
 import com.github.kyuubiran.ezxhelper.utils.findMethod
+import com.github.kyuubiran.ezxhelper.utils.findMethodOrNull
 import com.github.kyuubiran.ezxhelper.utils.hookBefore
+import com.github.kyuubiran.ezxhelper.utils.paramCount
 import de.robv.android.xposed.XC_MethodHook
 import icu.nullptr.hidemyapplist.common.Constants
+import icu.nullptr.hidemyapplist.common.Constants.VENDING_PACKAGE_NAME
 import icu.nullptr.hidemyapplist.common.Utils
 import icu.nullptr.hidemyapplist.xposed.HMAService
 import icu.nullptr.hidemyapplist.xposed.Utils4Xposed
@@ -21,12 +26,32 @@ class PmsHookTarget30(private val service: HMAService) : IFrameworkHook {
         private const val TAG = "PmsHookTarget30"
     }
 
-    private var hook: XC_MethodHook.Unhook? = null
+    private val fakePackageInstallInfo by lazy {
+        var psInfo = Utils.getPackageInfoCompat(
+            service.pms,
+            VENDING_PACKAGE_NAME,
+            0L,
+            0
+        ).signingInfo
+
+        findConstructor(
+            "android.content.pm.InstallSourceInfo"
+        ) {
+            paramCount == 4
+        }.newInstance(
+            VENDING_PACKAGE_NAME,
+            psInfo,
+            VENDING_PACKAGE_NAME,
+            VENDING_PACKAGE_NAME,
+        )
+    }
+
+    private val hooks = mutableSetOf<XC_MethodHook.Unhook>()
     private var lastFilteredApp: AtomicReference<String?> = AtomicReference(null)
 
     override fun load() {
         logI(TAG, "Load hook")
-        hook = findMethod("com.android.server.pm.AppsFilter") {
+        hooks += findMethod("com.android.server.pm.AppsFilter") {
             name == "shouldFilterApplication"
         }.hookBefore { param ->
             runCatching {
@@ -51,10 +76,50 @@ class PmsHookTarget30(private val service: HMAService) : IFrameworkHook {
                 unload()
             }
         }
+
+        findMethodOrNull(service.pms::class.java, findSuper = true) {
+            name == "getInstallSourceInfo"
+        }?.hookBefore { param ->
+            val targetApp = param.args[0] as String?
+
+            val callingUid = Binder.getCallingUid()
+            if (callingUid == Constants.UID_SYSTEM) return@hookBefore
+            val callingApps = Utils.binderLocalScope {
+                service.pms.getPackagesForUid(callingUid)
+            } ?: return@hookBefore
+            for (caller in callingApps) {
+                if (service.shouldHideInstallationSource(caller, targetApp)) {
+                    param.result = fakePackageInstallInfo
+                    service.filterCount++
+                    break
+                }
+            }
+        }?.let {
+            hooks.add(it)
+        }
+
+        hooks += findMethod(service.pms::class.java, findSuper = true) {
+            name == "getInstallerPackageName"
+        }.hookBefore { param ->
+            val targetApp = param.args[0] as String?
+
+            val callingUid = Binder.getCallingUid()
+            if (callingUid == Constants.UID_SYSTEM) return@hookBefore
+            val callingApps = Utils.binderLocalScope {
+                service.pms.getPackagesForUid(callingUid)
+            } ?: return@hookBefore
+            for (caller in callingApps) {
+                if (service.shouldHideInstallationSource(caller, targetApp)) {
+                    param.result = VENDING_PACKAGE_NAME
+                    service.filterCount++
+                    break
+                }
+            }
+        }
     }
 
     override fun unload() {
-        hook?.unhook()
-        hook = null
+        hooks.forEach(XC_MethodHook.Unhook::unhook)
+        hooks.clear()
     }
 }

@@ -190,6 +190,14 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         return appConfig.useWhitelist
     }
 
+    fun shouldHideInstallationSource(caller: String?, query: String?): Boolean {
+        if (caller == null || query == null) return false
+        val appConfig = config.scope[caller] ?: return false
+        if (query in systemApps) return false
+
+        return appConfig.hideInstallationSource
+    }
+
     override fun stopService(cleanEnv: Boolean) {
         logI(TAG, "Stop service")
         synchronized(loggerLock) {

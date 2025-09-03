@@ -42,7 +42,7 @@ val targetSdkVer by extra(36)
 
 val appVerCode = gitCommitCount + 0x6f7373
 val appVerName by extra("3.3.1-oss-${gitCommitCountAfterOss}${gitHasUncommittedSuffix}")
-val configVerCode by extra(92)
+val configVerCode by extra(93)
 val serviceVerCode by extra(98)
 val minBackupVerCode by extra(65)
 

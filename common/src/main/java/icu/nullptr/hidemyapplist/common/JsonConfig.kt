@@ -31,6 +31,7 @@ data class JsonConfig(
     data class AppConfig(
         var useWhitelist: Boolean = false,
         var excludeSystemApps: Boolean = true,
+        var hideInstallationSource: Boolean = false,
         var applyTemplates: MutableSet<String> = mutableSetOf(),
         var applyPresets: MutableSet<String> = mutableSetOf(),
         var applySettingsPresets: MutableSet<String> = mutableSetOf(),

@@ -93,6 +93,7 @@
     <string name="app_extra_apps_invisible_count">%d additional apps invisible</string>
     <string name="app_warning_risky_package_title">Risky package</string>
     <string name="app_warning_risky_package_desc">This package is marked as risky and you can cause issues on hidden apps. Do you want to continue?</string>
+    <string name="app_hide_installation_source">Spoof installation sources to Play Store</string>
 
     <!-- Preset names -->
     <string name="preset_xposed">LSPosed/Xposed modules</string>

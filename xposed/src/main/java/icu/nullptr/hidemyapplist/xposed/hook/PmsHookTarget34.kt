@@ -1,13 +1,17 @@
 package icu.nullptr.hidemyapplist.xposed.hook
 
+import android.content.pm.PackageInstaller
 import android.os.Binder
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.github.kyuubiran.ezxhelper.utils.findConstructor
 import com.github.kyuubiran.ezxhelper.utils.findMethod
 import com.github.kyuubiran.ezxhelper.utils.findMethodOrNull
 import com.github.kyuubiran.ezxhelper.utils.hookBefore
+import com.github.kyuubiran.ezxhelper.utils.paramCount
 import de.robv.android.xposed.XC_MethodHook
 import icu.nullptr.hidemyapplist.common.Constants
+import icu.nullptr.hidemyapplist.common.Constants.VENDING_PACKAGE_NAME
 import icu.nullptr.hidemyapplist.common.Utils
 import icu.nullptr.hidemyapplist.xposed.HMAService
 import icu.nullptr.hidemyapplist.xposed.Utils4Xposed
@@ -29,13 +33,35 @@ class PmsHookTarget34(private val service: HMAService) : IFrameworkHook {
         }
     }
 
-    private val hookList = mutableSetOf<XC_MethodHook.Unhook>()
+    private val fakePackageInstallInfo by lazy {
+        var psInfo = Utils.getPackageInfoCompat(
+            service.pms,
+            VENDING_PACKAGE_NAME,
+            0L,
+            0
+        ).signingInfo
+
+        findConstructor(
+            "android.content.pm.InstallSourceInfo"
+        ) {
+            paramCount == 6
+        }.newInstance(
+            VENDING_PACKAGE_NAME,
+            psInfo,
+            VENDING_PACKAGE_NAME,
+            VENDING_PACKAGE_NAME,
+            VENDING_PACKAGE_NAME,
+            PackageInstaller.PACKAGE_SOURCE_STORE,
+        )
+    }
+
+    private val hooks = mutableSetOf<XC_MethodHook.Unhook>()
     private var lastFilteredApp: AtomicReference<String?> = AtomicReference(null)
 
     @Suppress("UNCHECKED_CAST")
     override fun load() {
         logI(TAG, "Load hook")
-        hookList += findMethod("com.android.server.pm.AppsFilterImpl", findSuper = true) {
+        hooks += findMethod("com.android.server.pm.AppsFilterImpl", findSuper = true) {
             name == "shouldFilterApplication"
         }.hookBefore { param ->
             runCatching {
@@ -88,12 +114,52 @@ class PmsHookTarget34(private val service: HMAService) : IFrameworkHook {
                 unload()
             }
         }?.let {
-            hookList.add(it)
+            hooks.add(it)
+        }
+
+        findMethodOrNull(service.pms::class.java, findSuper = true) {
+            name == "getInstallSourceInfo"
+        }?.hookBefore { param ->
+            val targetApp = param.args[0] as String?
+
+            val callingUid = Binder.getCallingUid()
+            if (callingUid == Constants.UID_SYSTEM) return@hookBefore
+            val callingApps = Utils.binderLocalScope {
+                service.pms.getPackagesForUid(callingUid)
+            } ?: return@hookBefore
+            for (caller in callingApps) {
+                if (service.shouldHideInstallationSource(caller, targetApp)) {
+                    param.result = fakePackageInstallInfo
+                    service.filterCount++
+                    break
+                }
+            }
+        }?.let {
+            hooks.add(it)
+        }
+
+        hooks += findMethod(service.pms::class.java, findSuper = true) {
+            name == "getInstallerPackageName"
+        }.hookBefore { param ->
+            val targetApp = param.args[0] as String?
+
+            val callingUid = Binder.getCallingUid()
+            if (callingUid == Constants.UID_SYSTEM) return@hookBefore
+            val callingApps = Utils.binderLocalScope {
+                service.pms.getPackagesForUid(callingUid)
+            } ?: return@hookBefore
+            for (caller in callingApps) {
+                if (service.shouldHideInstallationSource(caller, targetApp)) {
+                    param.result = VENDING_PACKAGE_NAME
+                    service.filterCount++
+                    break
+                }
+            }
         }
     }
 
     override fun unload() {
-        hookList.forEach(XC_MethodHook.Unhook::unhook)
-        hookList.clear()
+        hooks.forEach(XC_MethodHook.Unhook::unhook)
+        hooks.clear()
     }
 }

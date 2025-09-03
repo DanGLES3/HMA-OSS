@@ -1,11 +1,13 @@
 package icu.nullptr.hidemyapplist.xposed.hook
 
 import android.content.pm.ResolveInfo
+import android.os.Binder
 import com.github.kyuubiran.ezxhelper.utils.findMethod
 import com.github.kyuubiran.ezxhelper.utils.hookAfter
 import com.github.kyuubiran.ezxhelper.utils.hookBefore
 import de.robv.android.xposed.XC_MethodHook
 import icu.nullptr.hidemyapplist.common.Constants
+import icu.nullptr.hidemyapplist.common.Constants.VENDING_PACKAGE_NAME
 import icu.nullptr.hidemyapplist.common.Utils
 import icu.nullptr.hidemyapplist.xposed.HMAService
 import icu.nullptr.hidemyapplist.xposed.Utils4Xposed
@@ -26,6 +28,7 @@ class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
     @Suppress("UNCHECKED_CAST")
     override fun load() {
         logI(TAG, "Load hook")
+
         hooks += findMethod(service.pms::class.java, findSuper = true) {
             name == "filterAppAccessLPr" && parameterCount == 5
         }.hookBefore { param ->
@@ -52,6 +55,7 @@ class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
                 unload()
             }
         }
+
         hooks += findMethod(service.pms::class.java, findSuper = true) {
             name == "applyPostResolutionFilter"
         }.hookAfter { param ->
@@ -81,6 +85,25 @@ class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
             }.onFailure {
                 logE(TAG, "Fatal error occurred, disable hooks", it)
                 unload()
+            }
+        }
+
+        hooks += findMethod(service.pms::class.java, findSuper = true) {
+            name == "getInstallerPackageName"
+        }.hookBefore { param ->
+            val targetApp = param.args[0] as String?
+
+            val callingUid = Binder.getCallingUid()
+            if (callingUid == Constants.UID_SYSTEM) return@hookBefore
+            val callingApps = Utils.binderLocalScope {
+                service.pms.getPackagesForUid(callingUid)
+            } ?: return@hookBefore
+            for (caller in callingApps) {
+                if (service.shouldHideInstallationSource(caller, targetApp)) {
+                    param.result = VENDING_PACKAGE_NAME
+                    service.filterCount++
+                    break
+                }
             }
         }
     }
