@@ -182,9 +182,11 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             if (query in tpl.appList) return !appConfig.useWhitelist
         }
 
-        for (presetName in appConfig.applyPresets) {
-            val preset = AppPresets.instance.getPresetByName(presetName) ?: continue
-            if (preset.containsPackage(query)) return !appConfig.useWhitelist
+        if (!appConfig.useWhitelist) {
+            for (presetName in appConfig.applyPresets) {
+                val preset = AppPresets.instance.getPresetByName(presetName) ?: continue
+                if (preset.containsPackage(query)) return true
+            }
         }
 
         return appConfig.useWhitelist
@@ -193,16 +195,16 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
     fun shouldHideInstallationSource(caller: String?, query: String?): Boolean {
         if (caller == null || query == null) return false
         val appConfig = config.scope[caller] ?: return false
-        if (query in systemApps) return false
         logD(TAG, "@shouldHideInstallationSource $caller -> $query")
+        if (!appConfig.hideInstallationSource || query in systemApps) return false
         if (caller == query && appConfig.excludeTargetInstallationSource) return false
 
         try {
             val uid = Utils.getPackageUidCompat(pms, query, 0L, 0)
+            logD(TAG, "@shouldHideInstallationSource UID for $caller -> $query: $uid")
             if (uid < 0) return false // invalid package installation source request
-            // logD(TAG, "@shouldHideInstallationSource UID for $query: $uid")
         } catch (e: Throwable) {
-            // logD(TAG, "@shouldHideInstallationSource UID error", e)
+            logD(TAG, "@shouldHideInstallationSource UID error", e)
             return false
         }
 

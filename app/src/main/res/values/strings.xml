@@ -97,6 +97,7 @@
     <string name="app_hide_installation_source">Spoof installation sources</string>
     <string name="app_hide_installation_source_desc">All of user apps will be spoofed as installed over Play Store for this application</string>
     <string name="app_exclude_target_installation_source">Exclude the target app</string>
+    <string name="app_exclude_target_installation_source_desc">This app will be excluded from the Play Store spoofing</string>
     <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
 
     <!-- Preset names -->

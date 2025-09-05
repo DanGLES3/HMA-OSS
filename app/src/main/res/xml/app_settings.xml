@@ -19,6 +19,8 @@
             android:title="@string/app_hide_installation_source" />
         <SwitchPreferenceCompat
             android:key="excludeTargetInstallationSource"
+            android:dependency="hideInstallationSource"
+            android:summary="@string/app_exclude_target_installation_source_desc"
             android:title="@string/app_exclude_target_installation_source" />
     </PreferenceCategory>
 
