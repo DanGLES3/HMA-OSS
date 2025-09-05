@@ -68,7 +68,7 @@ dependencies {
 android.applicationVariants.all {
     outputs.all {
         (this as BaseVariantOutputImpl).apply {
-            outputFileName = "${rootProject.name.replace(" ", "_")}-v${versionName}-${buildType.name}.apk"
+            outputFileName = "${rootProject.name.replace(" ", "_")}-${versionName}-${buildType.name}.apk"
         }
     }
 }

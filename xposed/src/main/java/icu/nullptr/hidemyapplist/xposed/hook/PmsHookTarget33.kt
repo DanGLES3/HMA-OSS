@@ -33,7 +33,21 @@ class PmsHookTarget33(private val service: HMAService) : IFrameworkHook {
         }
     }
 
-    private val fakePackageInstallInfo by lazy {
+    private val fakeSystemPackageInstallInfo by lazy {
+        findConstructor(
+            "android.content.pm.InstallSourceInfo"
+        ) {
+            paramCount == 5
+        }.newInstance(
+            null,
+            null,
+            null,
+            null,
+            PackageInstaller.PACKAGE_SOURCE_UNSPECIFIED,
+        )
+    }
+
+    private val fakeUserPackageInstallInfo by lazy {
         var psInfo = Utils.getPackageInfoCompat(
             service.pms,
             VENDING_PACKAGE_NAME,
@@ -98,11 +112,15 @@ class PmsHookTarget33(private val service: HMAService) : IFrameworkHook {
                 service.pms.getPackagesForUid(callingUid)
             } ?: return@hookBefore
             for (caller in callingApps) {
-                if (service.shouldHideInstallationSource(caller, targetApp)) {
-                    param.result = fakePackageInstallInfo
-                    service.filterCount++
-                    break
+                val blockingMode = service.shouldHideInstallationSource(caller, targetApp)
+                when (blockingMode) {
+                    1 -> param.result = fakeUserPackageInstallInfo
+                    2 -> param.result = fakeSystemPackageInstallInfo
+                    else -> continue
                 }
+
+                service.filterCount++
+                break
             }
         }?.let {
             hooks.add(it)
@@ -119,11 +137,15 @@ class PmsHookTarget33(private val service: HMAService) : IFrameworkHook {
                 service.pms.getPackagesForUid(callingUid)
             } ?: return@hookBefore
             for (caller in callingApps) {
-                if (service.shouldHideInstallationSource(caller, targetApp)) {
-                    param.result = VENDING_PACKAGE_NAME
-                    service.filterCount++
-                    break
+                val blockingMode = service.shouldHideInstallationSource(caller, targetApp)
+                when (blockingMode) {
+                    1 -> param.result = VENDING_PACKAGE_NAME
+                    2 -> param.result = null
+                    else -> continue
                 }
+
+                service.filterCount++
+                break
             }
         }
     }

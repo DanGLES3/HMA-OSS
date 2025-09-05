@@ -99,11 +99,15 @@ class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
                 service.pms.getPackagesForUid(callingUid)
             } ?: return@hookBefore
             for (caller in callingApps) {
-                if (service.shouldHideInstallationSource(caller, targetApp)) {
-                    param.result = VENDING_PACKAGE_NAME
-                    service.filterCount++
-                    break
+                val blockingMode = service.shouldHideInstallationSource(caller, targetApp)
+                when (blockingMode) {
+                    1 -> param.result = VENDING_PACKAGE_NAME
+                    2 -> param.result = null
+                    else -> continue
                 }
+
+                service.filterCount++
+                break
             }
         }
     }

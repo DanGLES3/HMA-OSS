@@ -192,23 +192,25 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         return appConfig.useWhitelist
     }
 
-    fun shouldHideInstallationSource(caller: String?, query: String?): Boolean {
-        if (caller == null || query == null) return false
-        val appConfig = config.scope[caller] ?: return false
+    fun shouldHideInstallationSource(caller: String?, query: String?): Int {
+        if (caller == null || query == null) return 0
+        val appConfig = config.scope[caller] ?: return 0
+        if (!appConfig.hideInstallationSource) return 0
         logD(TAG, "@shouldHideInstallationSource $caller -> $query")
-        if (!appConfig.hideInstallationSource || query in systemApps) return false
-        if (caller == query && appConfig.excludeTargetInstallationSource) return false
+        if (caller == query && appConfig.excludeTargetInstallationSource) return 0
 
         try {
             val uid = Utils.getPackageUidCompat(pms, query, 0L, 0)
             logD(TAG, "@shouldHideInstallationSource UID for $caller -> $query: $uid")
-            if (uid < 0) return false // invalid package installation source request
+            if (uid < 0) return 0 // invalid package installation source request
         } catch (e: Throwable) {
             logD(TAG, "@shouldHideInstallationSource UID error", e)
-            return false
+            return 0
         }
 
-        return appConfig.hideInstallationSource
+        return if (query in systemApps) {
+            if (appConfig.hideSystemInstallationSource) { 2 } else { 0 }
+        } else { 1 }
     }
 
     override fun stopService(cleanEnv: Boolean) {
