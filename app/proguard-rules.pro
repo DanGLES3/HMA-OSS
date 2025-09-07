@@ -1,8 +1,3 @@
-# Xposed
--keepclassmembers class icu.nullptr.hidemyapplist.MyApp {
-    boolean isHooked;
-}
-
 # Enum class
 -keepclassmembers,allowoptimization enum * {
     public static **[] values();

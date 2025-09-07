@@ -116,7 +116,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val serviceVersion = ServiceClient.serviceVersion
         val color = when {
-            !hmaApp.isHooked -> getColor(R.color.gray)
             serviceVersion == 0 -> getColor(R.color.invalid)
             else -> themeColor(android.R.attr.colorPrimary)
         }
@@ -126,7 +125,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             root.outlineAmbientShadowColor = color
             root.outlineSpotShadowColor = color
 
-            if (hmaApp.isHooked) {
+            if (serviceVersion > 0) {
                 moduleStatusIcon.setImageResource(R.drawable.sentiment_calm_24px)
                 val versionNameSimple = BuildConfig.VERSION_NAME.substringBefore(".r")
                 moduleStatus.text =

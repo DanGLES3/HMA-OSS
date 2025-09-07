@@ -17,10 +17,6 @@ import kotlin.system.exitProcess
 lateinit var hmaApp: MyApp
 
 class MyApp : Application() {
-
-    @JvmField
-    var isHooked = false
-
     val globalScope = CoroutineScope(Dispatchers.Default)
     val appIconLoader by lazy {
         val iconSize = resources.getDimensionPixelSize(R.dimen.app_icon_size)
