@@ -21,6 +21,16 @@ class CustomROMPreset() : BasePreset("custom_rom") {
             return true
         }
 
+        // CAF (CodeAuroraForum) apps
+        if (packageName.startsWith("com.caf.")) {
+            return true
+        }
+
+        // CalyxOS
+        if (packageName.startsWith("org.calyxos.")) {
+            return true
+        }
+
         // AOSPA
         if (packageName.startsWith("co.aospa.")) {
             return true

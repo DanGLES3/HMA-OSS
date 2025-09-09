@@ -1,6 +1,7 @@
 package icu.nullptr.hidemyapplist.xposed.hook
 
 import android.content.pm.PackageInstaller
+import android.content.pm.PackageManager
 import android.os.Binder
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -9,7 +10,6 @@ import com.github.kyuubiran.ezxhelper.utils.findMethod
 import com.github.kyuubiran.ezxhelper.utils.findMethodOrNull
 import com.github.kyuubiran.ezxhelper.utils.hookBefore
 import com.github.kyuubiran.ezxhelper.utils.paramCount
-import de.robv.android.xposed.XC_MethodHook
 import icu.nullptr.hidemyapplist.common.Constants
 import icu.nullptr.hidemyapplist.common.Constants.VENDING_PACKAGE_NAME
 import icu.nullptr.hidemyapplist.common.Utils
@@ -18,10 +18,9 @@ import icu.nullptr.hidemyapplist.xposed.Utils4Xposed
 import icu.nullptr.hidemyapplist.xposed.logD
 import icu.nullptr.hidemyapplist.xposed.logE
 import icu.nullptr.hidemyapplist.xposed.logI
-import java.util.concurrent.atomic.AtomicReference
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-class PmsHookTarget34(private val service: HMAService) : IFrameworkHook {
+class PmsHookTarget34(service: HMAService) : PmsHookTargetBase(service) {
 
     companion object {
         private const val TAG = "PmsHookTarget34"
@@ -33,7 +32,7 @@ class PmsHookTarget34(private val service: HMAService) : IFrameworkHook {
         }
     }
 
-    private val fakeSystemPackageInstallInfo by lazy {
+    override val fakeSystemPackageInstallInfo: Any by lazy {
         findConstructor(
             "android.content.pm.InstallSourceInfo"
         ) {
@@ -48,30 +47,20 @@ class PmsHookTarget34(private val service: HMAService) : IFrameworkHook {
         )
     }
 
-    private val fakeUserPackageInstallInfo by lazy {
-        var psInfo = Utils.getPackageInfoCompat(
-            service.pms,
-            VENDING_PACKAGE_NAME,
-            0L,
-            0
-        ).signingInfo
-
+    override val fakeUserPackageInstallInfo: Any by lazy {
         findConstructor(
             "android.content.pm.InstallSourceInfo"
         ) {
             paramCount == 6
         }.newInstance(
             VENDING_PACKAGE_NAME,
-            psInfo,
+            psSigningInfo,
             VENDING_PACKAGE_NAME,
             VENDING_PACKAGE_NAME,
             VENDING_PACKAGE_NAME,
             PackageInstaller.PACKAGE_SOURCE_STORE,
         )
     }
-
-    private val hooks = mutableSetOf<XC_MethodHook.Unhook>()
-    private var lastFilteredApp: AtomicReference<String?> = AtomicReference(null)
 
     @Suppress("UNCHECKED_CAST")
     override fun load() {
@@ -132,57 +121,6 @@ class PmsHookTarget34(private val service: HMAService) : IFrameworkHook {
             hooks.add(it)
         }
 
-        findMethodOrNull(service.pms::class.java, findSuper = true) {
-            name == "getInstallSourceInfo"
-        }?.hookBefore { param ->
-            val targetApp = param.args[0] as String?
-
-            val callingUid = Binder.getCallingUid()
-            if (callingUid == Constants.UID_SYSTEM) return@hookBefore
-            val callingApps = Utils.binderLocalScope {
-                service.pms.getPackagesForUid(callingUid)
-            } ?: return@hookBefore
-            for (caller in callingApps) {
-                val blockingMode = service.shouldHideInstallationSource(caller, targetApp)
-                when (blockingMode) {
-                    1 -> param.result = fakeUserPackageInstallInfo
-                    2 -> param.result = fakeSystemPackageInstallInfo
-                    else -> continue
-                }
-
-                service.filterCount++
-                break
-            }
-        }?.let {
-            hooks.add(it)
-        }
-
-        hooks += findMethod(service.pms::class.java, findSuper = true) {
-            name == "getInstallerPackageName"
-        }.hookBefore { param ->
-            val targetApp = param.args[0] as String?
-
-            val callingUid = Binder.getCallingUid()
-            if (callingUid == Constants.UID_SYSTEM) return@hookBefore
-            val callingApps = Utils.binderLocalScope {
-                service.pms.getPackagesForUid(callingUid)
-            } ?: return@hookBefore
-            for (caller in callingApps) {
-                val blockingMode = service.shouldHideInstallationSource(caller, targetApp)
-                when (blockingMode) {
-                    1 -> param.result = VENDING_PACKAGE_NAME
-                    2 -> param.result = null
-                    else -> continue
-                }
-
-                service.filterCount++
-                break
-            }
-        }
-    }
-
-    override fun unload() {
-        hooks.forEach(XC_MethodHook.Unhook::unhook)
-        hooks.clear()
+        super.load()
     }
 }

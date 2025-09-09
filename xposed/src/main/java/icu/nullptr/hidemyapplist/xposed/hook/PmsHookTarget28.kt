@@ -16,14 +16,15 @@ import icu.nullptr.hidemyapplist.xposed.logE
 import icu.nullptr.hidemyapplist.xposed.logI
 import java.util.concurrent.atomic.AtomicReference
 
-class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
+class PmsHookTarget28(service: HMAService) : PmsHookTargetBase(service) {
 
     companion object {
         private const val TAG = "PmsHookTarget28"
     }
 
-    private val hooks = mutableListOf<XC_MethodHook.Unhook>()
-    private var lastFilteredApp: AtomicReference<String?> = AtomicReference(null)
+    // not required until SDK 30
+    override val fakeSystemPackageInstallInfo = null
+    override val fakeUserPackageInstallInfo = null
 
     @Suppress("UNCHECKED_CAST")
     override fun load() {
@@ -88,32 +89,6 @@ class PmsHookTarget28(private val service: HMAService) : IFrameworkHook {
             }
         }
 
-        hooks += findMethod(service.pms::class.java, findSuper = true) {
-            name == "getInstallerPackageName"
-        }.hookBefore { param ->
-            val targetApp = param.args[0] as String?
-
-            val callingUid = Binder.getCallingUid()
-            if (callingUid == Constants.UID_SYSTEM) return@hookBefore
-            val callingApps = Utils.binderLocalScope {
-                service.pms.getPackagesForUid(callingUid)
-            } ?: return@hookBefore
-            for (caller in callingApps) {
-                val blockingMode = service.shouldHideInstallationSource(caller, targetApp)
-                when (blockingMode) {
-                    1 -> param.result = VENDING_PACKAGE_NAME
-                    2 -> param.result = null
-                    else -> continue
-                }
-
-                service.filterCount++
-                break
-            }
-        }
-    }
-
-    override fun unload() {
-        hooks.forEach(XC_MethodHook.Unhook::unhook)
-        hooks.clear()
+        super.load()
     }
 }
