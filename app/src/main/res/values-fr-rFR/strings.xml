@@ -9,6 +9,7 @@
     <string name="title_app_select">Sélectionner les applications</string>
     <string name="title_app_settings">Réglages pour l\'application</string>
     <string name="title_about">A propos</string>
+    <string name="title_about_fork">About this fork</string>
     <string name="do_not_dual">Ne pas installer HMA dans l\'utilisateur secondaire</string>
     <string name="show_crash_log">Afficher le journal de plantage</string>
     <string name="config_damaged">Fichier de configuration endommagé. Merci de nettoyer les données de l\'application</string>
@@ -27,6 +28,7 @@
     <string name="no">Non</string>
     <string name="search">Rechercher</string>
     <string name="system">Système</string>
+    <string name="follow_system">Follow system</string>
     <!-- Home -->
     <string name="home_xposed_activated">Module Actif [%s]</string>
     <string name="home_xposed_not_activated">Module Inactivé</string>
@@ -58,7 +60,7 @@
     <string name="list_sort_by_package_name">Par nom de paquet</string>
     <string name="list_sort_by_install_time">Par date d\'installation</string>
     <string name="list_sort_by_update_time">Par date de mise à jour</string>
-    <!-- Template manage -->
+    <!-- Manage templates -->
     <string name="template_usage_hint">Établir des modèles pour les applications \"agitées\", controller la liste d\'appli qu\'elles peuvent obtenir.\n\nListe noir (recommandée): les applis sélectionnées dans le modèle seront invisibles aux autres aplis qui appliquent le modèle.\nListe blanche: les applis non sélectionnées dans le modèle seront invisibles aux applis l\'appliquant.</string>
     <string name="template_new_blacklist">Créer un modèle de liste noir</string>
     <string name="template_new_whitelist">Créer un modèle de liste blanche</string>
@@ -74,11 +76,31 @@
     <string name="app_enable_hide">Activer le masquage</string>
     <string name="app_template_config">Configuration du modèle</string>
     <string name="app_choose_template">Choisir le modèle</string>
+    <string name="app_choose_preset">Choose preset</string>
     <string name="app_exclude_system_apps">Exclure les applications du système</string>
     <string name="app_exclude_system_apps_summary">Désactiver cette option uniquement lors ce que c\'est vraiment nécessaire. Il est susceptible de provoquer un crash s\'il est désactivé</string>
     <string name="app_template_using">Utilisation de %d modèle(s)</string>
+    <string name="app_preset_using">Using %d presets</string>
+    <string name="app_settings_preset_using">Using %d settings presets</string>
     <string name="app_extra_apps_visible_count">%d applis additionelles visibles</string>
     <string name="app_extra_apps_invisible_count">%d applis additionelles invisibles</string>
+    <string name="app_warning_risky_package_title">Risky package</string>
+    <string name="app_warning_risky_package_desc">This package is marked as risky and you can cause issues on hidden apps. Do you want to continue?</string>
+    <string name="app_spoof">Spoofing</string>
+    <string name="app_hide_installation_source">Spoof installation sources</string>
+    <string name="app_hide_installation_source_desc">All of user apps will be spoofed as installed over Play Store for this application</string>
+    <string name="app_hide_installation_source_system">Spoof system apps too</string>
+    <string name="app_hide_installation_source_system_desc">All of system apps will be spoofed as installed over nothing for this application</string>
+    <string name="app_exclude_target_installation_source">Exclude the target app</string>
+    <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
+    <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
+    <!-- Preset names -->
+    <string name="preset_xposed">LSPosed/Xposed modules</string>
+    <string name="preset_root_apps">Root managers/Rooted apps</string>
+    <string name="preset_custom_rom">Custom ROM apps</string>
+    <!-- Settings preset names -->
+    <string name="settings_preset_accessibility">Accessibility</string>
+    <string name="settings_preset_dev_options">Developer options</string>
     <!-- Logs -->
     <string name="logs_save">Enregistrer le journal</string>
     <string name="logs_clear">Effacer le journal</string>
@@ -91,6 +113,8 @@
     <string name="settings_data_isolation_unsupported">Cette option est uniquement disponible sur Android 11 et supérieur</string>
     <string name="settings_app_data_isolation">Isolation des données d\'application</string>
     <string name="settings_vold_app_data_isolation">Forcer l\'isolement des données d\'application</string>
+    <string name="settings_warning">Warning</string>
+    <string name="settings_vold_warning">This will enable an AOSP feature which make app\'s external private storage directory isolated. This can help improve hiding apps while may cause stability issues. This feature may stop working at any time since it is abandoned in AOSP.</string>
     <string name="settings_change_require_root">Changer les permissions d\'accès à la racine requises</string>
     <string name="settings_need_reboot">La modification nécessite un redémarrage</string>
     <string name="settings_permission_denied">Permission refusée</string>
@@ -100,6 +124,8 @@
     <string name="settings_max_log_size">Tailles du tampon d\'enregistrement</string>
     <string name="settings_hide_icon">Masquer l\'icône du module dans le lanceur</string>
     <string name="settings_hide_icon_summary">Vous pouvez toujours ouvrir l\'application depuis le gestionnaire Xposed</string>
+    <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
+    <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
     <string name="settings_language">Langue</string>
     <string name="settings_translate">Participer à la traduction</string>
     <string name="settings_translate_summary">Aidez nous à traduire %s dans votre language</string>
@@ -123,6 +149,8 @@
     <string name="settings_receive_beta_update_summary">Les versions Beta pourraient êtres instables</string>
     <!-- About -->
     <string name="about_description">        Bien qu\'il soit incorrect de détecter l\'installation d\'une application spécifique, toutes les applications utilisant la racine ne prennent pas en charge les noms de paquets aléatoires. Dans ce cas, les applications détectées qui utilisent la racine (telles que Fake Location et Storage Isolation) sont égales à la racine détectée elle-même.\n\nDans le même temps, certaines applications intelligentes utilisent diverses failles pour acquérir votre liste d\'applications, afin de vous dessiner un personnage.\n\nCe module fournit quelques méthodes pour tester si vous avez déjà bien caché votre liste d\'applications. De plus, il peut fonctionner comme un module Xposed pour cacher certaines applications ou rejeter les demandes de liste d\'applications afin de protéger votre vie privée.
+    </string>
+    <string name="about_fork_description">        The original HMA project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">Comment utiliser ce module</string>
     <string name="about_how_to_use_description_1">        Vous pouvez créer des modèles dans \"Gestion des modèles\"\nAppliquer ensuite les modèles aux application dans \"Gestionnaire d\'applications\". (Vous pouvez également sélectionner des applications supplémentaires pour les cibler.)\nVous devez et ne devez QUE vérifier le \"Système d\'injection\" dans la portée du module Xposed / de la liste blanche.
@@ -152,4 +180,8 @@
     <string name="color_deep_orange">Orange foncé</string>
     <string name="color_brown">Marron</string>
     <string name="color_blue_grey">Gris bleuté</string>
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Dark theme</string>
+    <string name="dark_theme_off">Always off</string>
+    <string name="dark_theme_on">Always on</string>
 </resources>

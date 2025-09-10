@@ -80,6 +80,7 @@ class TemplateSettingsFragment : Fragment(R.layout.fragment_template_settings) {
         )
 
         binding.templateName.setText(viewModel.name)
+        binding.workMode.setText(if (viewModel.isWhiteList) R.string.whitelist else R.string.blacklist)
         binding.templateName.addTextChangedListener { viewModel.name = it.toString() }
         binding.targetApps.setOnClickListener {
             setFragmentResultListener("app_select") { _, bundle ->

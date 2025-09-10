@@ -29,7 +29,6 @@
     <string name="search">Ara</string>
     <string name="system">Sistem</string>
     <string name="follow_system">Sistemi Takip Et</string>
-
     <!-- Home -->
     <string name="home_xposed_activated">Modül Etkin [%s]</string>
     <string name="home_xposed_not_activated">Modül Etkin Değil</string>
@@ -53,7 +52,6 @@
     <string name="home_exported">Yapılandırma yedeklendi</string>
     <string name="home_new_update">Yeni güncelleme mevcut: %s</string>
     <string name="home_update">Güncelleme: %s</string>
-
     <!-- App select -->
     <string name="list_show_system">Sistem uygulamalarını göster</string>
     <string name="list_sorting">Sıralama</string>
@@ -62,9 +60,8 @@
     <string name="list_sort_by_package_name">Paket adına göre</string>
     <string name="list_sort_by_install_time">Yükleme zamanına göre</string>
     <string name="list_sort_by_update_time">Güncelleme zamanına göre</string>
-
     <!-- Manage templates -->
-    <string name="template_usage_hint">"Huzursuz" uygulamalar için şablonlar oluşturun ve bu uygulamaların hangi uygulama listesini görebileceğini kontrol edin.\n\nKara liste (önerilen): Şablonda seçilen uygulamalar, şablonu uygulayan uygulamalar için görünmez olacaktır.\nBeyaz liste: Şablonda seçilmeyen uygulamalar, şablonu uygulayan uygulamalar için görünmez olacaktır.</string>
+    <string name="template_usage_hint">\"Huzursuz\" uygulamalar için şablonlar oluşturun ve bu uygulamaların hangi uygulama listesini görebileceğini kontrol edin.\n\nKara liste (önerilen): Şablonda seçilen uygulamalar, şablonu uygulayan uygulamalar için görünmez olacaktır.\nBeyaz liste: Şablonda seçilmeyen uygulamalar, şablonu uygulayan uygulamalar için görünmez olacaktır.</string>
     <string name="template_new_blacklist">Kara liste şablonu oluştur</string>
     <string name="template_new_whitelist">Beyaz liste şablonu oluştur</string>
     <string name="template_delete">Şablonu silmek istediğinizden emin misiniz?</string>
@@ -75,7 +72,6 @@
     <string name="template_applied_count">%d uygulamaya uygulandı</string>
     <string name="template_apps_visible_count">%d uygulama görünür</string>
     <string name="template_apps_invisible_count">%d uygulama görünmez</string>
-
     <!-- App settings -->
     <string name="app_enable_hide">Gizlemeyi etkinleştir</string>
     <string name="app_template_config">Şablon yapılandırması</string>
@@ -98,22 +94,18 @@
     <string name="app_exclude_target_installation_source">Hedef uygulamayı hariç tut</string>
     <string name="app_exclude_target_installation_source_desc">Bu uygulamayı Play Store’da bulamıyorsanız etkinleştirin</string>
     <string name="app_force_stop_warning">Yapılandırmayı kaydettikten sonra hedef uygulamayı zorla durdurmayı unutmayın</string>
-
     <!-- Preset names -->
     <string name="preset_xposed">LSPosed/Xposed modülleri</string>
     <string name="preset_root_apps">Root yöneticileri/Rootlu uygulamalar</string>
     <string name="preset_custom_rom">Özel ROM uygulamaları</string>
-
     <!-- Settings preset names -->
     <string name="settings_preset_accessibility">Erişilebilirlik</string>
     <string name="settings_preset_dev_options">Geliştirici seçenekleri</string>
-
     <!-- Logs -->
     <string name="logs_save">Kayıtları kaydet</string>
     <string name="logs_clear">Kayıtları temizle</string>
     <string name="logs_empty">Kaydedilecek kayıt yok</string>
     <string name="logs_saved">Kayıtlar kaydedildi</string>
-
     <!-- Settings -->
     <string name="settings_module">Modül</string>
     <string name="settings_data_isolation">Veri izolasyonu</string>
@@ -134,18 +126,15 @@
     <string name="settings_hide_icon_summary">Uygulamayı Xposed yöneticisinden açabilirsiniz</string>
     <string name="settings_bypass_risky_package_warning">Riskli paket uyarısını atla</string>
     <string name="settings_bypass_risky_package_warning_summary">Bu özelliği etkinleştirmeden önce veya sonra riskli paketle ilgili sorunlardan geliştiriciler sorumlu değildir</string>
-
     <string name="settings_language">Dil</string>
     <string name="settings_translate">Çeviriye katkıda bulun</string>
     <string name="settings_translate_summary">%s’i kendi dilinize çevirmemize yardımcı olun</string>
-
     <string name="settings_theme">Tema</string>
     <string name="settings_system_theme_color">Sistem tema rengi</string>
     <string name="settings_theme_color">Tema rengi</string>
     <string name="settings_dark_theme">Koyu tema</string>
     <string name="settings_pure_black_dark_theme">Saf siyah koyu tema</string>
     <string name="settings_pure_black_dark_theme_summary">Koyu tema etkinse saf siyah temayı kullan</string>
-
     <string name="settings_service">Servis</string>
     <string name="settings_stop_system_service">Sistem servisini durdur</string>
     <string name="settings_stop_system_service_summary">Servisi yeniden başlatmak için yeniden başlatma gerekiyor</string>
@@ -154,30 +143,23 @@
     <string name="settings_force_clean_env">Çalışma zamanı ortamını zorla temizle (root)</string>
     <string name="settings_force_clean_env_summary">Sadece sistem servisi başlatılamazsa bu seçeneği kullanın, aksi takdirde yukarıdaki seçeneği tıklayın.</string>
     <string name="settings_force_clean_env_toast_successful">Çalışma zamanı ortamı temizlendi</string>
-
     <string name="settings_update">Güncelleme</string>
     <string name="settings_disable_update">Güncelleme bildirimini devre dışı bırak</string>
     <string name="settings_receive_beta_update">Beta güncellemelerini al</string>
     <string name="settings_receive_beta_update_summary">Beta sürümleri kararsız olabilir</string>
-
     <!-- About -->
-    <string name="about_description">
-        Belirli bir uygulamanın yüklü olup olmadığını tespit etmek yanlış olsa da, root kullanan her uygulama rastgele paket adı desteği sunmaz. Bu durumda, root kullanan tespit edilen uygulamalar (örneğin, Sahte Konum ve Depolama İzolasyonu), root’un kendisinin tespit edilmesiyle eşdeğerdir.\n\nAynı zamanda, bazı akıllı uygulamalar, uygulama listenizi elde etmek için çeşitli açıkları kullanır, böylece sizin için bir profil çizebilir.\n\nBu modül, uygulama listenizi başarıyla gizleyip gizlemediğinizi test etmenin bazı yollarını sunar. Ayrıca, bir Xposed modülü olarak çalışarak bazı uygulamaları gizlemek veya uygulama liste isteklerini reddederek gizliliğinizi korumak için kullanılabilir.
+    <string name="about_description">        Belirli bir uygulamanın yüklü olup olmadığını tespit etmek yanlış olsa da, root kullanan her uygulama rastgele paket adı desteği sunmaz. Bu durumda, root kullanan tespit edilen uygulamalar (örneğin, Sahte Konum ve Depolama İzolasyonu), root’un kendisinin tespit edilmesiyle eşdeğerdir.\n\nAynı zamanda, bazı akıllı uygulamalar, uygulama listenizi elde etmek için çeşitli açıkları kullanır, böylece sizin için bir profil çizebilir.\n\nBu modül, uygulama listenizi başarıyla gizleyip gizlemediğinizi test etmenin bazı yollarını sunar. Ayrıca, bir Xposed modülü olarak çalışarak bazı uygulamaları gizlemek veya uygulama liste isteklerini reddederek gizliliğinizi korumak için kullanılabilir.
     </string>
-    <string name="about_fork_description">
-        Orijinal HMA projesi kapalı kaynak haline geldi ve en son kodları bazı son değişiklikleri içermiyordu, bu yüzden bu çatalı oluşturup projeyi tekrar açık kaynak olarak sürdürmeye karar verdim.
+    <string name="about_fork_description">        Orijinal HMA projesi kapalı kaynak haline geldi ve en son kodları bazı son değişiklikleri içermiyordu, bu yüzden bu çatalı oluşturup projeyi tekrar açık kaynak olarak sürdürmeye karar verdim.
     </string>
     <string name="about_how_to_use_title">Bu modülü nasıl kullanırsınız</string>
-    <string name="about_how_to_use_description_1">
-        "Şablonları Yönet" bölümünde şablonlar oluşturabilirsiniz.\nSonra "Uygulamaları Yönet" bölümünde uygulamalara şablonları uygulayabilirsiniz. (Hedefler için ek uygulamalar da seçebilirsiniz.)\nXposed modül kapsamında/beyaz listede YALNIZCA "Sistem Çerçevesi"ni işaretlemelisiniz.
+    <string name="about_how_to_use_description_1">        \"Şablonları Yönet\" bölümünde şablonlar oluşturabilirsiniz.\nSonra \"Uygulamaları Yönet\" bölümünde uygulamalara şablonları uygulayabilirsiniz. (Hedefler için ek uygulamalar da seçebilirsiniz.)\nXposed modül kapsamında/beyaz listede YALNIZCA \"Sistem Çerçevesi\"ni işaretlemelisiniz.
     </string>
-    <string name="about_how_to_use_description_2">
-        Yapılandırma değişiklikleri gerçek zamanlı olarak etkilidir.
+    <string name="about_how_to_use_description_2">        Yapılandırma değişiklikleri gerçek zamanlı olarak etkilidir.
     </string>
     <string name="about_developer">Geliştirici</string>
     <string name="about_support">Destek ve geri bildirim</string>
     <string name="about_open_source">Açık kaynak lisansları</string>
-
     <!-- Colors -->
     <string name="color_sakura">Sakura</string>
     <string name="color_red">Kırmızı</string>
@@ -198,7 +180,6 @@
     <string name="color_deep_orange">Koyu turuncu</string>
     <string name="color_brown">Kahverengi</string>
     <string name="color_blue_grey">Mavi gri</string>
-
     <!-- Dark theme modes -->
     <string name="dark_theme">Koyu tema</string>
     <string name="dark_theme_off">Her zaman kapalı</string>

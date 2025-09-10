@@ -34,15 +34,16 @@ abstract class PmsHookTargetBase(protected val service: HMAService) : IFramework
             findMethodOrNull(service.pms::class.java, findSuper = true) {
                 name == "getInstallSourceInfo"
             }?.hookBefore { param ->
-                val targetApp = param.args[0] as String?
+                val query = param.args[0] as String?
 
+                val user = Binder.getCallingUserHandle()
                 val callingUid = Binder.getCallingUid()
                 if (callingUid == Constants.UID_SYSTEM) return@hookBefore
                 val callingApps = Utils.binderLocalScope {
                     service.pms.getPackagesForUid(callingUid)
                 } ?: return@hookBefore
                 for (caller in callingApps) {
-                    when (service.shouldHideInstallationSource(caller, targetApp)) {
+                    when (service.shouldHideInstallationSource(caller, query, user)) {
                         1 -> param.result = fakeUserPackageInstallInfo
                         2 -> param.result = fakeSystemPackageInstallInfo
                         else -> continue
@@ -59,15 +60,16 @@ abstract class PmsHookTargetBase(protected val service: HMAService) : IFramework
         hooks += findMethod(service.pms::class.java, findSuper = true) {
             name == "getInstallerPackageName"
         }.hookBefore { param ->
-            val targetApp = param.args[0] as String?
+            val query = param.args[0] as String?
 
+            val user = Binder.getCallingUserHandle()
             val callingUid = Binder.getCallingUid()
             if (callingUid == Constants.UID_SYSTEM) return@hookBefore
             val callingApps = Utils.binderLocalScope {
                 service.pms.getPackagesForUid(callingUid)
             } ?: return@hookBefore
             for (caller in callingApps) {
-                when (service.shouldHideInstallationSource(caller, targetApp)) {
+                when (service.shouldHideInstallationSource(caller, query, user)) {
                     1 -> param.result = VENDING_PACKAGE_NAME
                     2 -> param.result = null
                     else -> continue

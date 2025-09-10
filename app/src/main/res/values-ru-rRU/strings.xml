@@ -9,6 +9,7 @@
     <string name="title_app_select">Выберите приложения</string>
     <string name="title_app_settings">Настройки приложения</string>
     <string name="title_about">О модуле</string>
+    <string name="title_about_fork">About this fork</string>
     <string name="do_not_dual">Не устанавливать HMA для второго пользователя</string>
     <string name="show_crash_log">Показывать логи вылета</string>
     <string name="config_damaged">Файл настроек повреждён. Пожалуйста, очистите данные приложения</string>
@@ -27,6 +28,7 @@
     <string name="no">Нет</string>
     <string name="search">Поиск</string>
     <string name="system">Система</string>
+    <string name="follow_system">Follow system</string>
     <!-- Home -->
     <string name="home_xposed_activated">Модуль активирован [%s]</string>
     <string name="home_xposed_not_activated">Модуль не активирован</string>
@@ -58,7 +60,7 @@
     <string name="list_sort_by_package_name">По названию пакета</string>
     <string name="list_sort_by_install_time">По времени установки</string>
     <string name="list_sort_by_update_time">По времени обновления</string>
-    <!-- Template manage -->
+    <!-- Manage templates -->
     <string name="template_usage_hint">Установите шаблоны для «беспокойных» приложений, контролируя список приложений, который они могут получить.\n\nЧёрный список (рекомендуется): приложения, выбранные в шаблоне, будут невидимыми для приложений, применяющих шаблон.\nБелый список: приложения, не выбранные в шаблоне, будут невидимыми для приложений, применяющих шаблон.</string>
     <string name="template_new_blacklist">Создать шаблон с чёрным списком</string>
     <string name="template_new_whitelist">Создать шаблон с белым списком</string>
@@ -74,11 +76,31 @@
     <string name="app_enable_hide">Включить скрытие</string>
     <string name="app_template_config">Конфигурация шаблонов</string>
     <string name="app_choose_template">Выберите шаблон</string>
+    <string name="app_choose_preset">Choose preset</string>
     <string name="app_exclude_system_apps">Исключить системные приложения</string>
     <string name="app_exclude_system_apps_summary">Выключайте эту опцию, только если действительно нужно. Вполне вероятно, что она вызовет сбой при своём выключении</string>
     <string name="app_template_using">Использует %d шаблонов</string>
+    <string name="app_preset_using">Using %d presets</string>
+    <string name="app_settings_preset_using">Using %d settings presets</string>
     <string name="app_extra_apps_visible_count">Видимы %d дополнительных приложений</string>
     <string name="app_extra_apps_invisible_count">Невидимы %d дополнительных приложений</string>
+    <string name="app_warning_risky_package_title">Risky package</string>
+    <string name="app_warning_risky_package_desc">This package is marked as risky and you can cause issues on hidden apps. Do you want to continue?</string>
+    <string name="app_spoof">Spoofing</string>
+    <string name="app_hide_installation_source">Spoof installation sources</string>
+    <string name="app_hide_installation_source_desc">All of user apps will be spoofed as installed over Play Store for this application</string>
+    <string name="app_hide_installation_source_system">Spoof system apps too</string>
+    <string name="app_hide_installation_source_system_desc">All of system apps will be spoofed as installed over nothing for this application</string>
+    <string name="app_exclude_target_installation_source">Exclude the target app</string>
+    <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
+    <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
+    <!-- Preset names -->
+    <string name="preset_xposed">LSPosed/Xposed modules</string>
+    <string name="preset_root_apps">Root managers/Rooted apps</string>
+    <string name="preset_custom_rom">Custom ROM apps</string>
+    <!-- Settings preset names -->
+    <string name="settings_preset_accessibility">Accessibility</string>
+    <string name="settings_preset_dev_options">Developer options</string>
     <!-- Logs -->
     <string name="logs_save">Сохранить логи</string>
     <string name="logs_clear">Очистить логи</string>
@@ -91,6 +113,8 @@
     <string name="settings_data_isolation_unsupported">Это опция доступна только на Android 11 и выше</string>
     <string name="settings_app_data_isolation">Изоляция данных приложений</string>
     <string name="settings_vold_app_data_isolation">Принудительная изоляция данных приложений</string>
+    <string name="settings_warning">Warning</string>
+    <string name="settings_vold_warning">This will enable an AOSP feature which make app\'s external private storage directory isolated. This can help improve hiding apps while may cause stability issues. This feature may stop working at any time since it is abandoned in AOSP.</string>
     <string name="settings_change_require_root">Изменение требует root-доступ</string>
     <string name="settings_need_reboot">Изменение требует перезагрузки</string>
     <string name="settings_permission_denied">Отказано в доступе</string>
@@ -100,6 +124,8 @@
     <string name="settings_max_log_size">Размер буфера логов</string>
     <string name="settings_hide_icon">Скрыть иконку модуля на главном экране</string>
     <string name="settings_hide_icon_summary">Вы всё ещё сможете открывать приложение в Xposed менеджере</string>
+    <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
+    <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
     <string name="settings_language">Язык</string>
     <string name="settings_translate">Принять участие в переводе</string>
     <string name="settings_translate_summary">Помогите нам перевести %s на ваш язык</string>
@@ -123,6 +149,8 @@
     <string name="settings_receive_beta_update_summary">Бета-версии могут быть нестабильными</string>
     <!-- About -->
     <string name="about_description">        Хотя и неправильно определять наличие конкретных приложений, сейчас не каждое приложение, использующее root-права имеет поддержку случайного имени пакета. В этом случае обнаруженные приложения, использующие root-права (такие как Fake Location и Storage Isolation), будут равны обнаруженным root-правам.\n\nВ это же время некоторые умные приложения используют лазейки, чтобы получить список приложений и нарисовать себе вашу персону.\n\nЭто приложение предоставляет несколько методов для проверки того, насколько хорошо вы скрыли свой список приложений. Также это приложение может работать как Xposed модуль, чтобы скрыть какие-либо приложения или отклонять запросы на получение списка приложений для защиты вашей конфиденциальности.
+    </string>
+    <string name="about_fork_description">        The original HMA project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">Как использовать этот модуль</string>
     <string name="about_how_to_use_description_1">        Вы можете создать шаблоны в \"Управление шаблонами\".\nЗатем примените шаблоны к приложениям в \"Управление приложениями\". (Вы также можете выбрать дополнительные приложения для отдельных приложений.)\nВыбирайте ТОЛЬКО \"System Framework\" в настройках охвата этого Xposed-модуля / белого списка.
@@ -152,4 +180,8 @@
     <string name="color_deep_orange">Глубокий оранжевый</string>
     <string name="color_brown">Коричневый</string>
     <string name="color_blue_grey">Серо-голубой</string>
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Dark theme</string>
+    <string name="dark_theme_off">Always off</string>
+    <string name="dark_theme_on">Always on</string>
 </resources>

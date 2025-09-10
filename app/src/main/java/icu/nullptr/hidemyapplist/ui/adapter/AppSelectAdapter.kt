@@ -8,6 +8,7 @@ import icu.nullptr.hidemyapplist.ui.view.AppItemView
 import icu.nullptr.hidemyapplist.util.PackageHelper
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import org.frknkrc44.hma_oss.BuildConfig
 
 abstract class AppSelectAdapter(
     private val firstFilter: ((String) -> Boolean)? = null
@@ -24,9 +25,11 @@ abstract class AppSelectAdapter(
                 val filteredList = PackageHelper.appList.first().filter {
                     if (firstFilter?.invoke(it) == false) return@filter false
                     if (!PrefManager.appFilter_showSystem && PackageHelper.isSystem(it)) return@filter false
+                    if (it == BuildConfig.APPLICATION_ID &&
+                        (this@AppSelectAdapter.javaClass == AppManageAdapter::class.java ||
+                            (this@AppSelectAdapter.javaClass == AppScopeAdapter::class.java && firstFilter != null))) return@filter false
                     val label = PackageHelper.loadAppLabel(it)
-                    val packageInfo = PackageHelper.loadPackageInfo(it)
-                    label.lowercase().contains(constraintLowered) || packageInfo.packageName.lowercase().contains(constraintLowered)
+                    label.lowercase().contains(constraintLowered) || it.lowercase().contains(constraintLowered)
                 }
 
                 FilterResults().also { it.values = filteredList }

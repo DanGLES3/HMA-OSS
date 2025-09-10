@@ -9,6 +9,7 @@
     <string name="title_app_select">Apps auswählen</string>
     <string name="title_app_settings">App Einstellungen</string>
     <string name="title_about">Über</string>
+    <string name="title_about_fork">About this fork</string>
     <string name="do_not_dual">HMA nicht zum zweiten Benutzer installieren</string>
     <string name="show_crash_log">Absturzprotokoll anzeigen</string>
     <string name="config_damaged">Konfigurationsdatei beschädigt. Bitte Appdaten löschen</string>
@@ -27,6 +28,7 @@
     <string name="no">Nein</string>
     <string name="search">Suchen</string>
     <string name="system">System</string>
+    <string name="follow_system">Follow system</string>
     <!-- Home -->
     <string name="home_xposed_activated">Modul aktiviert [%s]</string>
     <string name="home_xposed_not_activated">Modul nicht aktiviert</string>
@@ -58,7 +60,7 @@
     <string name="list_sort_by_package_name">Nach Paketname</string>
     <string name="list_sort_by_install_time">Nach Installationszeitpunkt</string>
     <string name="list_sort_by_update_time">Nach Aktualisierungszeitpunkt</string>
-    <!-- Template manage -->
+    <!-- Manage templates -->
     <string name="template_usage_hint">Establish templates for \"restless\" apps, controlling applist they can obtain.\n\nBlacklist (recommended): the apps selected in the template will be invisible to the apps applying the template.\nWhitelist: the apps not selected in the template will be invisible to the apps applying the template.</string>
     <string name="template_new_blacklist">Create a blacklist template</string>
     <string name="template_new_whitelist">Create a whitelist template</string>
@@ -74,11 +76,31 @@
     <string name="app_enable_hide">Enable hide</string>
     <string name="app_template_config">Template config</string>
     <string name="app_choose_template">Choose template</string>
+    <string name="app_choose_preset">Choose preset</string>
     <string name="app_exclude_system_apps">Exclude system apps</string>
     <string name="app_exclude_system_apps_summary">Turn off this option only when really necessary. It is likely to cause crash with it disabled</string>
     <string name="app_template_using">Using %d templates</string>
+    <string name="app_preset_using">Using %d presets</string>
+    <string name="app_settings_preset_using">Using %d settings presets</string>
     <string name="app_extra_apps_visible_count">%d additional apps visible</string>
     <string name="app_extra_apps_invisible_count">%d additional apps invisible</string>
+    <string name="app_warning_risky_package_title">Risky package</string>
+    <string name="app_warning_risky_package_desc">This package is marked as risky and you can cause issues on hidden apps. Do you want to continue?</string>
+    <string name="app_spoof">Spoofing</string>
+    <string name="app_hide_installation_source">Spoof installation sources</string>
+    <string name="app_hide_installation_source_desc">All of user apps will be spoofed as installed over Play Store for this application</string>
+    <string name="app_hide_installation_source_system">Spoof system apps too</string>
+    <string name="app_hide_installation_source_system_desc">All of system apps will be spoofed as installed over nothing for this application</string>
+    <string name="app_exclude_target_installation_source">Exclude the target app</string>
+    <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
+    <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
+    <!-- Preset names -->
+    <string name="preset_xposed">LSPosed/Xposed modules</string>
+    <string name="preset_root_apps">Root managers/Rooted apps</string>
+    <string name="preset_custom_rom">Custom ROM apps</string>
+    <!-- Settings preset names -->
+    <string name="settings_preset_accessibility">Accessibility</string>
+    <string name="settings_preset_dev_options">Developer options</string>
     <!-- Logs -->
     <string name="logs_save">Save logs</string>
     <string name="logs_clear">Clear logs</string>
@@ -91,6 +113,8 @@
     <string name="settings_data_isolation_unsupported">This option is only available on Android 11 and above</string>
     <string name="settings_app_data_isolation">App data isolation</string>
     <string name="settings_vold_app_data_isolation">Vold app data isolation</string>
+    <string name="settings_warning">Warning</string>
+    <string name="settings_vold_warning">This will enable an AOSP feature which make app\'s external private storage directory isolated. This can help improve hiding apps while may cause stability issues. This feature may stop working at any time since it is abandoned in AOSP.</string>
     <string name="settings_change_require_root">Changing requires root permission</string>
     <string name="settings_need_reboot">Changing requires reboot</string>
     <string name="settings_permission_denied">Permission denied</string>
@@ -100,6 +124,8 @@
     <string name="settings_max_log_size">Logger buffer sizes</string>
     <string name="settings_hide_icon">Hide module icon in launcher</string>
     <string name="settings_hide_icon_summary">You can still open the app in Xposed manager</string>
+    <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
+    <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
     <string name="settings_language">Language</string>
     <string name="settings_translate">Participate in translation</string>
     <string name="settings_translate_summary">Help us translate %s into your language</string>
@@ -123,6 +149,8 @@
     <string name="settings_receive_beta_update_summary">Beta version may be unstable</string>
     <!-- About -->
     <string name="about_description">        Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
+    </string>
+    <string name="about_fork_description">        The original HMA project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">How to use this module</string>
     <string name="about_how_to_use_description_1">        You can create templates in \"Template manage\".\nThen apply the templates to apps in \"App manage\". (You can also select extra apps for targets.)\nYou should and ONLY should check \"System Framework\" in Xposed module scope / whitelist.
@@ -152,4 +180,8 @@
     <string name="color_deep_orange">Deep orange</string>
     <string name="color_brown">Brown</string>
     <string name="color_blue_grey">Blue grey</string>
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Dark theme</string>
+    <string name="dark_theme_off">Always off</string>
+    <string name="dark_theme_on">Always on</string>
 </resources>

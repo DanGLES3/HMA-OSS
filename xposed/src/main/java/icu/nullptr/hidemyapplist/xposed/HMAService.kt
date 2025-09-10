@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.IPackageManager
 import android.os.Build
+import android.os.UserHandle
 import icu.nullptr.hidemyapplist.common.AppPresets
 import icu.nullptr.hidemyapplist.common.Constants
 import icu.nullptr.hidemyapplist.common.IHMAService
@@ -192,7 +193,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         return appConfig.useWhitelist
     }
 
-    fun shouldHideInstallationSource(caller: String?, query: String?): Int {
+    fun shouldHideInstallationSource(caller: String?, query: String?, user: UserHandle): Int {
         if (caller == null || query == null) return 0
         val appConfig = config.scope[caller] ?: return 0
         if (!appConfig.hideInstallationSource) return 0
@@ -200,11 +201,11 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         if (caller == query && appConfig.excludeTargetInstallationSource) return 0
 
         try {
-            val uid = Utils.getPackageUidCompat(pms, query, 0L, 0)
-            logD(TAG, "@shouldHideInstallationSource UID for $caller -> $query: $uid")
+            val uid = Utils.getPackageUidCompat(pms, query, 0L, user.hashCode())
+            logD(TAG, "@shouldHideInstallationSource UID for $caller (${user.hashCode()}) -> $query: $uid")
             if (uid < 0) return 0 // invalid package installation source request
         } catch (e: Throwable) {
-            logD(TAG, "@shouldHideInstallationSource UID error", e)
+            logD(TAG, "@shouldHideInstallationSource UID error for $caller (${user.hashCode()})", e)
             return 0
         }
 

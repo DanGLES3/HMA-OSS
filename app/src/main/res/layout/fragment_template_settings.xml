@@ -39,6 +39,28 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/item_padding_horizontal"
+            android:minHeight="?listPreferredItemHeight"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textAppearance="?textAppearanceBodyLarge"
+                android:text="@string/work_mode"
+                android:layout_marginEnd="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textAppearance="?textAppearanceBodyMedium"
+                android:id="@+id/work_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         <icu.nullptr.hidemyapplist.ui.view.ListItemView
             android:id="@+id/target_apps"
             android:layout_width="match_parent"

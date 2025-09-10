@@ -9,6 +9,7 @@
     <string name="title_app_select">Виберіть додатки</string>
     <string name="title_app_settings">Налаштування додатка</string>
     <string name="title_about">Про додаток</string>
+    <string name="title_about_fork">About this fork</string>
     <string name="do_not_dual">Не встановлюйте HMA для додаткового користувача</string>
     <string name="show_crash_log">Показати журнал збоїв</string>
     <string name="config_damaged">Файл конфігурації пошкоджено. Очистіть дані додатку</string>
@@ -27,6 +28,7 @@
     <string name="no">Ні</string>
     <string name="search">Пошук</string>
     <string name="system">Система</string>
+    <string name="follow_system">Follow system</string>
     <!-- Home -->
     <string name="home_xposed_activated">Модуль активовано [%s]</string>
     <string name="home_xposed_not_activated">Модуль не активовано</string>
@@ -58,7 +60,7 @@
     <string name="list_sort_by_package_name">За назвою пакета</string>
     <string name="list_sort_by_install_time">За часом встановлення</string>
     <string name="list_sort_by_update_time">За часом оновлення</string>
-    <!-- Template manage -->
+    <!-- Manage templates -->
     <string name="template_usage_hint">Створіть шаблони для «неспокійних» додатків, контролюючи список додатків, які вони можуть отримати.\n\nЧорний список (рекомендовано): додатки, вибрані в шаблоні, будуть невидимі для додатків, які застосовують шаблон.\nБілий список: додатки, не вибрані в шаблоні, будуть невидимий для додатків, які застосовують шаблон.</string>
     <string name="template_new_blacklist">Створити шаблон чорного списку</string>
     <string name="template_new_whitelist">Створити шаблон білого списку</string>
@@ -74,11 +76,31 @@
     <string name="app_enable_hide">Увімкнути приховування</string>
     <string name="app_template_config">Конфігурація шаблону</string>
     <string name="app_choose_template">Виберіть шаблон</string>
+    <string name="app_choose_preset">Choose preset</string>
     <string name="app_exclude_system_apps">Виключити системні додатки</string>
     <string name="app_exclude_system_apps_summary">Вимкніть цей параметр лише тоді, коли це дійсно необхідно. Імовірно, це призведе до збою, якщо його вимкнено</string>
     <string name="app_template_using">Використання %d шаблонів</string>
+    <string name="app_preset_using">Using %d presets</string>
+    <string name="app_settings_preset_using">Using %d settings presets</string>
     <string name="app_extra_apps_visible_count">%d видимі додаткові додатки</string>
     <string name="app_extra_apps_invisible_count">%d невидимі додаткові додатки</string>
+    <string name="app_warning_risky_package_title">Risky package</string>
+    <string name="app_warning_risky_package_desc">This package is marked as risky and you can cause issues on hidden apps. Do you want to continue?</string>
+    <string name="app_spoof">Spoofing</string>
+    <string name="app_hide_installation_source">Spoof installation sources</string>
+    <string name="app_hide_installation_source_desc">All of user apps will be spoofed as installed over Play Store for this application</string>
+    <string name="app_hide_installation_source_system">Spoof system apps too</string>
+    <string name="app_hide_installation_source_system_desc">All of system apps will be spoofed as installed over nothing for this application</string>
+    <string name="app_exclude_target_installation_source">Exclude the target app</string>
+    <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
+    <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
+    <!-- Preset names -->
+    <string name="preset_xposed">LSPosed/Xposed modules</string>
+    <string name="preset_root_apps">Root managers/Rooted apps</string>
+    <string name="preset_custom_rom">Custom ROM apps</string>
+    <!-- Settings preset names -->
+    <string name="settings_preset_accessibility">Accessibility</string>
+    <string name="settings_preset_dev_options">Developer options</string>
     <!-- Logs -->
     <string name="logs_save">Зберегти журнали</string>
     <string name="logs_clear">Очистити журнали</string>
@@ -91,6 +113,8 @@
     <string name="settings_data_isolation_unsupported">Цей параметр доступний лише на Android 11 і вище</string>
     <string name="settings_app_data_isolation">Ізоляція даних додатку</string>
     <string name="settings_vold_app_data_isolation">Ізоляція даних додатку Vold</string>
+    <string name="settings_warning">Warning</string>
+    <string name="settings_vold_warning">This will enable an AOSP feature which make app\'s external private storage directory isolated. This can help improve hiding apps while may cause stability issues. This feature may stop working at any time since it is abandoned in AOSP.</string>
     <string name="settings_change_require_root">Для зміни потрібен дозвіл root</string>
     <string name="settings_need_reboot">Для зміни потрібно перезавантаження</string>
     <string name="settings_permission_denied">У дозволі відмовлено</string>
@@ -100,6 +124,8 @@
     <string name="settings_max_log_size">Розміри буфера реєстратора</string>
     <string name="settings_hide_icon">Сховати значок модуля в панелі запуску</string>
     <string name="settings_hide_icon_summary">Ви все ще можете відкрити додаток у менеджері Xposed</string>
+    <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
+    <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
     <string name="settings_language">Мова</string>
     <string name="settings_translate">Участь у перекладі</string>
     <string name="settings_translate_summary">Допоможіть нам перекласти %s вашою мовою</string>
@@ -123,6 +149,8 @@
     <string name="settings_receive_beta_update_summary">Бета-версія може бути нестабільною</string>
     <!-- About -->
     <string name="about_description">        Незважаючи на те, що виявляти встановлену конкретний додаток неправильно, не кожен додаток, що використовує root, забезпечує підтримку довільних імен пакетів. У цьому випадку виявлені додатки, які використовують root (наприклад, Fake Location and Storage Isolation), дорівнюють самому виявленому root.\n\nУ той же час деякі розумні додатки використовують різні лазівки, щоб отримати ваш список додатків, щоб він міг малювати особистість для вас.\n\nЦей модуль надає деякі методи перевірити, чи добре ви вже приховали свій список додатків. Крім того, він може працювати як модуль Xposed, щоб приховати деякі додатки або відхилити запити списку додатків, щоб захистити вашу конфіденційність.
+    </string>
+    <string name="about_fork_description">        The original HMA project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
     </string>
     <string name="about_how_to_use_title">Як користуватися цим модулем</string>
     <string name="about_how_to_use_description_1">        Ви можете створювати шаблони в «Керування шаблонами».\nПотім застосуйте шаблони до додатків у «Керування додатками». (Ви також можете вибрати додаткові додатки для цілей.)\nВи повинні й ТІЛЬКИ повинні перевірити «System Framework» в області/білому списку модуля Xposed.
@@ -152,4 +180,8 @@
     <string name="color_deep_orange">Глибокий помаранчевий</string>
     <string name="color_brown">Коричневий</string>
     <string name="color_blue_grey">Синьо-сірий</string>
+    <!-- Dark theme modes -->
+    <string name="dark_theme">Dark theme</string>
+    <string name="dark_theme_off">Always off</string>
+    <string name="dark_theme_on">Always on</string>
 </resources>

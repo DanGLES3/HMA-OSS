@@ -35,7 +35,12 @@ class AppItemView @JvmOverloads constructor(
 
     fun load(packageName: String) {
         binding.packageName.text = packageName
-        binding.label.text = PackageHelper.loadAppLabel(packageName)
-        binding.icon.setImageBitmap(PackageHelper.loadAppIcon(packageName))
+        try {
+            binding.label.text = PackageHelper.loadAppLabel(packageName)
+            binding.icon.setImageBitmap(PackageHelper.loadAppIcon(packageName))
+        } catch (e: Throwable) {
+            binding.label.text = packageName
+            binding.icon.setImageResource(android.R.drawable.sym_def_app_icon)
+        }
     }
 }

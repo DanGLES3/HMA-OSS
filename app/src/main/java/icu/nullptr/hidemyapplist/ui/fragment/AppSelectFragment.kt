@@ -4,13 +4,16 @@ import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowInsets
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import icu.nullptr.hidemyapplist.service.PrefManager
 import icu.nullptr.hidemyapplist.ui.adapter.AppSelectAdapter
@@ -113,6 +116,13 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
             PackageHelper.invalidateCache()
         }
 
+        adapter.registerAdapterDataObserver(
+            EmptyDataObserver(
+                binding.list,
+                binding.listEmptyContainer
+            )
+        )
+
         lifecycleScope.launch {
             PackageHelper.isRefreshing
                 .flowWithLifecycle(lifecycle)
@@ -143,6 +153,34 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
             }
 
             insets
+        }
+    }
+
+    // Credit: https://medium.com/nerd-for-tech/empty-dataset-in-recyclerview-ad86833dd5c6
+    inner class EmptyDataObserver(
+        private val recyclerView: RecyclerView,
+        private val emptyView: View
+    ): RecyclerView.AdapterDataObserver() {
+        private val isScopeFragment = this@AppSelectFragment.javaClass == ScopeFragment::class.java
+
+        private fun checkIfEmpty() {
+            val emptyViewVisible = recyclerView.adapter!!.itemCount < if (isScopeFragment) 1 else 2
+            emptyView.visibility = if (emptyViewVisible) View.VISIBLE else View.GONE
+            if (emptyViewVisible) {
+                emptyView.findViewById<TextView>(R.id.list_empty_text).text = getString(
+                    if (isScopeFragment) {
+                        R.string.list_empty_no_enabled
+                    } else {
+                        R.string.list_empty_no_apps
+                    }
+                )
+            }
+            (recyclerView.parent as View).visibility = if (emptyViewVisible) View.GONE else View.VISIBLE
+        }
+
+        override fun onChanged() {
+            super.onChanged()
+            checkIfEmpty()
         }
     }
 }

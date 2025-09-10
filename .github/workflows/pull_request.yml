@@ -28,17 +28,36 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Write properties
+      - name: Prepare env
         run: |
           echo buildWithGitSuffix=true >> local.properties
+          mkdir -p ~/.config/.android
+          ln -s ~/.config/.android ~/.android
+
+      - name: Cache gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.config/.android/debug.keystore
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle-
 
       - name: Gradle prebuild
         run: |
           echo 'org.gradle.jvmargs=-Xmx2048m' >> gradle.properties
           ./gradlew prebuild
 
+      - name: Create debug keystore
+        run: |
+          if [ ! -f ~/.config/.android/debug.keystore ]
+          then
+            keytool -genkey -v -keystore ~/.config/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          fi
+
       - name: Build debug
         id: buildDebug
         run: |
           ./gradlew :app:assembleDebug
-          echo "debugName=$(ls app/build/apk/debug/HMA*-debug.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
+          echo "debugName=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
