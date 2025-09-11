@@ -60,6 +60,8 @@
     <string name="list_sort_by_package_name">За назвою пакета</string>
     <string name="list_sort_by_install_time">За часом встановлення</string>
     <string name="list_sort_by_update_time">За часом оновлення</string>
+    <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
+    <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Створіть шаблони для «неспокійних» додатків, контролюючи список додатків, які вони можуть отримати.\n\nЧорний список (рекомендовано): додатки, вибрані в шаблоні, будуть невидимі для додатків, які застосовують шаблон.\nБілий список: додатки, не вибрані в шаблоні, будуть невидимий для додатків, які застосовують шаблон.</string>
     <string name="template_new_blacklist">Створити шаблон чорного списку</string>

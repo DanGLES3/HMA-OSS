@@ -9,12 +9,12 @@
     <string name="title_app_select">Pilih aplikasi</string>
     <string name="title_app_settings">Pengaturan aplikasi</string>
     <string name="title_about">Tentang</string>
-    <string name="title_about_fork">Tentang fork ini</string>
+    <string name="title_about_fork">Tentang cabang ini</string>
     <string name="do_not_dual">Jangan instal HMA pada pengguna sekunder</string>
     <string name="show_crash_log">Tampilkan log kerusakan</string>
     <string name="config_damaged">File konfigurasi rusak. Harap bersihkan data aplikasi</string>
     <string name="edit_list">Edit daftar</string>
-    <string name="delete">Menghapus</string>
+    <string name="delete">Hapus</string>
     <string name="enabled">Diaktifkan</string>
     <string name="disabled">Dinonaktifkan</string>
     <string name="work_mode">Mode kerja</string>
@@ -60,8 +60,10 @@
     <string name="list_sort_by_package_name">Nama paket</string>
     <string name="list_sort_by_install_time">Waktu instalasi</string>
     <string name="list_sort_by_update_time">Waktu pembaruan</string>
+    <string name="list_empty_no_enabled">Coba aktifkan penyembunyian untuk aplikasi dengan mode kerja templat ini dan aplikasi akan muncul di sini</string>
+    <string name="list_empty_no_apps">Tidak ada aplikasi yang ditemukan, mungkin anda tidak mengizinkan aplikasi ini untuk mengakses semua paket</string>
     <!-- Manage templates -->
-    <string name="template_usage_hint">Buat templat untuk aplikasi \"restless\", guna mengontrol akses daftar aplikasi.\n\nBlacklist (disarankan): aplikasi yang dipilih dalam templat akan tersembunyi dari aplikasi yang menerapkan templat tersebut.\nWhitelist: aplikasi yang tidak dipilih dalam templat akan tersembunyi oleh aplikasi yang menerapkan templat tersebut.</string>
+    <string name="template_usage_hint">Buat templat untuk aplikasi \"berisiko\", guna mengontrol akses daftar aplikasi.\n\nBlacklist (disarankan): aplikasi yang dipilih dalam templat akan tersembunyi dari aplikasi yang menerapkan templat tersebut.\nWhitelist: aplikasi yang tidak dipilih dalam templat akan tersembunyi oleh aplikasi yang menerapkan templat tersebut.</string>
     <string name="template_new_blacklist">Buat templat blacklist</string>
     <string name="template_new_whitelist">Buat templat whitelist</string>
     <string name="template_delete">Apakah anda yakin ingin menghapus templat tersebut?</string>
@@ -77,7 +79,7 @@
     <string name="app_template_config">Konfigurasi templat</string>
     <string name="app_choose_template">Pilih templat</string>
     <string name="app_choose_preset">Pilih preset</string>
-    <string name="app_exclude_system_apps">Kecualikan aplikasi sistem</string>
+    <string name="app_exclude_system_apps">Kecualikan apl sistem</string>
     <string name="app_exclude_system_apps_summary">Matikan opsi ini hanya jika benar-benar diperlukan. Kemungkinan menyebabkan crash jika dinonaktifkan</string>
     <string name="app_template_using">Menggunakan %d templat</string>
     <string name="app_preset_using">Menggunakan %d preset</string>
@@ -114,9 +116,9 @@
     <string name="settings_app_data_isolation">Isolasi data aplikasi</string>
     <string name="settings_vold_app_data_isolation">Isolasi data aplikasi Vold</string>
     <string name="settings_warning">Peringatan</string>
-    <string name="settings_vold_warning">Ini akan mengaktifkan fitur AOSP yang membuat direktori penyimpanan pribadi eksternal aplikasi terisolasi. Ini dapat membantu meningkatkan penyembunyian aplikasi meskipun dapat menyebabkan masalah stabilitas. Fitur ini dapat berhenti berfungsi kapan saja karena ditinggalkan oleh AOSP.</string>
+    <string name="settings_vold_warning">Ini akan mengaktifkan fitur AOSP yang membuat direktori penyimpanan eksternal pribadi aplikasi terisolasi. Ini dapat membantu meningkatkan penyembunyian aplikasi meskipun dapat menyebabkan masalah stabilitas. Fitur ini dapat berhenti berfungsi kapan saja karena ditinggalkan oleh AOSP.</string>
     <string name="settings_change_require_root">Perubahan diperlukan izin root</string>
-    <string name="settings_need_reboot">Perubahan diperlukan reboot</string>
+    <string name="settings_need_reboot">Perubahan diperlukan mulai ulang</string>
     <string name="settings_permission_denied">Izin ditolak</string>
     <string name="settings_force_mount_data">Paksa isolasi data untuk semua aplikasi</string>
     <string name="settings_force_mount_data_summary">Isolasi data dinonaktifkan untuk aplikasi target API yang lebih rendah dari 30 secara default</string>
@@ -124,7 +126,7 @@
     <string name="settings_max_log_size">Ukuran buffer logger</string>
     <string name="settings_hide_icon">Sembunyikan ikon modul di launcher</string>
     <string name="settings_hide_icon_summary">Anda masih dapat membuka aplikasi di manajer Xposed</string>
-    <string name="settings_bypass_risky_package_warning">Lewati peringatan paket berisiko</string>
+    <string name="settings_bypass_risky_package_warning">Abaikan paket berisiko</string>
     <string name="settings_bypass_risky_package_warning_summary">Perlu diketahui bahwa pengembang tidak bertanggung jawab atas masalah terkait paket berisiko sebelum atau setelah anda mengaktifkan fitur ini</string>
     <string name="settings_language">Bahasa</string>
     <string name="settings_translate">Berpartisipasi dalam penerjemahan</string>
@@ -139,23 +141,23 @@
     <string name="settings_stop_system_service">Hentikan layanan sistem</string>
     <string name="settings_stop_system_service_summary">Perlu reboot untuk memulai kembali layanan</string>
     <string name="settings_is_clean_env">Bersihkan lingkungan runtime pada saat yang bersamaan?</string>
-    <string name="settings_is_clean_env_summary">Hapus cache layanan sistem di /data/misc/hide_my_applist_*. Setelah reboot berikutnya, Diperlukan membuka aplikasi modul sekali secara manual untuk mengaktifkan intersepsi, dan jumlah intersepsi juga akan dihapus.</string>
+    <string name="settings_is_clean_env_summary">Hapus cache layanan sistem di /data/misc/hide_my_applist_*. Setelah mulai ulang berikutnya, Diperlukan membuka aplikasi modul sekali secara manual untuk mengaktifkan intersepsi, dan jumlah intersepsi juga akan dihapus.</string>
     <string name="settings_force_clean_env">Paksa bersihkan lingkungan runtime (root)</string>
-    <string name="settings_force_clean_env_summary">Hanya jika layanan sistem gagal untuk memulai, jika tidak, Anda harus mengklik opsi di atas.</string>
+    <string name="settings_force_clean_env_summary">Hanya jika layanan sistem gagal untuk memulai, jika tidak, anda harus mengklik opsi di atas.</string>
     <string name="settings_force_clean_env_toast_successful">Lingkungan runtime dibersihkan</string>
     <string name="settings_update">Pembaruan</string>
     <string name="settings_disable_update">Nonaktifkan pemberitahuan pembaruan</string>
     <string name="settings_receive_beta_update">Terima pembaruan beta</string>
     <string name="settings_receive_beta_update_summary">Versi beta mungkin tidak stabil</string>
     <!-- About -->
-    <string name="about_description">        Meskipun tidak tepat untuk mendeteksi instalasi aplikasi tertentu, tidak semua aplikasi yang menggunakan root mendukung nama paket acak. Dalam kasus ini, aplikasi terdeteksi yang menggunakan root (seperti Lokasi Palsu dan Isolasi Penyimpanan) dianggap sama dengan root itu sendiri.\n\nPada saat yang sama, beberapa aplikasi cerdas memanfaatkan celah untuk mendapatkan daftar aplikasi anda, sehingga mereka bisa membangun profil tentang anda.\n\nModul ini menyediakan beberapa metode untuk menguji apakah anda telah menyembunyikan daftar aplikasi dengan baik. Selain itu, dapat berfungsi sebagai modul Xposed untuk menyembunyikan aplikasi tertentu atau menolak permintaan daftar aplikasi guna melindungi privasi anda.
+    <string name="about_description">        Meskipun tidak tepat untuk mendeteksi instalasi aplikasi tertentu, tidak semua aplikasi yang menggunakan root mendukung nama paket acak. Dalam kasus ini, aplikasi terdeteksi yang menggunakan root (seperti Fake Location dan Storage Isolation) dianggap sama dengan root itu sendiri.\n\nPada saat yang sama, beberapa aplikasi cerdas memanfaatkan celah untuk mendapatkan daftar aplikasi anda, sehingga mereka bisa membangun profil tentang anda.\n\nModul ini menyediakan beberapa metode untuk menguji apakah anda telah menyembunyikan daftar aplikasi dengan baik. Selain itu, dapat berfungsi sebagai modul Xposed untuk menyembunyikan aplikasi tertentu atau menolak permintaan daftar aplikasi guna melindungi privasi anda.
     </string>
     <string name="about_fork_description">        Proyek HMA asli telah menjadi sumber tertutup dan kode terbaru mereka tidak memuat beberapa perubahan terbaru, jadi saya membuat percabangan ini untuk melanjutkannya sebagai sumber terbuka lagi.
     </string>
     <string name="about_how_to_use_title">Cara menggunakan modul ini</string>
-    <string name="about_how_to_use_description_1">        Anda dapat membuat template di \"Kelola templat\".\nKemudian terapkan templat ke aplikasi di \"Kelola aplikasi\". (Anda juga dapat memilih aplikasi tambahan untuk target.)\nAnda harus dan HANYA memeriksa \"Kerangka Sistem\" dalam scope modul Xposed / whitelist.
+    <string name="about_how_to_use_description_1">        Anda dapat membuat templat di \"Kelola templat\".\nKemudian terapkan templat ke aplikasi di \"Kelola aplikasi\". (Anda juga dapat memilih aplikasi tambahan untuk target.)\nAnda harus dan HANYA mengaktifkan \"Kerangka Sistem\" dalam scope modul Xposed / whitelist.
     </string>
-    <string name="about_how_to_use_description_2">        Modifikasi konfigurasi efektif secara real time.
+    <string name="about_how_to_use_description_2">        Perubahan konfigurasi efektif secara real time.
     </string>
     <string name="about_developer">Pengembang</string>
     <string name="about_support">Dukungan dan umpan balik</string>

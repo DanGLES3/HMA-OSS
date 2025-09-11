@@ -60,6 +60,8 @@
     <string name="list_sort_by_package_name">Par nom de paquet</string>
     <string name="list_sort_by_install_time">Par date d\'installation</string>
     <string name="list_sort_by_update_time">Par date de mise à jour</string>
+    <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
+    <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Établir des modèles pour les applications \"agitées\", controller la liste d\'appli qu\'elles peuvent obtenir.\n\nListe noir (recommandée): les applis sélectionnées dans le modèle seront invisibles aux autres aplis qui appliquent le modèle.\nListe blanche: les applis non sélectionnées dans le modèle seront invisibles aux applis l\'appliquant.</string>
     <string name="template_new_blacklist">Créer un modèle de liste noir</string>

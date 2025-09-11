@@ -12,6 +12,7 @@ import java.io.File
 object ConfigManager {
 
     data class TemplateInfo(val name: String?, val isWhiteList: Boolean)
+    data class PresetInfo(val name: String, val translation: String)
 
     private const val TAG = "ConfigManager"
     private lateinit var config: JsonConfig

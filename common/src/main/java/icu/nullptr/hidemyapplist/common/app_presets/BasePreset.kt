@@ -12,6 +12,8 @@ abstract class BasePreset(val name: String) {
 
     fun containsPackage(packageName: String) = exactPackageNames.contains(packageName) || packageNames.contains(packageName)
 
+    val packages get() = packageNames + exactPackageNames
+
     fun addPackageInfoPreset(appInfo: ApplicationInfo): Boolean {
         val packageName = appInfo.packageName
         if (!exactPackageNames.contains(packageName) && canBeAddedIntoPreset(appInfo)) {

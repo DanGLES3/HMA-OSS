@@ -60,6 +60,8 @@
     <string name="list_sort_by_package_name">依據應用包名稱</string>
     <string name="list_sort_by_install_time">依據安裝時間</string>
     <string name="list_sort_by_update_time">依據更新時間</string>
+    <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
+    <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">為不安分的「應用程式」建立模板，控制他們可讀取的應用程式列表。\n黑名單 (推薦使用)：開啟此模板的應用程式將看不到黑名單內勾選的應用程式。\n白名單：開啟此模板的應用程式將只能看到白名單模板勾選內的應用程式。</string>
     <string name="template_new_blacklist">建立黑名單模板</string>

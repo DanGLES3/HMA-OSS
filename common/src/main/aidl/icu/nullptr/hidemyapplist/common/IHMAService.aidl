@@ -15,4 +15,6 @@ interface IHMAService {
     void clearLogs() = 5;
 
     void handlePackageEvent(String eventType, String packageName) = 6;
+
+    String[] getPackagesForPreset(String presetName) = 7;
 }

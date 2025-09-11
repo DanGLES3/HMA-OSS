@@ -60,6 +60,8 @@
     <string name="list_sort_by_package_name">按应用包名</string>
     <string name="list_sort_by_install_time">按安装时间</string>
     <string name="list_sort_by_update_time">按更新时间</string>
+    <string name="list_empty_no_enabled">尝试使用此模板的工作模式为应用程序启用隐藏，应用程序将显示在此处</string>
+    <string name="list_empty_no_apps">未找到应用程序，可能您未允许此应用程序查询所有软件包</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">为“不安分”的应用建立模板，控制可获取的应用列表。\n\n黑名单（推荐）：模板中选中的应用对应用模板的应用不可见。\n白名单：模板中未选中的应用对应用模板的应用不可见。</string>
     <string name="template_new_blacklist">创建黑名单模板</string>
@@ -149,7 +151,7 @@
     <string name="settings_receive_beta_update_summary">注意：测试版可能不稳定</string>
     <!-- About -->
     <string name="about_description">虽然检测特定的应用程序安装是不正确的，但并非每个使用root的应用程序都提供随机包名支持。在这种情况下，检测到的使用root的应用程序（如假位置和存储隔离）等于检测到的root本身。与此同时，一些智能应用程序使用各种漏洞来获取您的应用程序列表，以便它可以为您绘制一个角色。此模块提供了一些方法来测试您是否已经很好地隐藏了应用程序。此外，它还可以作为Xposed模块来隐藏一些应用程序或拒绝应用程序列表请求，以保护您的隐私。</string>
-    <string name="about_fork_description">最初的HMA项目已经成为闭源代码，他们的最新代码不包含一些最新的更改，所以我创建了这个分叉，再次将其作为开源代码继续使用</string>
+    <string name="about_fork_description">最初的HMA项目已经成为闭源代码，他们的最新代码不包含一些最新的更改，所以我创建了这个分支，再次将其作为开源代码继续使用</string>
     <string name="about_how_to_use_title">如何使用此模块</string>
     <string name="about_how_to_use_description_1">您可以在“管理模板”中创建模板。然后在“管理应用程序”中将模板应用于应用程序。（您还可以为目标选择额外的应用程序。）您应该并且只应该在Xposed模块范围/白名单中选中“系统框架”。Xposed模块用于隐藏某些应用程序或拒绝应用程序列表请求，以保护您的隐私。</string>
     <string name="about_how_to_use_description_2">配置修改实时有效</string>

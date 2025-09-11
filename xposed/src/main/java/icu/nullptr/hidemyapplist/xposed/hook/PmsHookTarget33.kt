@@ -1,16 +1,12 @@
 package icu.nullptr.hidemyapplist.xposed.hook
 
 import android.content.pm.PackageInstaller
-import android.content.pm.PackageManager
-import android.os.Binder
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.github.kyuubiran.ezxhelper.utils.findConstructor
 import com.github.kyuubiran.ezxhelper.utils.findMethod
-import com.github.kyuubiran.ezxhelper.utils.findMethodOrNull
 import com.github.kyuubiran.ezxhelper.utils.hookBefore
 import com.github.kyuubiran.ezxhelper.utils.paramCount
-import de.robv.android.xposed.XC_MethodHook
 import icu.nullptr.hidemyapplist.common.Constants
 import icu.nullptr.hidemyapplist.common.Constants.VENDING_PACKAGE_NAME
 import icu.nullptr.hidemyapplist.common.Utils
@@ -19,7 +15,6 @@ import icu.nullptr.hidemyapplist.xposed.Utils4Xposed
 import icu.nullptr.hidemyapplist.xposed.logD
 import icu.nullptr.hidemyapplist.xposed.logE
 import icu.nullptr.hidemyapplist.xposed.logI
-import java.util.concurrent.atomic.AtomicReference
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 class PmsHookTarget33(service: HMAService) : PmsHookTargetBase(service) {

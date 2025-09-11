@@ -277,4 +277,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
             Intent.ACTION_PACKAGE_REMOVED -> AppPresets.instance.handlePackageRemoved(packageName)
         }
     }
+
+    override fun getPackagesForPreset(presetName: String) =
+        AppPresets.instance.getPresetByName(presetName)?.packages?.toTypedArray()
 }

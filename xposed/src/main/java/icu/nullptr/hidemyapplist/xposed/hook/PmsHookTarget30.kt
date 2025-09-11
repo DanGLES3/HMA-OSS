@@ -1,6 +1,5 @@
 package icu.nullptr.hidemyapplist.xposed.hook
 
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.github.kyuubiran.ezxhelper.utils.findConstructor

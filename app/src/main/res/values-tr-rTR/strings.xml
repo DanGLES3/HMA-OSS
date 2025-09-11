@@ -17,7 +17,7 @@
     <string name="delete">Sil</string>
     <string name="enabled">Etkin</string>
     <string name="disabled">Devre Dışı</string>
-    <string name="work_mode">Çalışma Modu</string>
+    <string name="work_mode">Çalışma modu</string>
     <string name="blacklist">Kara Liste</string>
     <string name="whitelist">Beyaz Liste</string>
     <string name="application">Uygulama</string>
@@ -45,7 +45,7 @@
     <string name="home_restore_config">Yapılandırmayı geri yükle</string>
     <string name="home_import_successful">İçe aktarma başarılı</string>
     <string name="home_import_failed">İçe aktarma başarısız</string>
-    <string name="home_import_app_version_too_old">Modül sürümü yedeğinkinden düşük</string>
+    <string name="home_import_app_version_too_old">Modül sürümü yedeğin sürümünden düşük</string>
     <string name="home_import_backup_version_too_old">Yedek sürümü çok eski</string>
     <string name="home_import_file_damaged">Yedek dosyası hasarlı</string>
     <string name="home_export_failed">Dışa aktarma başarısız</string>
@@ -60,6 +60,8 @@
     <string name="list_sort_by_package_name">Paket adına göre</string>
     <string name="list_sort_by_install_time">Yükleme zamanına göre</string>
     <string name="list_sort_by_update_time">Güncelleme zamanına göre</string>
+    <string name="list_empty_no_enabled">Bu taslağın çalışma modu için uygulamaları gizlemeyi deneyin, uygulamalar burada görünecektir</string>
+    <string name="list_empty_no_apps">Hiçbir uygulama bulunamadı, belki de bu uygulamanın tüm paketleri görmesine izin verilmemiştir</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">\"Huzursuz\" uygulamalar için şablonlar oluşturun ve bu uygulamaların hangi uygulama listesini görebileceğini kontrol edin.\n\nKara liste (önerilen): Şablonda seçilen uygulamalar, şablonu uygulayan uygulamalar için görünmez olacaktır.\nBeyaz liste: Şablonda seçilmeyen uygulamalar, şablonu uygulayan uygulamalar için görünmez olacaktır.</string>
     <string name="template_new_blacklist">Kara liste şablonu oluştur</string>
@@ -86,7 +88,7 @@
     <string name="app_extra_apps_invisible_count">%d ek uygulama görünmez</string>
     <string name="app_warning_risky_package_title">Riskli paket</string>
     <string name="app_warning_risky_package_desc">Bu paket riskli olarak işaretlenmiş ve gizli uygulamalarda sorunlara neden olabilir. Devam etmek istiyor musunuz?</string>
-    <string name="app_spoof">Sahteleme</string>
+    <string name="app_spoof">Kandırma</string>
     <string name="app_hide_installation_source">Yükleme kaynaklarını gizle</string>
     <string name="app_hide_installation_source_desc">Bu uygulama için tüm kullanıcı uygulamaları Play Store üzerinden yüklenmiş gibi görünecek</string>
     <string name="app_hide_installation_source_system">Sistem uygulamalarını da gizle</string>
@@ -138,7 +140,7 @@
     <string name="settings_service">Servis</string>
     <string name="settings_stop_system_service">Sistem servisini durdur</string>
     <string name="settings_stop_system_service_summary">Servisi yeniden başlatmak için yeniden başlatma gerekiyor</string>
-    <string name="settings_is_clean_env">Çalışma zamanı ortamını temizle?</string>
+    <string name="settings_is_clean_env">Aynı zamanda çalışma zamanı ortamını da temizlemek istiyor musunuz?</string>
     <string name="settings_is_clean_env_summary">/data/misc/hide_my_applist_* içindeki sistem servisi önbelleğini kaldırır. Bu, bir sonraki yeniden başlatmadan sonra modül uygulaması el ile başlatılmalıdır ve müdahale sayımları da temizlenecektir.</string>
     <string name="settings_force_clean_env">Çalışma zamanı ortamını zorla temizle (root)</string>
     <string name="settings_force_clean_env_summary">Sadece sistem servisi başlatılamazsa bu seçeneği kullanın, aksi takdirde yukarıdaki seçeneği tıklayın.</string>
@@ -152,7 +154,7 @@
     </string>
     <string name="about_fork_description">        Orijinal HMA projesi kapalı kaynak haline geldi ve en son kodları bazı son değişiklikleri içermiyordu, bu yüzden bu çatalı oluşturup projeyi tekrar açık kaynak olarak sürdürmeye karar verdim.
     </string>
-    <string name="about_how_to_use_title">Bu modülü nasıl kullanırsınız</string>
+    <string name="about_how_to_use_title">Bu modül nasıl kullanılır</string>
     <string name="about_how_to_use_description_1">        \"Şablonları Yönet\" bölümünde şablonlar oluşturabilirsiniz.\nSonra \"Uygulamaları Yönet\" bölümünde uygulamalara şablonları uygulayabilirsiniz. (Hedefler için ek uygulamalar da seçebilirsiniz.)\nXposed modül kapsamında/beyaz listede YALNIZCA \"Sistem Çerçevesi\"ni işaretlemelisiniz.
     </string>
     <string name="about_how_to_use_description_2">        Yapılandırma değişiklikleri gerçek zamanlı olarak etkilidir.
@@ -173,7 +175,7 @@
     <string name="color_teal">Çuha çiçeği yeşili</string>
     <string name="color_green">Yeşil</string>
     <string name="color_light_green">Açık yeşil</string>
-    <string name="color_lime">Limet</string>
+    <string name="color_lime">Limon yeşili</string>
     <string name="color_yellow">Sarı</string>
     <string name="color_amber">Kehribar</string>
     <string name="color_orange">Turuncu</string>

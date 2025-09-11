@@ -60,6 +60,8 @@
     <string name="list_sort_by_package_name">Podle názvu balíčku</string>
     <string name="list_sort_by_install_time">Podle času instalace</string>
     <string name="list_sort_by_update_time">Podle času aktualizace</string>
+    <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
+    <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Vytvořte šablony pro „neklidné“ aplikace a ovládejte seznam aplikací, které mohou vidět.\n\nČerná listina (doporučeno): aplikace vybrané v šabloně budou pro aplikace používající šablonu neviditelné.\nWhitellist: aplikace, které nejsou vybrány v šabloně, budou neviditelné pro aplikace používající šablonu.</string>
     <string name="template_new_blacklist">Vytvořte šablonu černé listiny</string>

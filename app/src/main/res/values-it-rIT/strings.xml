@@ -60,6 +60,8 @@
     <string name="list_sort_by_package_name">Per package name</string>
     <string name="list_sort_by_install_time">Per data installazione</string>
     <string name="list_sort_by_update_time">Per data aggiornamento</string>
+    <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
+    <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Stabilisci template per app \"nervose\", controllando la lista di app che possono ottenere.\n\nBlacklist (consigliata): le app selezionate nel template saranno invisibili alle app che applicano il template.\nWhitelist: le app non selezionate nel template saranno invisibili alle app che applicano il template.</string>
     <string name="template_new_blacklist">Crea un template blacklist</string>

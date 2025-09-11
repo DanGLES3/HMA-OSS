@@ -26,11 +26,15 @@ object PackageHelper {
         val icon: Bitmap
     )
 
-    private object Comparators {
+    object Comparators {
         val byLabel = Comparator<String> { o1, o2 ->
-            val n1 = loadAppLabel(o1).lowercase(Locale.getDefault())
-            val n2 = loadAppLabel(o2).lowercase(Locale.getDefault())
-            Collator.getInstance(Locale.getDefault()).compare(n1, n2)
+            try {
+                val n1 = loadAppLabel(o1).lowercase(Locale.getDefault())
+                val n2 = loadAppLabel(o2).lowercase(Locale.getDefault())
+                Collator.getInstance(Locale.getDefault()).compare(n1, n2)
+            } catch (_: Throwable) {
+                byPackageName.compare(o1, o2)
+            }
         }
         val byPackageName = Comparator<String> { o1, o2 ->
             val n1 = o1.lowercase(Locale.getDefault())
@@ -38,14 +42,22 @@ object PackageHelper {
             Collator.getInstance(Locale.getDefault()).compare(n1, n2)
         }
         val byInstallTime = Comparator<String> { o1, o2 ->
-            val n1 = loadPackageInfo(o1).firstInstallTime
-            val n2 = loadPackageInfo(o2).firstInstallTime
-            n2.compareTo(n1)
+            try {
+                val n1 = loadPackageInfo(o1).firstInstallTime
+                val n2 = loadPackageInfo(o2).firstInstallTime
+                n2.compareTo(n1)
+            } catch (_: Throwable) {
+                byPackageName.compare(o1, o2)
+            }
         }
         val byUpdateTime = Comparator<String> { o1, o2 ->
-            val n1 = loadPackageInfo(o1).lastUpdateTime
-            val n2 = loadPackageInfo(o2).lastUpdateTime
-            n2.compareTo(n1)
+            try {
+                val n1 = loadPackageInfo(o1).lastUpdateTime
+                val n2 = loadPackageInfo(o2).lastUpdateTime
+                n2.compareTo(n1)
+            } catch (_: Throwable) {
+                byPackageName.compare(o1, o2)
+            }
         }
     }
 
@@ -97,6 +109,10 @@ object PackageHelper {
         if (PrefManager.appFilter_reverseOrder) comparator = comparator.reversed()
         val list = mAppList.first().sortedWith(firstComparator.then(comparator))
         mAppList.emit(list)
+    }
+
+    fun exists(packageName: String) = runBlocking {
+        packageCache.first().contains(packageName)
     }
 
     fun loadPackageInfo(packageName: String): PackageInfo = runBlocking {

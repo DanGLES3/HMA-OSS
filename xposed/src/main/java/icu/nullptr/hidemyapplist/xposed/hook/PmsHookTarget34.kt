@@ -1,7 +1,6 @@
 package icu.nullptr.hidemyapplist.xposed.hook
 
 import android.content.pm.PackageInstaller
-import android.content.pm.PackageManager
 import android.os.Binder
 import android.os.Build
 import androidx.annotation.RequiresApi

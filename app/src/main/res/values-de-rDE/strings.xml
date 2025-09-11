@@ -60,6 +60,8 @@
     <string name="list_sort_by_package_name">Nach Paketname</string>
     <string name="list_sort_by_install_time">Nach Installationszeitpunkt</string>
     <string name="list_sort_by_update_time">Nach Aktualisierungszeitpunkt</string>
+    <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
+    <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Establish templates for \"restless\" apps, controlling applist they can obtain.\n\nBlacklist (recommended): the apps selected in the template will be invisible to the apps applying the template.\nWhitelist: the apps not selected in the template will be invisible to the apps applying the template.</string>
     <string name="template_new_blacklist">Create a blacklist template</string>

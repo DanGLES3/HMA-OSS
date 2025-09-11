@@ -1,5 +1,5 @@
 [versions]
-agp = "8.12.1"
+agp = "8.13.0"
 kotlin = "2.1.10"
 material = "1.13.0-rc01"
 rxhttp = "3.3.1"
@@ -13,7 +13,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 ksp = { id = "com.google.devtools.ksp", version = "2.1.10-1.0.31" }
 nav-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version = "2.8.8" }
 autoresconfig = { id = "dev.rikka.tools.autoresconfig", version = "1.2.2" }
-materialthemebuilder = { id = "dev.rikka.tools.materialthemebuilder", version = "1.5.1" }
 refine = { id = "dev.rikka.tools.refine", version = "4.4.0" }
 
 [libraries]

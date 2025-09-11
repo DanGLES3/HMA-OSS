@@ -4,7 +4,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.TextView
 import androidx.activity.addCallback
@@ -23,6 +22,7 @@ import icu.nullptr.hidemyapplist.util.PackageHelper
 import kotlinx.coroutines.launch
 import org.frknkrc44.hma_oss.R
 import org.frknkrc44.hma_oss.databinding.FragmentAppSelectBinding
+import org.frknkrc44.hma_oss.ui.fragment.AppPresetFragment
 
 abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
 
@@ -37,11 +37,11 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
         navController.navigateUp()
     }
 
-    private fun applyFilter() {
+    protected fun applyFilter() {
         adapter.filter.filter(search)
     }
 
-    private fun sortList() {
+    protected open fun sortList() {
         lifecycleScope.launch {
             PackageHelper.sortList(firstComparator)
             applyFilter()
@@ -78,11 +78,13 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
         sortList()
     }
 
+    open fun getFragmentTitle() = getString(R.string.title_app_select)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { onBack() }
         setupToolbar(
             toolbar = binding.toolbar,
-            title = getString(R.string.title_app_select),
+            title = getFragmentTitle(),
             navigationIcon = R.drawable.baseline_arrow_back_24,
             navigationOnClick = { onBack() },
             menuRes = R.menu.menu_app_list,
@@ -161,17 +163,23 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
         private val recyclerView: RecyclerView,
         private val emptyView: View
     ): RecyclerView.AdapterDataObserver() {
-        private val isScopeFragment = this@AppSelectFragment.javaClass == ScopeFragment::class.java
+        private val fragmentType by lazy {
+            when(this@AppSelectFragment.javaClass) {
+                ScopeFragment::class.java -> 0
+                AppPresetFragment::class.java -> 1
+                else -> 2
+            }
+        }
 
         private fun checkIfEmpty() {
-            val emptyViewVisible = recyclerView.adapter!!.itemCount < if (isScopeFragment) 1 else 2
+            val emptyViewVisible = recyclerView.adapter!!.itemCount < if (fragmentType < 2) 1 else 2
             emptyView.visibility = if (emptyViewVisible) View.VISIBLE else View.GONE
             if (emptyViewVisible) {
                 emptyView.findViewById<TextView>(R.id.list_empty_text).text = getString(
-                    if (isScopeFragment) {
-                        R.string.list_empty_no_enabled
-                    } else {
-                        R.string.list_empty_no_apps
+                    when (fragmentType) {
+                        0 -> R.string.list_empty_no_enabled
+                        1 -> R.string.list_empty_preset
+                        else -> R.string.list_empty_no_apps
                     }
                 )
             }

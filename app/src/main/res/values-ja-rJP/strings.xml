@@ -60,6 +60,8 @@
     <string name="list_sort_by_package_name">パッケージネームで</string>
     <string name="list_sort_by_install_time">インストール日時で</string>
     <string name="list_sort_by_update_time">アップデート時間で</string>
+    <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
+    <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">「落ち着きのない」アプリのテンプレートを確立し、取得できるアプリリストを制御します。\n\nブラックリスト (推奨): テンプレートで選択されたアプリは、テンプレートを適用するアプリから見えなくなります。\nホワイトリスト: テンプレートで選択されていないアプリは、テンプレートを適用するアプリには表示されません。</string>
     <string name="template_new_blacklist">ブラックリストのテンプレートを作成</string>

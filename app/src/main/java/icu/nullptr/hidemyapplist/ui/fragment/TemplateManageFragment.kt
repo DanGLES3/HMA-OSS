@@ -1,6 +1,5 @@
 package icu.nullptr.hidemyapplist.ui.fragment
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.transition.MaterialContainerTransform
 import icu.nullptr.hidemyapplist.common.JsonConfig
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.ui.adapter.TemplateAdapter
@@ -28,10 +26,12 @@ class TemplateManageFragment : Fragment(R.layout.fragment_template_manage) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /*
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.nav_host_fragment
             scrimColor = Color.TRANSPARENT
         }
+         */
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
