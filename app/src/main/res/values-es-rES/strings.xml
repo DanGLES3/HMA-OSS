@@ -35,7 +35,7 @@
     <string name="home_xposed_service_on">Servicio del sistema ejecutandose [%d]</string>
     <string name="home_xposed_service_off">El servicio del sistema no se está ejecutando</string>
     <string name="home_xposed_service_old">Módulo actualizado, requiere reiniciar</string>
-    <string name="home_xposed_filter_count">HMA-OSS ha filtrado un total de solicitudes %d</string>
+    <string name="home_xposed_filter_count">HMA-OSS ha filtrado un total de %d solicitudes</string>
     <string name="home_manage">Administrar</string>
     <string name="home_detection_test">Prueba de detección</string>
     <string name="home_download_test_app_title">Descargar aplicación de prueba</string>
@@ -62,6 +62,7 @@
     <string name="list_sort_by_update_time">Por fecha de actualización</string>
     <string name="list_empty_no_enabled">Trate de habilitar la ocultación para aplicaciones con el modo de trabajo de esta plantilla y las aplicaciones aparecerán aquí</string>
     <string name="list_empty_no_apps">No se han encontrado aplicaciones, tal vez no hayas permitido que esta aplicación consulte todos los paquetes</string>
+    <string name="list_empty_preset">No hay aplicaciones añadidas en este preset</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Establece plantillas para aplicaciones \"inquietas\", controlando la lista de aplicaciones que pueden obtener.\n\nLista negra (recomendada): las aplicaciones seleccionadas en la plantilla serán invisibles para las aplicaciones que aplican la plantilla.\nLista blanca: las aplicaciones no seleccionadas en la plantilla serán invisibles para las aplicaciones que aplican la plantilla.</string>
     <string name="template_new_blacklist">Crear plantilla de lista negra</string>
@@ -96,7 +97,8 @@
     <string name="app_exclude_target_installation_source">Excluir la aplicación objetivo</string>
     <string name="app_exclude_target_installation_source_desc">Puedes activarlo si esta aplicación no está disponible en Play Store</string>
     <string name="app_force_stop_warning">No olvide forzar detención a la aplicación objetivo después de guardar la configuración</string>
-    <!-- Preset names -->
+    <!-- Presets -->
+    <string name="title_preset_manage">Mostrar presets</string>
     <string name="preset_xposed">Módulos LSPosed/Xposed</string>
     <string name="preset_root_apps">Gestores root/Aplicaciones Root</string>
     <string name="preset_custom_rom">Aplicaciones de ROM personalizadas</string>
@@ -150,8 +152,7 @@
     <string name="settings_receive_beta_update">Recibir actualización beta</string>
     <string name="settings_receive_beta_update_summary">La versión beta puede ser inestable</string>
     <!-- About -->
-    <string name="about_description">        Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
-    </string>
+    <string name="about_description">Aunque es incorrecto detectar la instalación de una aplicación específica, no todas las aplicaciones que usan root brindan soporte para nombres de paquetes aleatorios. En este caso, aplicaciones detectadas que usan root(como ubicación falsa y aislamiento de almacenamiento) es igual a la raíz detectada.\n\n Al mismo tiempo, algunas aplicaciones inteligentes utilizan varias lagunas para adquirir su lista de aplicaciones, de modo que pueda dibujar una personalidad para usted.\n\n Este módulo proporciona algunos métodos para probar si ya ha ocultado correctamente su lista de aplicaciones. Además, puede funcionar como un módulo Xposed para ocultar algunas aplicaciones o rechazar solicitudes de listas de aplicaciones para proteger su privacidad.    </string>
     <string name="about_fork_description">        El proyecto HMA original se ha vuelto de código cerrado y su último código no contiene algunos de los últimos cambios, así que creé este fork para continuar como código abierto de nuevo.
     </string>
     <string name="about_how_to_use_title">Cómo utilizar este módulo</string>

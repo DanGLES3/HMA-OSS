@@ -62,6 +62,7 @@
     <string name="list_sort_by_update_time">Waktu pembaruan</string>
     <string name="list_empty_no_enabled">Coba aktifkan penyembunyian untuk aplikasi dengan mode kerja templat ini dan aplikasi akan muncul di sini</string>
     <string name="list_empty_no_apps">Tidak ada aplikasi yang ditemukan, mungkin anda tidak mengizinkan aplikasi ini untuk mengakses semua paket</string>
+    <string name="list_empty_preset">Tidak ada aplikasi yang ditambahkan dalam preset ini</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Buat templat untuk aplikasi \"berisiko\", guna mengontrol akses daftar aplikasi.\n\nBlacklist (disarankan): aplikasi yang dipilih dalam templat akan tersembunyi dari aplikasi yang menerapkan templat tersebut.\nWhitelist: aplikasi yang tidak dipilih dalam templat akan tersembunyi oleh aplikasi yang menerapkan templat tersebut.</string>
     <string name="template_new_blacklist">Buat templat blacklist</string>
@@ -96,7 +97,8 @@
     <string name="app_exclude_target_installation_source">Kecualikan aplikasi target</string>
     <string name="app_exclude_target_installation_source_desc">Anda dapat mengaktifkannya jika aplikasi ini tidak tersedia di Play Store</string>
     <string name="app_force_stop_warning">Jangan lupa untuk menghentikan paksa aplikasi target setelah menyimpan konfigurasi</string>
-    <!-- Preset names -->
+    <!-- Presets -->
+    <string name="title_preset_manage">Tampilkan preset</string>
     <string name="preset_xposed">Modul LSPosed/Xposed</string>
     <string name="preset_root_apps">Manajer root/Aplikasi root</string>
     <string name="preset_custom_rom">Aplikasi ROM kustom</string>

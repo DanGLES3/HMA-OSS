@@ -6,11 +6,13 @@ import android.view.View
 import android.view.WindowInsets
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
+import kotlinx.coroutines.launch
 import org.frknkrc44.hma_oss.R
 import org.frknkrc44.hma_oss.databinding.FragmentPresetManageBinding
 import org.frknkrc44.hma_oss.ui.adapter.AppPresetListAdapter
@@ -18,16 +20,8 @@ import org.frknkrc44.hma_oss.ui.adapter.AppPresetListAdapter
 class PresetManageFragment : Fragment(R.layout.fragment_preset_manage) {
 
     private val binding by viewBinding<FragmentPresetManageBinding>()
-    private val adapter = AppPresetListAdapter(this::navigateToPreset)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        /*
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.nav_host_fragment
-            scrimColor = Color.TRANSPARENT
-        }
-         */
+    private val adapter by lazy {
+        AppPresetListAdapter(requireContext(), this::navigateToPreset)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

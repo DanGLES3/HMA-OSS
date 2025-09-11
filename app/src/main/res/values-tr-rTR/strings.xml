@@ -3,32 +3,32 @@
     <string name="title_home">Ana Sayfa</string>
     <string name="title_logs">Kayıtlar</string>
     <string name="title_settings">Ayarlar</string>
-    <string name="title_template_manage">Şablonları Yönet</string>
-    <string name="title_template_settings">Şablon Ayarları</string>
-    <string name="title_app_manage">Uygulamaları Yönet</string>
-    <string name="title_app_select">Uygulama Seç</string>
-    <string name="title_app_settings">Uygulama Ayarları</string>
+    <string name="title_template_manage">Şablonları yönet</string>
+    <string name="title_template_settings">Şablon ayarları</string>
+    <string name="title_app_manage">Uygulamaları yönet</string>
+    <string name="title_app_select">Uygulama seç</string>
+    <string name="title_app_settings">Uygulama ayarları</string>
     <string name="title_about">Hakkında</string>
-    <string name="title_about_fork">Bu Çatal Hakkında</string>
+    <string name="title_about_fork">Bu çatal hakkında</string>
     <string name="do_not_dual">HMA’yı ikincil kullanıcıya yüklemeyin</string>
     <string name="show_crash_log">Çökme kaydını göster</string>
     <string name="config_damaged">Yapılandırma dosyası hasarlı. Lütfen uygulama verilerini temizleyin</string>
     <string name="edit_list">Listeyi düzenle</string>
     <string name="delete">Sil</string>
     <string name="enabled">Etkin</string>
-    <string name="disabled">Devre Dışı</string>
+    <string name="disabled">Devre dışı</string>
     <string name="work_mode">Çalışma modu</string>
-    <string name="blacklist">Kara Liste</string>
-    <string name="whitelist">Beyaz Liste</string>
+    <string name="blacklist">Kara liste</string>
+    <string name="whitelist">Beyaz liste</string>
     <string name="application">Uygulama</string>
     <string name="preferences">Tercihler</string>
     <string name="refresh">Yenile</string>
-    <string name="filter">Filtre</string>
+    <string name="filter">Filtrele</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="search">Ara</string>
     <string name="system">Sistem</string>
-    <string name="follow_system">Sistemi Takip Et</string>
+    <string name="follow_system">Sistemi takip et</string>
     <!-- Home -->
     <string name="home_xposed_activated">Modül Etkin [%s]</string>
     <string name="home_xposed_not_activated">Modül Etkin Değil</string>
@@ -41,8 +41,8 @@
     <string name="home_download_test_app_title">Test uygulaması indir</string>
     <string name="home_download_test_app_message">Bireysel bir tespit test uygulaması geliştirdik ve tespit testini bu uygulamaya taşıdık. Şimdi indirmek ister misiniz?</string>
     <string name="home_backup_and_restore">Yedekle &amp; Geri Yükle</string>
-    <string name="home_backup_config">Yapılandırmayı yedekle</string>
-    <string name="home_restore_config">Yapılandırmayı geri yükle</string>
+    <string name="home_backup_config">Yedekle</string>
+    <string name="home_restore_config">Geri yükle</string>
     <string name="home_import_successful">İçe aktarma başarılı</string>
     <string name="home_import_failed">İçe aktarma başarısız</string>
     <string name="home_import_app_version_too_old">Modül sürümü yedeğin sürümünden düşük</string>
@@ -62,6 +62,7 @@
     <string name="list_sort_by_update_time">Güncelleme zamanına göre</string>
     <string name="list_empty_no_enabled">Bu taslağın çalışma modu için uygulamaları gizlemeyi deneyin, uygulamalar burada görünecektir</string>
     <string name="list_empty_no_apps">Hiçbir uygulama bulunamadı, belki de bu uygulamanın tüm paketleri görmesine izin verilmemiştir</string>
+    <string name="list_empty_preset">Bu ön ayara hiçbir uygulama eklenmedi</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">\"Huzursuz\" uygulamalar için şablonlar oluşturun ve bu uygulamaların hangi uygulama listesini görebileceğini kontrol edin.\n\nKara liste (önerilen): Şablonda seçilen uygulamalar, şablonu uygulayan uygulamalar için görünmez olacaktır.\nBeyaz liste: Şablonda seçilmeyen uygulamalar, şablonu uygulayan uygulamalar için görünmez olacaktır.</string>
     <string name="template_new_blacklist">Kara liste şablonu oluştur</string>
@@ -96,7 +97,8 @@
     <string name="app_exclude_target_installation_source">Hedef uygulamayı hariç tut</string>
     <string name="app_exclude_target_installation_source_desc">Bu uygulamayı Play Store’da bulamıyorsanız etkinleştirin</string>
     <string name="app_force_stop_warning">Yapılandırmayı kaydettikten sonra hedef uygulamayı zorla durdurmayı unutmayın</string>
-    <!-- Preset names -->
+    <!-- Presets -->
+    <string name="title_preset_manage">Ön ayarları göster</string>
     <string name="preset_xposed">LSPosed/Xposed modülleri</string>
     <string name="preset_root_apps">Root yöneticileri/Rootlu uygulamalar</string>
     <string name="preset_custom_rom">Özel ROM uygulamaları</string>

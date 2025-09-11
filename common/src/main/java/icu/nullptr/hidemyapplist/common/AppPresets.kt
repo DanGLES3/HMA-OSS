@@ -15,16 +15,7 @@ class AppPresets private constructor() {
     var loggerFunction: ((String) -> Unit)? = null
 
     companion object {
-        private var hiddenInstance: AppPresets? = null
-
-        val instance: AppPresets
-            get() {
-                if (hiddenInstance == null) {
-                    hiddenInstance = AppPresets()
-                }
-
-                return hiddenInstance!!
-            }
+        val instance by lazy { AppPresets() }
     }
 
     fun getAllPresetNames() = presetList.map { it.name }.toTypedArray()

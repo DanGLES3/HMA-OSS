@@ -8,16 +8,7 @@ class SettingsPresets private constructor() {
     private val presetList = mutableListOf<BasePreset>()
 
     companion object {
-        private var hiddenInstance: SettingsPresets? = null
-
-        val instance: SettingsPresets
-            get() {
-                if (hiddenInstance == null) {
-                    hiddenInstance = SettingsPresets()
-                }
-
-                return hiddenInstance!!
-            }
+        val instance by lazy { SettingsPresets() }
     }
 
     fun getAllPresetNames() = presetList.map { it.name }.toTypedArray()

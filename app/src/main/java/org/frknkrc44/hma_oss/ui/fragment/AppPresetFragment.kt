@@ -1,18 +1,25 @@
 package org.frknkrc44.hma_oss.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import icu.nullptr.hidemyapplist.hmaApp
 import icu.nullptr.hidemyapplist.service.PrefManager
 import icu.nullptr.hidemyapplist.ui.fragment.AppSelectFragment
 import icu.nullptr.hidemyapplist.util.PackageHelper
 import icu.nullptr.hidemyapplist.util.PackageHelper.Comparators
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.frknkrc44.hma_oss.ui.adapter.AppPresetAdapter
+import kotlin.coroutines.suspendCoroutine
 
 class AppPresetFragment() : AppSelectFragment() {
 
-    override val firstComparator = Comparator.comparing(PackageHelper::exists).reversed()
+    override val firstComparator: Comparator<String> = Comparator.comparing(PackageHelper::exists).reversed()
 
     override val adapter by lazy {
         val args by navArgs<AppPresetFragmentArgs>()
@@ -25,9 +32,12 @@ class AppPresetFragment() : AppSelectFragment() {
     }
 
     override fun sortList() {
-        lifecycleScope.launch {
+        hmaApp.globalScope.launch {
             sortPresetList()
-            applyFilter()
+
+            lifecycleScope.launch {
+                applyFilter()
+            }
         }
     }
 
@@ -39,12 +49,27 @@ class AppPresetFragment() : AppSelectFragment() {
             PrefManager.SortMethod.BY_UPDATE_TIME -> Comparators.byUpdateTime
         }
         if (PrefManager.appFilter_reverseOrder) comparator = comparator.reversed()
-        adapter.packages.sortWith(firstComparator.then(comparator))
+
+        val packages = adapter.packages.sortedWith(firstComparator.then(comparator))
+
+        lifecycleScope.launch {
+            adapter.packages.clear()
+            adapter.packages += packages
+        }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
-        // returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+    override fun invalidateCache() {
+        super.invalidateCache()
+        adapter.updateList()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            binding.swipeRefresh.isRefreshing = true
+            adapter.updateList()
+            sortList()
+        }
     }
 }

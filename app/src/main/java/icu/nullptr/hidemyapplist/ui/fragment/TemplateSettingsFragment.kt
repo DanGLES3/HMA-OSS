@@ -56,16 +56,6 @@ class TemplateSettingsFragment : Fragment(R.layout.fragment_template_settings) {
         navController.navigateUp()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        /*
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.nav_host_fragment
-            scrimColor = Color.TRANSPARENT
-        }
-         */
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { onBack(false) }
         setupToolbar(

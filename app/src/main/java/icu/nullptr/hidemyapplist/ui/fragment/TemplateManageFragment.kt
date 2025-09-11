@@ -24,16 +24,6 @@ class TemplateManageFragment : Fragment(R.layout.fragment_template_manage) {
     private val binding by viewBinding<FragmentTemplateManageBinding>()
     private val adapter = TemplateAdapter(this::navigateToSettings)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        /*
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.nav_host_fragment
-            scrimColor = Color.TRANSPARENT
-        }
-         */
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupToolbar(
             toolbar = binding.toolbar,

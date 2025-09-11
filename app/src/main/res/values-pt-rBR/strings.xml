@@ -35,7 +35,7 @@
     <string name="home_xposed_service_on">Serviço do sistema funcionando [%d]</string>
     <string name="home_xposed_service_off">Serviço do sistema não está funcionando</string>
     <string name="home_xposed_service_old">Módulo atualizado, necessário reiniciar</string>
-    <string name="home_xposed_filter_count">HMA-OSS filtrou no total %d de pedidos</string>
+    <string name="home_xposed_filter_count">HMA-OSS filtrou no total %d pedidos</string>
     <string name="home_manage">Gerenciar</string>
     <string name="home_detection_test">Teste de detecção</string>
     <string name="home_download_test_app_title">Baixar aplicativo de teste</string>
@@ -62,8 +62,9 @@
     <string name="list_sort_by_update_time">Pela data de atualização</string>
     <string name="list_empty_no_enabled">Tente esconder apps com esse modelo e os apps irão aparecer aqui</string>
     <string name="list_empty_no_apps">Nenhum app encontrado, talvez voce não permitiu esse app a acessar todos os apps</string>
+    <string name="list_empty_preset">Nenhum app adicionado nesse perfil</string>
     <!-- Manage templates -->
-    <string name="template_usage_hint">Estabalecer modelos para apps \"inquietos\", controlando a lista de aplicativos que eles podem obter.\n\nLista Negra (recomendado): Os apps selecionados no modelo seram invisiveis para os apps no qual esse modelo for aplicado.\nLista Branca: Os apps não selecionados nesse modelo serão invisiveis aos apps no qual esse modelo for aplicado</string>
+    <string name="template_usage_hint">Crie modelos para apps \"inquietos\", controlando a lista de aplicativos que eles podem obter.\n\nLista Negra (recomendado): Os apps selecionados no modelo serão invisiveis para os apps no qual esse modelo for aplicado.\nLista Branca: Os apps não selecionados nesse modelo serão invisiveis aos apps no qual esse modelo for aplicado.</string>
     <string name="template_new_blacklist">Criar modelo de lista negra</string>
     <string name="template_new_whitelist">Criar modelo de lista branca</string>
     <string name="template_delete">Tem certeza que quer apagar a configuração</string>
@@ -80,7 +81,7 @@
     <string name="app_choose_template">Escolher modelo</string>
     <string name="app_choose_preset">Escolher perfil</string>
     <string name="app_exclude_system_apps">Excluir apps dos sistema</string>
-    <string name="app_exclude_system_apps_summary">Desative essa opção somente quando REALMENTE necessário, ja que pode ocasionar do app parar de funcionar se desativado</string>
+    <string name="app_exclude_system_apps_summary">Desative essa opção somente quando Realmente necessário, já que pode ocasionar do app parar de funcionar se desativada</string>
     <string name="app_template_using">Usando %d modelos</string>
     <string name="app_preset_using">Usando %d perfis</string>
     <string name="app_settings_preset_using">Usando %d perfis de configuração</string>
@@ -91,12 +92,13 @@
     <string name="app_spoof">Esconder</string>
     <string name="app_hide_installation_source">Esconder fontes de instalação</string>
     <string name="app_hide_installation_source_desc">Todos os apps de usuário serão marcados como instalados a partir da Play Store para esse aplicativo</string>
-    <string name="app_hide_installation_source_system">Esconder apps de sistema tambem</string>
+    <string name="app_hide_installation_source_system">Esconder fonte de instalação de apps de sistema</string>
     <string name="app_hide_installation_source_system_desc">Todos os apps de sistema serão marcados como instalados pelo nada para esse applicativo</string>
     <string name="app_exclude_target_installation_source">Ignorar esse app</string>
     <string name="app_exclude_target_installation_source_desc">Ative isso se esse app não esta disponivel na Play Store</string>
     <string name="app_force_stop_warning">Não esqueça de fechar o app após salvar a configuração</string>
-    <!-- Preset names -->
+    <!-- Presets -->
+    <string name="title_preset_manage">Mostrar perfis</string>
     <string name="preset_xposed">Módulos Lsposed/Xposed</string>
     <string name="preset_root_apps">Gerenciadores de root/Apps de root</string>
     <string name="preset_custom_rom">Apps de ROM modificado</string>
@@ -111,23 +113,23 @@
     <!-- Settings -->
     <string name="settings_module">Modulo</string>
     <string name="settings_data_isolation">Isolamento de dados</string>
-    <string name="settings_data_isolation_summary">App data: %s\nVold app data: %s\nForçar montagem: %s</string>
+    <string name="settings_data_isolation_summary">Isolamento de dados: %s\nIsolamento pelo Vold: %s\nForçar montagem: %s</string>
     <string name="settings_data_isolation_unsupported">Esta opção só esta disponivel no Android 11 pra cima</string>
-    <string name="settings_app_data_isolation">App data isolation</string>
+    <string name="settings_app_data_isolation">Isolamento de dados</string>
     <string name="settings_vold_app_data_isolation">Isolamento de dados pelo Vold</string>
     <string name="settings_warning">Aviso</string>
     <string name="settings_vold_warning">Isso ira ativar um recurso do Android que isola as pastas externas de aplicativos. Isso pode ajudar a melhor esconder apps mas pode causar instabilidade. Esse recurso pode parar de funcionar a qualquer momento ja que esta abandonada no Android.</string>
-    <string name="settings_change_require_root">Alterar requer permissão d root</string>
+    <string name="settings_change_require_root">Alterar requer permissão de root</string>
     <string name="settings_need_reboot">Alterar requer reinicialização</string>
     <string name="settings_permission_denied">Permissão negada</string>
     <string name="settings_force_mount_data">Impor isolamento de dados em todos os apps</string>
     <string name="settings_force_mount_data_summary">Isolamento de dados esta desativado para apps q usam API inferior a 30 por padrão</string>
     <string name="settings_detail_log">Registros detalhados para depuração</string>
     <string name="settings_max_log_size">Tamanho do registro</string>
-    <string name="settings_hide_icon">Esconder icone do modulo no launcher</string>
+    <string name="settings_hide_icon">Esconder icone do modulo na tela inicial</string>
     <string name="settings_hide_icon_summary">Voce ainda podera abrir o app pelo Lsposed</string>
     <string name="settings_bypass_risky_package_warning">Ignorar aviso de app de risco</string>
-    <string name="settings_bypass_risky_package_warning_summary">Nota que o desenvolvedor não é responsavel por problemas causados por apps de risco antes ou depois de voce ativar esse recurso</string>
+    <string name="settings_bypass_risky_package_warning_summary">Aviso que o desenvolvedor não é responsável por problemas causados por apps</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_translate">Participe na tradução</string>
     <string name="settings_translate_summary">Nos ajude a traduzir %s na sua lingua</string>
@@ -135,14 +137,14 @@
     <string name="settings_system_theme_color">Cor de tema do sistema</string>
     <string name="settings_theme_color">Cor do tema</string>
     <string name="settings_dark_theme">Tema escuro</string>
-    <string name="settings_pure_black_dark_theme">Tema puramente preto</string>
-    <string name="settings_pure_black_dark_theme_summary">Usar o tema puramente preto se o tema escuro estivar habilitado</string>
+    <string name="settings_pure_black_dark_theme">Tema preto (AMOLED)</string>
+    <string name="settings_pure_black_dark_theme_summary">Ativa o tema preto se o tema escuro estiver habilitado</string>
     <string name="settings_service">Serviço</string>
     <string name="settings_stop_system_service">Parar serviço do sistema</string>
     <string name="settings_stop_system_service_summary">Reinicialização necessario para reiniciar o serviço</string>
     <string name="settings_is_clean_env">Limpar o ambiente de operação ao mesmo tempo?</string>
     <string name="settings_is_clean_env_summary">Remover arquivo temporário do serviço do sistema em /data/misc/hide_my_applist_*. Isso significa que você precisa iniciar o aplicativo manualmente uma vez na próxima reinicialização para habilitar interceptações, e a contagens de interceptações será apagada.</string>
-    <string name="settings_force_clean_env">Forçar a limpar o ambiente de operações (root)</string>
+    <string name="settings_force_clean_env">Forçar a limpar o ambiente de operação (root)</string>
     <string name="settings_force_clean_env_summary">Apenas se o serviço de sistema falhar ao iniciar, se não voce deve clicar a opção acima.</string>
     <string name="settings_force_clean_env_toast_successful">Ambiente de operação limpo</string>
     <string name="settings_update">Atualizar</string>
@@ -152,16 +154,15 @@
     <!-- About -->
     <string name="about_description">        Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
     </string>
-    <string name="about_fork_description">        The original HMA project has become closed-source and their latest code didn\'t contain some of the latest changes, so I created this fork to continue it as open-source again.
-    </string>
+    <string name="about_fork_description">O projeto original do HMA se tornou de código fechado e o código disponível não contem as últimas mudanças, então criei esta versão para continua-la como código aberto novamente    </string>
     <string name="about_how_to_use_title">Como usar esse modulo</string>
-    <string name="about_how_to_use_description_1">        Voce pode criar modelos em \"Gerenciar modelos\".\nEntão aplique os modelos nos apps em \"Gerenciar app\". (Voce tamber pode selecionar apps extra para esconder de tais.)\nVoce só deve habilitar o \"Sistema Android\" na lista de ativação do Xposed.\n    </string>
+    <string name="about_how_to_use_description_1">Voce pode criar modelos em \"Gerenciar modelos\".\nEntão aplique os modelos nos apps em \"Gerenciar apps\". (Voce tamber pode selecionar apps adicionais para os esconder de tais.)\nVoce só deve habilitar o \"Sistema Android\" na lista de ativação do Xposed.\n    </string>
     <string name="about_how_to_use_description_2">       A modificação de configurações tem efeito imediato.\n    </string>
     <string name="about_developer">Desenvolvedor</string>
     <string name="about_support">Suporte e ajuda</string>
     <string name="about_open_source">Licensas de codigo aberto</string>
     <!-- Colors -->
-    <string name="color_sakura">Sakura</string>
+    <string name="color_sakura">Sakura (rosado)</string>
     <string name="color_red">Vermelho</string>
     <string name="color_pink">Rosa</string>
     <string name="color_purple">Roxo</string>

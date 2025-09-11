@@ -7,11 +7,17 @@ import icu.nullptr.hidemyapplist.ui.adapter.AppSelectAdapter
 import icu.nullptr.hidemyapplist.ui.view.AppItemView
 import icu.nullptr.hidemyapplist.util.PackageHelper
 import kotlinx.coroutines.runBlocking
+import kotlin.lazy
 
 class AppPresetAdapter(
     private val presetName: String
 ) : AppSelectAdapter() {
-    val packages by lazy { ServiceClient.getPackagesForPreset(presetName)?.toMutableList() ?: mutableListOf() }
+    var packages = mutableListOf<String>()
+
+    fun updateList() {
+        packages.clear()
+        packages += ServiceClient.getPackagesForPreset(presetName)?.toList() ?: listOf()
+    }
 
     inner class ViewHolder(view: AppItemView) : AppSelectAdapter.ViewHolder(view) {
         override fun bind(packageName: String) {
@@ -32,6 +38,7 @@ class AppPresetAdapter(
     }
 
     private inner class PresetFilter : Filter() {
+
         override fun performFiltering(constraint: CharSequence): FilterResults {
             return runBlocking {
                 val constraintLowered = constraint.toString().lowercase()

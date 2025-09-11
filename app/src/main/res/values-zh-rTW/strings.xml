@@ -62,6 +62,7 @@
     <string name="list_sort_by_update_time">依據更新時間</string>
     <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
     <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
+    <string name="list_empty_preset">No applications added in this preset</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">為不安分的「應用程式」建立模板，控制他們可讀取的應用程式列表。\n黑名單 (推薦使用)：開啟此模板的應用程式將看不到黑名單內勾選的應用程式。\n白名單：開啟此模板的應用程式將只能看到白名單模板勾選內的應用程式。</string>
     <string name="template_new_blacklist">建立黑名單模板</string>
@@ -96,7 +97,8 @@
     <string name="app_exclude_target_installation_source">Exclude the target app</string>
     <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
     <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
-    <!-- Preset names -->
+    <!-- Presets -->
+    <string name="title_preset_manage">Show presets</string>
     <string name="preset_xposed">LSPosed/Xposed modules</string>
     <string name="preset_root_apps">Root managers/Rooted apps</string>
     <string name="preset_custom_rom">Custom ROM apps</string>
