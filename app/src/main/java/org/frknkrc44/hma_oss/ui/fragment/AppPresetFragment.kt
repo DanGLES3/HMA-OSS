@@ -9,13 +9,8 @@ import icu.nullptr.hidemyapplist.service.PrefManager
 import icu.nullptr.hidemyapplist.ui.fragment.AppSelectFragment
 import icu.nullptr.hidemyapplist.util.PackageHelper
 import icu.nullptr.hidemyapplist.util.PackageHelper.Comparators
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.frknkrc44.hma_oss.ui.adapter.AppPresetAdapter
-import kotlin.coroutines.suspendCoroutine
 
 class AppPresetFragment() : AppSelectFragment() {
 

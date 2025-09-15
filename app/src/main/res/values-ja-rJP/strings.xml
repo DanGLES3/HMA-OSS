@@ -32,7 +32,7 @@
     <!-- Home -->
     <string name="home_xposed_activated">モジュールは有効です [%s]</string>
     <string name="home_xposed_not_activated">モジュールは無効です</string>
-    <string name="home_xposed_service_on">システムサービスの実行中 [%d]</string>
+    <string name="home_xposed_service_on">システムサービスは実行中 [%d]</string>
     <string name="home_xposed_service_off">システムサービスは実行されていません</string>
     <string name="home_xposed_service_old">モジュールが更新されました。再起動してください</string>
     <string name="home_xposed_filter_count">HMA-OSS は合計 %d 件のリクエストをフィルタリングしました</string>
@@ -60,9 +60,9 @@
     <string name="list_sort_by_package_name">パッケージネームで</string>
     <string name="list_sort_by_install_time">インストール日時で</string>
     <string name="list_sort_by_update_time">アップデート時間で</string>
-    <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
-    <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
-    <string name="list_empty_preset">No applications added in this preset</string>
+    <string name="list_empty_no_enabled">このテンプレートの作業モードでアプリの非表示を有効にすると、アプリがここに表示されます</string>
+    <string name="list_empty_no_apps">アプリケーションが見つかりませんでした。このアプリがすべてのパッケージを照会することを許可していない可能性があります</string>
+    <string name="list_empty_preset">このプリセットにはアプリケーションが追加されていません</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">「落ち着きのない」アプリのテンプレートを確立し、取得できるアプリリストを制御します。\n\nブラックリスト (推奨): テンプレートで選択されたアプリは、テンプレートを適用するアプリから見えなくなります。\nホワイトリスト: テンプレートで選択されていないアプリは、テンプレートを適用するアプリには表示されません。</string>
     <string name="template_new_blacklist">ブラックリストのテンプレートを作成</string>
@@ -97,8 +97,10 @@
     <string name="app_exclude_target_installation_source">対象アプリを除外する</string>
     <string name="app_exclude_target_installation_source_desc">このアプリが Play ストアで利用できない場合、有効にすることができます</string>
     <string name="app_force_stop_warning">設定を保存した後に対象のアプリを強制終了することを忘れないでください</string>
+    <string name="app_invert_activity_launch_protection">アクティビティ起動保護を反転する</string>
+    <string name="app_invert_activity_launch_protection_desc">このオプションは、設定の「アクティビティ起動保護を無効にする」の選択を反転します。</string>
     <!-- Presets -->
-    <string name="title_preset_manage">Show presets</string>
+    <string name="title_preset_manage">プリセットを表示</string>
     <string name="preset_xposed">LSPosed/Xposed モジュール</string>
     <string name="preset_root_apps">Root マネージャー/Rooted アプリ</string>
     <string name="preset_custom_rom">カスタム ROM アプリ</string>
@@ -130,6 +132,8 @@
     <string name="settings_hide_icon_summary">LSPosed マネージャーで引き続きアプリを開くことができます</string>
     <string name="settings_bypass_risky_package_warning">危険なパッケージに関する警告を無視する</string>
     <string name="settings_bypass_risky_package_warning_summary">この機能を有効にする前後で、危険なパッケージに関する問題が発生した場合、開発者は一切責任を負わないことをご了承ください</string>
+    <string name="settings_disable_activity_launch_protection">アクティビティ起動保護を無効にする</string>
+    <string name="settings_disable_activity_launch_protection_summary">このトグルをオンにすると、すべての startActivity 保護が解除されます。不明な場合は有効にしないでください。</string>
     <string name="settings_language">言語</string>
     <string name="settings_translate">翻訳に参加する</string>
     <string name="settings_translate_summary">%s をあなたの言語に翻訳するのにご協力ください</string>

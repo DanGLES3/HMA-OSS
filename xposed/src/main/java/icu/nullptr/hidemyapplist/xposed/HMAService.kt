@@ -193,6 +193,21 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         return appConfig.useWhitelist
     }
 
+    fun shouldHideActivityLaunch(caller: String?, query: String?): Boolean {
+        if (shouldHide(caller, query)) {
+            val appConfig = config.scope[caller]
+            if (appConfig != null) {
+                return if (appConfig.invertActivityLaunchProtection) {
+                    config.disableActivityLaunchProtection
+                } else {
+                    !config.disableActivityLaunchProtection
+                }
+            }
+        }
+
+        return false
+    }
+
     fun shouldHideInstallationSource(caller: String?, query: String?, user: UserHandle): Int {
         if (caller == null || query == null) return 0
         val appConfig = config.scope[caller] ?: return 0

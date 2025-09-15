@@ -110,6 +110,7 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 "hideInstallationSource" -> pack.config.hideInstallationSource
                 "hideSystemInstallationSource" -> pack.config.hideSystemInstallationSource
                 "excludeTargetInstallationSource" -> pack.config.excludeTargetInstallationSource
+                "invertActivityLaunchProtection" -> pack.config.invertActivityLaunchProtection
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }
@@ -122,6 +123,7 @@ class AppSettingsFragment : Fragment(R.layout.fragment_settings) {
                 "hideInstallationSource" -> pack.config.hideInstallationSource = value
                 "hideSystemInstallationSource" -> pack.config.hideSystemInstallationSource = value
                 "excludeTargetInstallationSource" -> pack.config.excludeTargetInstallationSource = value
+                "invertActivityLaunchProtection" -> pack.config.invertActivityLaunchProtection = value
                 else -> throw IllegalArgumentException("Invalid key: $key")
             }
         }

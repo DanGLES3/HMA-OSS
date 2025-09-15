@@ -41,7 +41,7 @@ class ActivityHook(private val service: HMAService) : IFrameworkHook {
                 val intent = getObjectField(request, "intent") as Intent?
                 val targetApp = intent?.component?.packageName
 
-                if (service.shouldHide(caller, targetApp)) {
+                if (service.shouldHideActivityLaunch(caller, targetApp)) {
                     logD(
                         TAG,
                         "@executeRequest: insecure query from $caller, target: ${intent?.component}"

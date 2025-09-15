@@ -63,6 +63,13 @@ object ConfigManager {
             saveConfig()
         }
 
+    var disableActivityLaunchProtection: Boolean
+        get() = config.disableActivityLaunchProtection
+        set(value) {
+            config.disableActivityLaunchProtection = value
+            saveConfig()
+        }
+
     fun importConfig(json: String) {
         config = JsonConfig.parse(json)
         config.configVersion = BuildConfig.CONFIG_VERSION

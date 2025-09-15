@@ -11,6 +11,10 @@ class CustomROMPreset() : BasePreset("custom_rom") {
     override fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean {
         val packageName = appInfo.packageName
 
+        if (containsPackage(packageName)) {
+            return false
+        }
+
         // LineageOS overlays
         if (appInfo.sourceDir.contains("_lineage_")) {
             return true

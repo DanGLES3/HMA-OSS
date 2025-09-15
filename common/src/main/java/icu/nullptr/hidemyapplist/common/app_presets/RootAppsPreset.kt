@@ -1,6 +1,7 @@
 package icu.nullptr.hidemyapplist.common.app_presets
 
 import android.content.pm.ApplicationInfo
+import icu.nullptr.hidemyapplist.common.Utils
 import java.util.zip.ZipFile
 
 class RootAppsPreset() : BasePreset("root_apps") {
@@ -9,7 +10,6 @@ class RootAppsPreset() : BasePreset("root_apps") {
         "io.github.a13e300.ksuwebui",
         "io.github.muntashirakon.AppManager",
         "com.fox2code.mmm",
-        "xzr.hkf",
         "com.speedsoftware.rootexplorer",
         "id.kuato.diskhealth",
         "com.sunilpaulmathew.debloater",
@@ -34,6 +34,8 @@ class RootAppsPreset() : BasePreset("root_apps") {
         "ru.nsu.bobrofon.easysshfs",
         "x1125io.initdlight",
         "com.lonelycatgames.Xplore",
+        "com.byyoung.setting",
+        "web1n.stopapp",
 
         // kernel managers
         "flar2.exkernelmanager",
@@ -48,6 +50,11 @@ class RootAppsPreset() : BasePreset("root_apps") {
 
         if (containsPackage(packageName)) {
             return false
+        }
+
+        // All libxzr apps (konabess, hkf, ...)
+        if (Utils.startsWithMultiple(packageName, "xzr.", "moe.xzr.")) {
+            return true
         }
 
         // FX File Manager

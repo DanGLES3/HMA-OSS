@@ -97,6 +97,8 @@
     <string name="app_exclude_target_installation_source">Exclude the target app</string>
     <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
     <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
+    <string name="app_invert_activity_launch_protection">Invert Activity launch protection</string>
+    <string name="app_invert_activity_launch_protection_desc">This option will invert \"Disable Activity launch protection\" selection in Settings.</string>
     <!-- Presets -->
     <string name="title_preset_manage">Show presets</string>
     <string name="preset_xposed">LSPosed/Xposed modules</string>
@@ -130,6 +132,8 @@
     <string name="settings_hide_icon_summary">Puoi sempre aprire l\'app in Xposed manager</string>
     <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
     <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
+    <string name="settings_disable_activity_launch_protection">Disable Activity launch protection</string>
+    <string name="settings_disable_activity_launch_protection_summary">This toggle will lift all startActivity protections. If you\'re unsure, don\'t enable it.</string>
     <string name="settings_language">Lingua</string>
     <string name="settings_translate">Aiuta a tradurre</string>
     <string name="settings_translate_summary">Aiutaci a tradurre %s nella tua lingua</string>

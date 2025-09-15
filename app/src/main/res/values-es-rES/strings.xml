@@ -3,7 +3,7 @@
     <string name="title_home">Inicio</string>
     <string name="title_logs">Logs</string>
     <string name="title_settings">Ajustes</string>
-    <string name="title_template_manage">Template manage</string>
+    <string name="title_template_manage">Administrar plantillas</string>
     <string name="title_template_settings">Configuración de la plantilla</string>
     <string name="title_app_manage">Gestionar apps</string>
     <string name="title_app_select">Seleccionar aplicaciones</string>
@@ -23,7 +23,7 @@
     <string name="application">Aplicación</string>
     <string name="preferences">Preferencias</string>
     <string name="refresh">Actualizar</string>
-    <string name="filter">Filtro</string>
+    <string name="filter">Filtrar</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="search">Buscar</string>
@@ -41,8 +41,8 @@
     <string name="home_download_test_app_title">Descargar aplicación de prueba</string>
     <string name="home_download_test_app_message">Hemos desarrollado una aplicación de prueba de detección individual y hemos migrado el test de detección a ella ¿Quieres descargarla ahora?</string>
     <string name="home_backup_and_restore">Copia de seguridad&amp; Restaurar</string>
-    <string name="home_backup_config">Configuración de la copia de seguridad</string>
-    <string name="home_restore_config">Restaurar configuración</string>
+    <string name="home_backup_config">Exportar config</string>
+    <string name="home_restore_config">Restaurar config</string>
     <string name="home_import_successful">Importación con éxito</string>
     <string name="home_import_failed">Importación fallida</string>
     <string name="home_import_app_version_too_old">Versión del módulo inferior a la de la copia</string>
@@ -97,6 +97,8 @@
     <string name="app_exclude_target_installation_source">Excluir la aplicación objetivo</string>
     <string name="app_exclude_target_installation_source_desc">Puedes activarlo si esta aplicación no está disponible en Play Store</string>
     <string name="app_force_stop_warning">No olvide forzar detención a la aplicación objetivo después de guardar la configuración</string>
+    <string name="app_invert_activity_launch_protection">Invertir protección de Activity launch</string>
+    <string name="app_invert_activity_launch_protection_desc">Esta opción invertirá la selección de \"Desactivar la protección de Activity launch\" en Ajustes.</string>
     <!-- Presets -->
     <string name="title_preset_manage">Mostrar presets</string>
     <string name="preset_xposed">Módulos LSPosed/Xposed</string>
@@ -113,10 +115,10 @@
     <!-- Settings -->
     <string name="settings_module">Módulo</string>
     <string name="settings_data_isolation">Aislamiento de datos</string>
-    <string name="settings_data_isolation_summary">App data: %s\nVold app data: %s\nForce mount: %s</string>
+    <string name="settings_data_isolation_summary">Datos de aplicación: %s\nDatos de la aplicación Vold: %s\nForzar montaje: %s</string>
     <string name="settings_data_isolation_unsupported">Esta opción solo está disponible en Android 11 y superior</string>
-    <string name="settings_app_data_isolation">Aislamiento de datos de la aplicacion</string>
-    <string name="settings_vold_app_data_isolation">Vold app data isolation</string>
+    <string name="settings_app_data_isolation">Aislamiento App data</string>
+    <string name="settings_vold_app_data_isolation">Aislamiento app data Vold</string>
     <string name="settings_warning">Advertencia</string>
     <string name="settings_vold_warning">Esto habilitará una función AOSP que hará que el directorio de almacenamiento privado externo de la aplicación esté aislado. Esto puede ayudar a mejorar la ocultación de aplicaciones pero puede causar problemas de estabilidad. Esta característica puede dejar de funcionar en cualquier momento ya que hay sido abandonada en AOSP.</string>
     <string name="settings_change_require_root">Cambiar requiere permiso root</string>
@@ -130,6 +132,8 @@
     <string name="settings_hide_icon_summary">Aún puedes abrir la aplicación en el gestor de Xposed</string>
     <string name="settings_bypass_risky_package_warning">Omitir la advertencia de paquete riesgoso</string>
     <string name="settings_bypass_risky_package_warning_summary">Tenga en cuenta que los desarrolladores no son responsables de problemas relacionados con paquetes riesgosos antes o después de activar esta característica</string>
+    <string name="settings_disable_activity_launch_protection">Desactivar la protección de Activity launch</string>
+    <string name="settings_disable_activity_launch_protection_summary">Este interruptor activará todas las protecciones de startActivity. Si no estás seguro, no lo actives.</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_translate">Participa en la traducción</string>
     <string name="settings_translate_summary">Ayúdanos a traducir %s a tu idioma</string>
