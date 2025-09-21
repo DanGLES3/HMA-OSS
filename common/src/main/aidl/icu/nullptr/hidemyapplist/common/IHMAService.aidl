@@ -4,7 +4,7 @@ interface IHMAService {
 
     void stopService(boolean cleanEnv) = 0;
 
-    void syncConfig(String json) = 1;
+    void writeConfig(String json) = 1;
 
     int getServiceVersion() = 2;
 
@@ -17,4 +17,6 @@ interface IHMAService {
     void handlePackageEvent(String eventType, String packageName) = 6;
 
     String[] getPackagesForPreset(String presetName) = 7;
+
+    String readConfig() = 8;
 }

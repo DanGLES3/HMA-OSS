@@ -4,7 +4,7 @@ import android.os.Build
 import android.util.Log
 import icu.nullptr.hidemyapplist.common.JsonConfig
 import icu.nullptr.hidemyapplist.hmaApp
-import icu.nullptr.hidemyapplist.ui.util.makeToast
+import icu.nullptr.hidemyapplist.ui.util.showToast
 import org.frknkrc44.hma_oss.R
 import org.frknkrc44.hma_oss.common.BuildConfig
 import java.io.File
@@ -19,25 +19,36 @@ object ConfigManager {
     val configFile = File("${hmaApp.filesDir.absolutePath}/config.json")
 
     fun init() {
-        if (!configFile.exists()) {
-            configFile.writeText(JsonConfig().toString())
+        val configFileIsNew = !configFile.exists()
+        if (configFileIsNew) {
+            config = JsonConfig()
+            configFile.writeText(config.toString())
         }
         runCatching {
-            config = JsonConfig.parse(configFile.readText())
+            if (!configFileIsNew) config = JsonConfig.parse(configFile.readText())
             val configVersion = config.configVersion
             if (configVersion < BuildConfig.MIN_BACKUP_VERSION) throw RuntimeException("Config version too old")
             config.configVersion = BuildConfig.CONFIG_VERSION
+        }.onSuccess {
             saveConfig()
-        }.onFailure {
-            makeToast(R.string.config_damaged)
-            throw RuntimeException("Config file too old or damaged", it)
+        }.onFailure { catch ->
+            runCatching {
+                config = JsonConfig.parse(ServiceClient.readConfig() ?: throw RuntimeException("Service config is unavailable"))
+                config.configVersion = BuildConfig.CONFIG_VERSION
+                showToast(R.string.home_restore_config)
+            }.onSuccess {
+                saveConfig()
+            }.onFailure {
+                showToast(R.string.config_damaged)
+                throw RuntimeException("Config file too old or damaged", catch)
+            }
         }
     }
 
     private fun saveConfig() {
         val text = config.toString()
+        ServiceClient.writeConfig(text)
         configFile.writeText(text)
-        ServiceClient.syncConfig(text)
     }
 
     var detailLog: Boolean
@@ -60,6 +71,34 @@ object ConfigManager {
             else false
         set(value) {
             config.forceMountData = value
+            saveConfig()
+        }
+
+    var disableActivityLaunchProtection: Boolean
+        get() = config.disableActivityLaunchProtection
+        set(value) {
+            config.disableActivityLaunchProtection = value
+            saveConfig()
+        }
+
+    var altAppDataIsolation: Boolean
+        get() = config.altAppDataIsolation
+        set(value) {
+            config.altAppDataIsolation = value
+            saveConfig()
+        }
+
+    var altVoldAppDataIsolation: Boolean
+        get() = config.altVoldAppDataIsolation
+        set(value) {
+            config.altVoldAppDataIsolation = value
+            saveConfig()
+        }
+
+    var skipSystemAppDataIsolation: Boolean
+        get() = config.skipSystemAppDataIsolation
+        set(value) {
+            config.skipSystemAppDataIsolation = value
             saveConfig()
         }
 

@@ -30,7 +30,7 @@ jobs:
 
       - name: Prepare env
         run: |
-          echo buildWithGitSuffix=true >> local.properties
+          touch local.properties
           mkdir -p ~/.config/.android
           ln -s ~/.config/.android ~/.android
 

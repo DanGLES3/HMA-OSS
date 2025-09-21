@@ -22,9 +22,9 @@ import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.attrDrawable
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.getColor
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.homeItemBackgroundColor
 import icu.nullptr.hidemyapplist.ui.util.ThemeUtils.themeColor
-import icu.nullptr.hidemyapplist.ui.util.makeToast
 import icu.nullptr.hidemyapplist.ui.util.navigate
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
+import icu.nullptr.hidemyapplist.ui.util.showToast
 import org.frknkrc44.hma_oss.BuildConfig
 import org.frknkrc44.hma_oss.R
 import org.frknkrc44.hma_oss.databinding.FragmentHomeBinding
@@ -43,11 +43,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             if (uri == null) return@backup
             ConfigManager.configFile.inputStream().use { input ->
                 hmaApp.contentResolver.openOutputStream(uri).use { output ->
-                    if (output == null) makeToast(R.string.home_export_failed)
+                    if (output == null) showToast(R.string.home_export_failed)
                     else input.copyTo(output)
                 }
             }
-            makeToast(R.string.home_exported)
+            showToast(R.string.home_exported)
         }
 
     private val restoreSAFLauncher =
@@ -58,7 +58,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     .openInputStream(uri)?.reader().use { it?.readText() }
                     ?: throw IOException(getString(R.string.home_import_file_damaged))
                 ConfigManager.importConfig(backup)
-                makeToast(R.string.home_import_successful)
+                showToast(R.string.home_import_successful)
             }.onFailure {
                 it.printStackTrace()
                 MaterialAlertDialogBuilder(requireContext())

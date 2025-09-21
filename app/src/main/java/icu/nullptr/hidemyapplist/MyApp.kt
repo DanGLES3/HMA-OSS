@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import icu.nullptr.hidemyapplist.receiver.AppChangeReceiver
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.service.PrefManager
-import icu.nullptr.hidemyapplist.ui.util.makeToast
+import icu.nullptr.hidemyapplist.ui.util.showToast
 import icu.nullptr.hidemyapplist.util.ConfigUtils.Companion.getLocale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +29,7 @@ class MyApp : Application() {
         super.onCreate()
         hmaApp = this
         if (!filesDir.absolutePath.startsWith("/data/user/0/")) {
-            makeToast(R.string.do_not_dual)
+            showToast(R.string.do_not_dual)
             exitProcess(0)
         }
         AppChangeReceiver.register(this)

@@ -16,6 +16,8 @@ jobs:
   build:
     name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -65,8 +67,11 @@ jobs:
         id: buildAll
         run: |
           ./gradlew assemble
-          echo "releaseName=$(ls app/build/outputs/apk/release/*.apk | awk -F '(/|.apk)' '{print $5}')" >> $GITHUB_OUTPUT
-          echo "debugName=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $5}')" >> $GITHUB_OUTPUT
+          echo "releaseName=$(ls app/build/outputs/apk/release/*.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
+          echo "debugName=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
+          echo "releaseFile=$(ls app/build/outputs/apk/release/*.apk)" >> $GITHUB_OUTPUT
+          echo "debugFile=$(ls app/build/outputs/apk/debug/*.apk)" >> $GITHUB_OUTPUT
+          echo "ossNum=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}' | cut -f4 -d'-')" >> $GITHUB_OUTPUT
 
       - name: Upload release
         if: success()
@@ -88,6 +93,17 @@ jobs:
           name: mappings
           path: "app/build/outputs/mapping/release"
 
+      - name: Upload to GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: oss-${{ steps.buildAll.outputs.ossNum }}
+          body: ${{ github.event.head_commit.message }}
+          files: |
+            ${{ steps.buildAll.outputs.releaseFile }}
+            ${{ steps.buildAll.outputs.debugFile }}
+          tag_name: oss-${{ steps.buildAll.outputs.ossNum }}
+
       - name: Post to channel
         if: ${{ github.event_name != 'pull_request' && success() && github.ref == 'refs/heads/master' }}
         env:
@@ -96,8 +112,7 @@ jobs:
           COMMIT_URL: ${{ github.event.head_commit.url }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
-          OUTPUT="app/build/outputs/apk/"
-          export release=$(find $OUTPUT -name "*-release.apk")
-          export debug=$(find $OUTPUT -name "*-debug.apk")
+          export release=${{ steps.buildAll.outputs.releaseFile }}
+          export debug=${{ steps.buildAll.outputs.debugFile }}
           ESCAPED=`python3 -c 'import json,os,urllib.parse; msg = json.dumps(os.environ["COMMIT_MESSAGE"]); print(urllib.parse.quote(msg if len(msg) <= 1024 else json.dumps(os.environ["COMMIT_URL"])))'`
           curl -v "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=${CHANNEL_ID}&media=%5B%7B%22type%22:%22document%22,%20%22media%22:%22attach://release%22%7D,%7B%22type%22:%22document%22,%20%22media%22:%22attach://debug%22,%22caption%22:${ESCAPED}%7D%5D"  -F release="@$release" -F debug="@$debug"

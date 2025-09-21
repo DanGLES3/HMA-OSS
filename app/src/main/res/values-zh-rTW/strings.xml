@@ -62,6 +62,7 @@
     <string name="list_sort_by_update_time">依據更新時間</string>
     <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
     <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
+    <string name="list_empty_preset">No applications added in this preset</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">為不安分的「應用程式」建立模板，控制他們可讀取的應用程式列表。\n黑名單 (推薦使用)：開啟此模板的應用程式將看不到黑名單內勾選的應用程式。\n白名單：開啟此模板的應用程式將只能看到白名單模板勾選內的應用程式。</string>
     <string name="template_new_blacklist">建立黑名單模板</string>
@@ -96,7 +97,11 @@
     <string name="app_exclude_target_installation_source">Exclude the target app</string>
     <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
     <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
-    <!-- Preset names -->
+    <string name="app_invert_activity_launch_protection">Invert Activity launch protection</string>
+    <string name="app_invert_activity_launch_protection_desc">This option will invert \"Disable Activity launch protection\" selection in Settings.</string>
+    <string name="app_global_activity_launch_protection_state">Protection is %s globally</string>
+    <!-- Presets -->
+    <string name="title_preset_manage">Show presets</string>
     <string name="preset_xposed">LSPosed/Xposed modules</string>
     <string name="preset_root_apps">Root managers/Rooted apps</string>
     <string name="preset_custom_rom">Custom ROM apps</string>
@@ -110,6 +115,10 @@
     <string name="logs_saved">日誌已儲存</string>
     <!-- Settings -->
     <string name="settings_module">模塊</string>
+    <string name="settings_overwrite">Overwrite</string>
+    <string name="settings_overwritten">Overwritten</string>
+    <string name="settings_overwrite_summary">This category items will be forced as enabled if the switches are checked</string>
+    <string name="settings_default_value">Default value: %s</string>
     <string name="settings_data_isolation">資料隔離</string>
     <string name="settings_data_isolation_summary">App data：%s\nVold app data：%s\n強制掛載：%s</string>
     <string name="settings_data_isolation_unsupported">該選項僅適用於 Android 11 或更低版本的系統</string>
@@ -128,6 +137,8 @@
     <string name="settings_hide_icon_summary">你仍然可以在 Xposed 管理器中開啟並管理此應用</string>
     <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
     <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
+    <string name="settings_disable_activity_launch_protection">Disable Activity launch protection</string>
+    <string name="settings_disable_activity_launch_protection_summary">This toggle will lift all startActivity protections. If you\'re unsure, don\'t enable it.</string>
     <string name="settings_language">語言</string>
     <string name="settings_translate">參與翻譯</string>
     <string name="settings_translate_summary">幫助我們翻譯 %s 到您的語言</string>

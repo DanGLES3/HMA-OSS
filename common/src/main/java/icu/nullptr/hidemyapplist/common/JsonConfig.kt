@@ -16,6 +16,10 @@ data class JsonConfig(
     var detailLog: Boolean = false,
     var maxLogSize: Int = 512,
     var forceMountData: Boolean = true,
+    var disableActivityLaunchProtection: Boolean = false,
+    var altAppDataIsolation: Boolean = false,
+    var altVoldAppDataIsolation: Boolean = false,
+    var skipSystemAppDataIsolation: Boolean = true,
     val templates: MutableMap<String, Template> = mutableMapOf(),
     val scope: MutableMap<String, AppConfig> = mutableMapOf()
 ) {
@@ -34,6 +38,7 @@ data class JsonConfig(
         var hideInstallationSource: Boolean = false,
         var hideSystemInstallationSource: Boolean = false,
         var excludeTargetInstallationSource: Boolean = false,
+        var invertActivityLaunchProtection: Boolean = false,
         var applyTemplates: MutableSet<String> = mutableSetOf(),
         var applyPresets: MutableSet<String> = mutableSetOf(),
         var applySettingsPresets: MutableSet<String> = mutableSetOf(),

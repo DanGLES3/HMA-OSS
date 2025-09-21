@@ -9,9 +9,11 @@ import icu.nullptr.hidemyapplist.common.AppPresets
 import icu.nullptr.hidemyapplist.common.Constants
 import icu.nullptr.hidemyapplist.common.IHMAService
 import icu.nullptr.hidemyapplist.common.JsonConfig
+import icu.nullptr.hidemyapplist.common.RiskyPackageUtils.appHasGMSConnection
 import icu.nullptr.hidemyapplist.common.Utils
 import icu.nullptr.hidemyapplist.xposed.hook.AccessibilityHook
 import icu.nullptr.hidemyapplist.xposed.hook.ActivityHook
+import icu.nullptr.hidemyapplist.xposed.hook.AppDataIsolationHook
 import icu.nullptr.hidemyapplist.xposed.hook.ContentProviderHook
 import icu.nullptr.hidemyapplist.xposed.hook.IFrameworkHook
 import icu.nullptr.hidemyapplist.xposed.hook.PlatformCompatHook
@@ -42,7 +44,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
 
     private val configLock = Any()
     private val loggerLock = Any()
-    private val systemApps = mutableSetOf<String>()
+    val systemApps = mutableSetOf<String>()
     private val frameworkHooks = mutableSetOf<IFrameworkHook>()
     val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
@@ -151,6 +153,7 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             frameworkHooks.add(PlatformCompatHook(this))
+            frameworkHooks.add(AppDataIsolationHook(this))
         }
 
         frameworkHooks.add(ActivityHook(this))
@@ -169,10 +172,12 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         return config.scope[caller]?.applySettingsPresets ?: return setOf()
     }
 
+    fun isAppInGMSIgnoredPackages(caller: String, query: String) =
+        (caller == Constants.GMS_PACKAGE_NAME || caller == Constants.GSF_PACKAGE_NAME) && appHasGMSConnection(query)
+
     fun shouldHide(caller: String?, query: String?): Boolean {
         if (caller == null || query == null) return false
         if (caller in Constants.packagesShouldNotHide || query in Constants.packagesShouldNotHide) return false
-        if ((caller == Constants.GMS_PACKAGE_NAME || caller == Constants.GSF_PACKAGE_NAME) && query == Constants.APP_PACKAGE_NAME) return false // If apply hide on gms, hma app will crash 😓
         if (caller == query) return false
         val appConfig = config.scope[caller] ?: return false
         if (appConfig.useWhitelist && appConfig.excludeSystemApps && query in systemApps) return false
@@ -180,17 +185,37 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         if (query in appConfig.extraAppList) return !appConfig.useWhitelist
         for (tplName in appConfig.applyTemplates) {
             val tpl = config.templates[tplName]!!
-            if (query in tpl.appList) return !appConfig.useWhitelist
+            if (query in tpl.appList) {
+                if (isAppInGMSIgnoredPackages(caller, query)) return false
+
+                return !appConfig.useWhitelist
+            }
         }
 
         if (!appConfig.useWhitelist) {
             for (presetName in appConfig.applyPresets) {
                 val preset = AppPresets.instance.getPresetByName(presetName) ?: continue
-                if (preset.containsPackage(query)) return true
+                if (preset.containsPackage(query))
+                    return !isAppInGMSIgnoredPackages(caller, query)
             }
         }
 
         return appConfig.useWhitelist
+    }
+
+    fun shouldHideActivityLaunch(caller: String?, query: String?): Boolean {
+        if (shouldHide(caller, query)) {
+            val appConfig = config.scope[caller]
+            if (appConfig != null) {
+                return if (appConfig.invertActivityLaunchProtection) {
+                    config.disableActivityLaunchProtection
+                } else {
+                    !config.disableActivityLaunchProtection
+                }
+            }
+        }
+
+        return false
     }
 
     fun shouldHideInstallationSource(caller: String?, query: String?, user: UserHandle): Int {
@@ -239,18 +264,23 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
         }
     }
 
-    override fun syncConfig(json: String) {
+    override fun writeConfig(json: String) {
         synchronized(configLock) {
-            configFile.writeText(json)
-            val newConfig = JsonConfig.parse(json)
-            if (newConfig.configVersion != BuildConfig.CONFIG_VERSION) {
-                logW(TAG, "Sync config: version mismatch, need reboot")
-                return
+            runCatching {
+                val newConfig = JsonConfig.parse(json)
+                if (newConfig.configVersion != BuildConfig.CONFIG_VERSION) {
+                    logW(TAG, "Sync config: version mismatch, need reboot")
+                    return
+                }
+                config = newConfig
+                configFile.writeText(json)
+                frameworkHooks.forEach(IFrameworkHook::onConfigChanged)
+            }.onSuccess {
+                logD(TAG, "Config synced")
+            }.onFailure {
+                return@synchronized
             }
-            config = newConfig
-            frameworkHooks.forEach(IFrameworkHook::onConfigChanged)
         }
-        logD(TAG, "Config synced")
     }
 
     override fun getServiceVersion() = BuildConfig.SERVICE_VERSION
@@ -280,4 +310,6 @@ class HMAService(val pms: IPackageManager) : IHMAService.Stub() {
 
     override fun getPackagesForPreset(presetName: String) =
         AppPresets.instance.getPresetByName(presetName)?.packages?.toTypedArray()
+
+    override fun readConfig() = config.toString()
 }

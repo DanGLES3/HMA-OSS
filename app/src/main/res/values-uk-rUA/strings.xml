@@ -62,6 +62,7 @@
     <string name="list_sort_by_update_time">За часом оновлення</string>
     <string name="list_empty_no_enabled">Try enabling hiding for apps with this template\'s work mode and apps will appear here</string>
     <string name="list_empty_no_apps">No applications found, maybe you didn\'t allow this app to query all packages</string>
+    <string name="list_empty_preset">No applications added in this preset</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Створіть шаблони для «неспокійних» додатків, контролюючи список додатків, які вони можуть отримати.\n\nЧорний список (рекомендовано): додатки, вибрані в шаблоні, будуть невидимі для додатків, які застосовують шаблон.\nБілий список: додатки, не вибрані в шаблоні, будуть невидимий для додатків, які застосовують шаблон.</string>
     <string name="template_new_blacklist">Створити шаблон чорного списку</string>
@@ -96,7 +97,11 @@
     <string name="app_exclude_target_installation_source">Exclude the target app</string>
     <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
     <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
-    <!-- Preset names -->
+    <string name="app_invert_activity_launch_protection">Invert Activity launch protection</string>
+    <string name="app_invert_activity_launch_protection_desc">This option will invert \"Disable Activity launch protection\" selection in Settings.</string>
+    <string name="app_global_activity_launch_protection_state">Protection is %s globally</string>
+    <!-- Presets -->
+    <string name="title_preset_manage">Show presets</string>
     <string name="preset_xposed">LSPosed/Xposed modules</string>
     <string name="preset_root_apps">Root managers/Rooted apps</string>
     <string name="preset_custom_rom">Custom ROM apps</string>
@@ -110,6 +115,10 @@
     <string name="logs_saved">Журнали збережено</string>
     <!-- Settings -->
     <string name="settings_module">Модуль</string>
+    <string name="settings_overwrite">Overwrite</string>
+    <string name="settings_overwritten">Overwritten</string>
+    <string name="settings_overwrite_summary">This category items will be forced as enabled if the switches are checked</string>
+    <string name="settings_default_value">Default value: %s</string>
     <string name="settings_data_isolation">Ізоляція даних</string>
     <string name="settings_data_isolation_summary">Дані додатку: %s\nПопередні дані додатку: %s\nПримусове монтування: %s</string>
     <string name="settings_data_isolation_unsupported">Цей параметр доступний лише на Android 11 і вище</string>
@@ -128,6 +137,8 @@
     <string name="settings_hide_icon_summary">Ви все ще можете відкрити додаток у менеджері Xposed</string>
     <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
     <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
+    <string name="settings_disable_activity_launch_protection">Disable Activity launch protection</string>
+    <string name="settings_disable_activity_launch_protection_summary">This toggle will lift all startActivity protections. If you\'re unsure, don\'t enable it.</string>
     <string name="settings_language">Мова</string>
     <string name="settings_translate">Участь у перекладі</string>
     <string name="settings_translate_summary">Допоможіть нам перекласти %s вашою мовою</string>

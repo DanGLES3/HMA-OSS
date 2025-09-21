@@ -32,35 +32,42 @@
             android:clipToPadding="false"
             android:scrollbars="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/list_empty_container"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/about_page_item_category_padding_horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/outline_android_24"
+                        android:layout_marginBottom="8dp"
+                        android:layout_width="@dimen/app_icon_size"
+                        android:layout_height="@dimen/app_icon_size"
+                        app:tint="?colorControlNormal" />
+
+                    <TextView
+                        android:id="@+id/list_empty_text"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <LinearLayout
-            android:id="@+id/list_empty_container"
-            android:visibility="gone"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/about_page_item_category_padding_horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:importantForAccessibility="no"
-                android:src="@drawable/outline_android_24"
-                android:layout_marginBottom="8dp"
-                android:layout_width="@dimen/app_icon_size"
-                android:layout_height="@dimen/app_icon_size"
-                app:tint="?colorControlNormal" />
-
-            <TextView
-                android:id="@+id/list_empty_text"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,7 +3,7 @@
     <string name="title_home">Inicio</string>
     <string name="title_logs">Logs</string>
     <string name="title_settings">Ajustes</string>
-    <string name="title_template_manage">Template manage</string>
+    <string name="title_template_manage">Administrar plantillas</string>
     <string name="title_template_settings">Configuración de la plantilla</string>
     <string name="title_app_manage">Gestionar apps</string>
     <string name="title_app_select">Seleccionar aplicaciones</string>
@@ -23,7 +23,7 @@
     <string name="application">Aplicación</string>
     <string name="preferences">Preferencias</string>
     <string name="refresh">Actualizar</string>
-    <string name="filter">Filtro</string>
+    <string name="filter">Filtrar</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="search">Buscar</string>
@@ -35,14 +35,14 @@
     <string name="home_xposed_service_on">Servicio del sistema ejecutandose [%d]</string>
     <string name="home_xposed_service_off">El servicio del sistema no se está ejecutando</string>
     <string name="home_xposed_service_old">Módulo actualizado, requiere reiniciar</string>
-    <string name="home_xposed_filter_count">HMA-OSS ha filtrado un total de solicitudes %d</string>
+    <string name="home_xposed_filter_count">HMA-OSS ha filtrado un total de %d solicitudes</string>
     <string name="home_manage">Administrar</string>
     <string name="home_detection_test">Prueba de detección</string>
     <string name="home_download_test_app_title">Descargar aplicación de prueba</string>
     <string name="home_download_test_app_message">Hemos desarrollado una aplicación de prueba de detección individual y hemos migrado el test de detección a ella ¿Quieres descargarla ahora?</string>
     <string name="home_backup_and_restore">Copia de seguridad&amp; Restaurar</string>
-    <string name="home_backup_config">Configuración de la copia de seguridad</string>
-    <string name="home_restore_config">Restaurar configuración</string>
+    <string name="home_backup_config">Exportar config</string>
+    <string name="home_restore_config">Restaurar config</string>
     <string name="home_import_successful">Importación con éxito</string>
     <string name="home_import_failed">Importación fallida</string>
     <string name="home_import_app_version_too_old">Versión del módulo inferior a la de la copia</string>
@@ -62,6 +62,7 @@
     <string name="list_sort_by_update_time">Por fecha de actualización</string>
     <string name="list_empty_no_enabled">Trate de habilitar la ocultación para aplicaciones con el modo de trabajo de esta plantilla y las aplicaciones aparecerán aquí</string>
     <string name="list_empty_no_apps">No se han encontrado aplicaciones, tal vez no hayas permitido que esta aplicación consulte todos los paquetes</string>
+    <string name="list_empty_preset">No hay aplicaciones añadidas en este preset</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Establece plantillas para aplicaciones \"inquietas\", controlando la lista de aplicaciones que pueden obtener.\n\nLista negra (recomendada): las aplicaciones seleccionadas en la plantilla serán invisibles para las aplicaciones que aplican la plantilla.\nLista blanca: las aplicaciones no seleccionadas en la plantilla serán invisibles para las aplicaciones que aplican la plantilla.</string>
     <string name="template_new_blacklist">Crear plantilla de lista negra</string>
@@ -96,7 +97,11 @@
     <string name="app_exclude_target_installation_source">Excluir la aplicación objetivo</string>
     <string name="app_exclude_target_installation_source_desc">Puedes activarlo si esta aplicación no está disponible en Play Store</string>
     <string name="app_force_stop_warning">No olvide forzar detención a la aplicación objetivo después de guardar la configuración</string>
-    <!-- Preset names -->
+    <string name="app_invert_activity_launch_protection">Invertir protección de Activity launch</string>
+    <string name="app_invert_activity_launch_protection_desc">Esta opción invertirá la selección de \"Desactivar la protección de Activity launch\" en Ajustes.</string>
+    <string name="app_global_activity_launch_protection_state">La protección es %s globalmente</string>
+    <!-- Presets -->
+    <string name="title_preset_manage">Mostrar presets</string>
     <string name="preset_xposed">Módulos LSPosed/Xposed</string>
     <string name="preset_root_apps">Gestores root/Aplicaciones Root</string>
     <string name="preset_custom_rom">Aplicaciones de ROM personalizadas</string>
@@ -110,11 +115,15 @@
     <string name="logs_saved">Logs guardados</string>
     <!-- Settings -->
     <string name="settings_module">Módulo</string>
+    <string name="settings_overwrite">Sobreescribir</string>
+    <string name="settings_overwritten">Sobreescrito</string>
+    <string name="settings_overwrite_summary">Los elementos de esta categoría serán forzados como habilitados si los interruptores son marcados</string>
+    <string name="settings_default_value">Valor por defecto: %s</string>
     <string name="settings_data_isolation">Aislamiento de datos</string>
-    <string name="settings_data_isolation_summary">App data: %s\nVold app data: %s\nForce mount: %s</string>
+    <string name="settings_data_isolation_summary">Datos de aplicación: %s\nDatos de la aplicación Vold: %s\nForzar montaje: %s</string>
     <string name="settings_data_isolation_unsupported">Esta opción solo está disponible en Android 11 y superior</string>
-    <string name="settings_app_data_isolation">Aislamiento de datos de la aplicacion</string>
-    <string name="settings_vold_app_data_isolation">Vold app data isolation</string>
+    <string name="settings_app_data_isolation">Aislamiento App data</string>
+    <string name="settings_vold_app_data_isolation">Aislamiento app data Vold</string>
     <string name="settings_warning">Advertencia</string>
     <string name="settings_vold_warning">Esto habilitará una función AOSP que hará que el directorio de almacenamiento privado externo de la aplicación esté aislado. Esto puede ayudar a mejorar la ocultación de aplicaciones pero puede causar problemas de estabilidad. Esta característica puede dejar de funcionar en cualquier momento ya que hay sido abandonada en AOSP.</string>
     <string name="settings_change_require_root">Cambiar requiere permiso root</string>
@@ -128,6 +137,8 @@
     <string name="settings_hide_icon_summary">Aún puedes abrir la aplicación en el gestor de Xposed</string>
     <string name="settings_bypass_risky_package_warning">Omitir la advertencia de paquete riesgoso</string>
     <string name="settings_bypass_risky_package_warning_summary">Tenga en cuenta que los desarrolladores no son responsables de problemas relacionados con paquetes riesgosos antes o después de activar esta característica</string>
+    <string name="settings_disable_activity_launch_protection">Desactivar la protección de Activity launch</string>
+    <string name="settings_disable_activity_launch_protection_summary">Este interruptor activará todas las protecciones de startActivity. Si no estás seguro, no lo actives.</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_translate">Participa en la traducción</string>
     <string name="settings_translate_summary">Ayúdanos a traducir %s a tu idioma</string>
@@ -150,8 +161,7 @@
     <string name="settings_receive_beta_update">Recibir actualización beta</string>
     <string name="settings_receive_beta_update_summary">La versión beta puede ser inestable</string>
     <!-- About -->
-    <string name="about_description">        Although It is incorrect to detect specific app installation, yet not every app using root provides random package name support. In this case, detected apps that use root (such as Fake Location and Storage Isolation) is equal to detected root itself.\n\nAt the same time, some smart apps use various loopholes to acquire your app list, so that it can draw a persona for you.\n\nThis module provides some methods to test whether you have already hidden your applist nicely. Also, it can work as an Xposed module to hide some apps or reject app list requests to protect your privacy.
-    </string>
+    <string name="about_description">Aunque es incorrecto detectar la instalación de una aplicación específica, no todas las aplicaciones que usan root brindan soporte para nombres de paquetes aleatorios. En este caso, aplicaciones detectadas que usan root(como ubicación falsa y aislamiento de almacenamiento) es igual a la raíz detectada.\n\n Al mismo tiempo, algunas aplicaciones inteligentes utilizan varias lagunas para adquirir su lista de aplicaciones, de modo que pueda dibujar una personalidad para usted.\n\n Este módulo proporciona algunos métodos para probar si ya ha ocultado correctamente su lista de aplicaciones. Además, puede funcionar como un módulo Xposed para ocultar algunas aplicaciones o rechazar solicitudes de listas de aplicaciones para proteger su privacidad.    </string>
     <string name="about_fork_description">        El proyecto HMA original se ha vuelto de código cerrado y su último código no contiene algunos de los últimos cambios, así que creé este fork para continuar como código abierto de nuevo.
     </string>
     <string name="about_how_to_use_title">Cómo utilizar este módulo</string>

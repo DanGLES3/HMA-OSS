@@ -11,7 +11,12 @@ import kotlinx.coroutines.runBlocking
 class AppPresetAdapter(
     private val presetName: String
 ) : AppSelectAdapter() {
-    val packages by lazy { ServiceClient.getPackagesForPreset(presetName)?.toMutableList() ?: mutableListOf() }
+    var packages = mutableListOf<String>()
+
+    fun updateList() {
+        packages.clear()
+        packages += ServiceClient.getPackagesForPreset(presetName)?.toList() ?: listOf()
+    }
 
     inner class ViewHolder(view: AppItemView) : AppSelectAdapter.ViewHolder(view) {
         override fun bind(packageName: String) {
@@ -32,13 +37,21 @@ class AppPresetAdapter(
     }
 
     private inner class PresetFilter : Filter() {
+
         override fun performFiltering(constraint: CharSequence): FilterResults {
             return runBlocking {
-                val constraintLowered = constraint.toString().lowercase()
+                val constraintLowered = constraint.toString().trim().lowercase()
                 val filteredList = packages.filter {
                     if (constraintLowered.isEmpty()) return@filter true
-                    val label = PackageHelper.loadAppLabel(it)
-                    label.lowercase().contains(constraintLowered) || it.lowercase().contains(constraintLowered)
+
+                    if (it.lowercase().contains(constraintLowered)) return@filter true
+
+                    try {
+                        val label = PackageHelper.loadAppLabel(it)
+                        return@filter label.lowercase().contains(constraintLowered)
+                    } catch (e: Throwable) {
+                        return@filter false
+                    }
                 }
 
                 FilterResults().also { it.values = filteredList }
@@ -47,8 +60,11 @@ class AppPresetAdapter(
 
         @Suppress("UNCHECKED_CAST", "NotifyDataSetChanged")
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
-            filteredList = results.values as List<String>
-            notifyDataSetChanged()
+            val values = results.values
+            if (values != null) {
+                filteredList = values as List<String>
+                notifyDataSetChanged()
+            }
         }
     }
 

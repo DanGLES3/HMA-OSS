@@ -46,6 +46,11 @@
             android:key="excludeSystemApps"
             android:summary="@string/app_exclude_system_apps_summary"
             android:title="@string/app_exclude_system_apps" />
+        <SwitchPreferenceCompat
+            android:icon="@drawable/outline_android_24"
+            android:key="invertActivityLaunchProtection"
+            android:title="@string/app_invert_activity_launch_protection"
+            android:summary="@string/app_invert_activity_launch_protection_desc" />
     </PreferenceCategory>
 
     <PreferenceCategory

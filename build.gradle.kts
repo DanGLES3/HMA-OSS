@@ -34,16 +34,29 @@ fun getUncommittedSuffix(): String {
 
 val gitHasUncommittedSuffix = getUncommittedSuffix()
 val gitCommitCount = "git rev-list HEAD --count".execute().toInt()
-val gitCommitHash = "git rev-parse --verify --short HEAD".execute()
+
+// 432 is the count of commits before license changed
 val gitCommitCountAfterOss = gitCommitCount - 432
 
 val minSdkVer by extra(29)
 val targetSdkVer by extra(36)
 
-val appVerCode = gitCommitCount + 0x6f7373
+val appVerCode = gitCommitCount + 0x6f7373 // commit count + 0xOSS
 val appVerName by extra("oss-${gitCommitCountAfterOss}${gitHasUncommittedSuffix}")
+
+/*
+ * configVerCode, serviceVerCode and minBackupVerCode is used by other build.gradle.kts files
+ *
+ * DO NOT REMOVE THESE LINES
+*/
+
+@Suppress("unused")
 val configVerCode by extra(93)
+
+@Suppress("unused")
 val serviceVerCode by extra(98)
+
+@Suppress("unused")
 val minBackupVerCode by extra(65)
 
 val androidSourceCompatibility = JavaVersion.VERSION_21
@@ -62,8 +75,6 @@ fun Project.configureBaseExtension() {
             targetSdk = targetSdkVer
             versionCode = appVerCode
             versionName = appVerName
-            if (localProperties.getProperty("buildWithGitSuffix").toBoolean())
-                versionNameSuffix = ".r${gitCommitCount}.${gitCommitHash}"
 
             consumerProguardFiles("proguard-rules.pro")
         }

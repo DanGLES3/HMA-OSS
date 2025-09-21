@@ -26,7 +26,7 @@ import org.frknkrc44.hma_oss.ui.fragment.AppPresetFragment
 
 abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
 
-    private val binding by viewBinding<FragmentAppSelectBinding>()
+    protected val binding by viewBinding<FragmentAppSelectBinding>()
 
     protected abstract val firstComparator: Comparator<String>
     protected abstract val adapter: AppSelectAdapter
@@ -46,6 +46,10 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
             PackageHelper.sortList(firstComparator)
             applyFilter()
         }
+    }
+
+    open fun invalidateCache() {
+        PackageHelper.invalidateCache()
     }
 
     private fun onMenuOptionSelected(item: MenuItem) {
@@ -115,7 +119,7 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
         binding.list.layoutManager = LinearLayoutManager(context)
         binding.list.adapter = adapter
         binding.swipeRefresh.setOnRefreshListener {
-            PackageHelper.invalidateCache()
+            invalidateCache()
         }
 
         adapter.registerAdapterDataObserver(
@@ -171,8 +175,14 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
             }
         }
 
+        val atLeastEntryCount: Int get() {
+            if (!search.isBlank()) return 0
+
+            return if (fragmentType < 2) 1 else 2
+        }
+
         private fun checkIfEmpty() {
-            val emptyViewVisible = recyclerView.adapter!!.itemCount < if (fragmentType < 2) 1 else 2
+            val emptyViewVisible = recyclerView.adapter!!.itemCount < atLeastEntryCount
             emptyView.visibility = if (emptyViewVisible) View.VISIBLE else View.GONE
             if (emptyViewVisible) {
                 emptyView.findViewById<TextView>(R.id.list_empty_text).text = getString(
@@ -183,7 +193,7 @@ abstract class AppSelectFragment : Fragment(R.layout.fragment_app_select) {
                     }
                 )
             }
-            (recyclerView.parent as View).visibility = if (emptyViewVisible) View.GONE else View.VISIBLE
+            recyclerView.visibility = if (emptyViewVisible) View.GONE else View.VISIBLE
         }
 
         override fun onChanged() {

@@ -62,6 +62,7 @@
     <string name="list_sort_by_update_time">Waktu pembaruan</string>
     <string name="list_empty_no_enabled">Coba aktifkan penyembunyian untuk aplikasi dengan mode kerja templat ini dan aplikasi akan muncul di sini</string>
     <string name="list_empty_no_apps">Tidak ada aplikasi yang ditemukan, mungkin anda tidak mengizinkan aplikasi ini untuk mengakses semua paket</string>
+    <string name="list_empty_preset">Tidak ada aplikasi yang ditambahkan dalam preset ini</string>
     <!-- Manage templates -->
     <string name="template_usage_hint">Buat templat untuk aplikasi \"berisiko\", guna mengontrol akses daftar aplikasi.\n\nBlacklist (disarankan): aplikasi yang dipilih dalam templat akan tersembunyi dari aplikasi yang menerapkan templat tersebut.\nWhitelist: aplikasi yang tidak dipilih dalam templat akan tersembunyi oleh aplikasi yang menerapkan templat tersebut.</string>
     <string name="template_new_blacklist">Buat templat blacklist</string>
@@ -96,7 +97,11 @@
     <string name="app_exclude_target_installation_source">Kecualikan aplikasi target</string>
     <string name="app_exclude_target_installation_source_desc">Anda dapat mengaktifkannya jika aplikasi ini tidak tersedia di Play Store</string>
     <string name="app_force_stop_warning">Jangan lupa untuk menghentikan paksa aplikasi target setelah menyimpan konfigurasi</string>
-    <!-- Preset names -->
+    <string name="app_invert_activity_launch_protection">Ubah proteksi peluncuran Activity</string>
+    <string name="app_invert_activity_launch_protection_desc">Opsi ini akan mengubah pilihan \"Nonaktifkan proteksi peluncuran Activity\" di Pengaturan.</string>
+    <string name="app_global_activity_launch_protection_state">Perlindungan %s secara universal</string>
+    <!-- Presets -->
+    <string name="title_preset_manage">Tampilkan preset</string>
     <string name="preset_xposed">Modul LSPosed/Xposed</string>
     <string name="preset_root_apps">Manajer root/Aplikasi root</string>
     <string name="preset_custom_rom">Aplikasi ROM kustom</string>
@@ -110,6 +115,10 @@
     <string name="logs_saved">Log disimpan</string>
     <!-- Settings -->
     <string name="settings_module">Modul</string>
+    <string name="settings_overwrite">Timpa</string>
+    <string name="settings_overwritten">Ditimpa</string>
+    <string name="settings_overwrite_summary">Item kategori ini akan dipaksa diaktifkan jika sakelar dicentang</string>
+    <string name="settings_default_value">Nilai default: %s</string>
     <string name="settings_data_isolation">Isolasi data</string>
     <string name="settings_data_isolation_summary">Data apl: %s\nData apl Vold: %s\nPaksa mount: %s</string>
     <string name="settings_data_isolation_unsupported">Opsi ini hanya tersedia di Android 11 dan di atasnya</string>
@@ -128,6 +137,8 @@
     <string name="settings_hide_icon_summary">Anda masih dapat membuka aplikasi di manajer Xposed</string>
     <string name="settings_bypass_risky_package_warning">Abaikan paket berisiko</string>
     <string name="settings_bypass_risky_package_warning_summary">Perlu diketahui bahwa pengembang tidak bertanggung jawab atas masalah terkait paket berisiko sebelum atau setelah anda mengaktifkan fitur ini</string>
+    <string name="settings_disable_activity_launch_protection">Nonaktifkan proteksi peluncuran Activity</string>
+    <string name="settings_disable_activity_launch_protection_summary">Tombol ini akan menonaktifkan semua proteksi startActivity. Jika anda tidak yakin, jangan aktifkan.</string>
     <string name="settings_language">Bahasa</string>
     <string name="settings_translate">Berpartisipasi dalam penerjemahan</string>
     <string name="settings_translate_summary">Bantu kami menerjemahkan %s ke bahasa anda</string>

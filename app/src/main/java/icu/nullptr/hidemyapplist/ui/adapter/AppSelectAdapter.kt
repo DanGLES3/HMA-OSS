@@ -21,7 +21,7 @@ abstract class AppSelectAdapter(
     private inner class AppFilter : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults {
             return runBlocking {
-                val constraintLowered = constraint.toString().lowercase()
+                val constraintLowered = constraint.toString().trim().lowercase()
                 val filteredList = PackageHelper.appList.first().filter {
                     if (firstFilter?.invoke(it) == false) return@filter false
                     if (!PrefManager.appFilter_showSystem && PackageHelper.isSystem(it)) return@filter false
@@ -38,8 +38,11 @@ abstract class AppSelectAdapter(
 
         @Suppress("UNCHECKED_CAST", "NotifyDataSetChanged")
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
-            filteredList = results.values as List<String>
-            notifyDataSetChanged()
+            val values = results.values
+            if (values != null) {
+                filteredList = values as List<String>
+                notifyDataSetChanged()
+            }
         }
     }
 

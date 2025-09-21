@@ -10,6 +10,7 @@
 - [English](README.md)
 - [中文（简体）](README_zh_CN.md)
 - Türkçe
+- [日本語](README_ja.md)
 
 ## Bu modül hakkında
 

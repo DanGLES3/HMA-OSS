@@ -1,16 +1,14 @@
 package icu.nullptr.hidemyapplist.common.app_presets
 
 import android.content.pm.ApplicationInfo
+import icu.nullptr.hidemyapplist.common.Utils
 import java.util.zip.ZipFile
 
 class RootAppsPreset() : BasePreset("root_apps") {
     override val exactPackageNames = setOf(
         // rooted apps
         "io.github.a13e300.ksuwebui",
-        "io.github.muntashirakon.AppManager",
         "com.fox2code.mmm",
-        "xzr.hkf",
-        "com.speedsoftware.rootexplorer",
         "id.kuato.diskhealth",
         "com.sunilpaulmathew.debloater",
         "com.garyodernichts.downgrader",
@@ -24,7 +22,6 @@ class RootAppsPreset() : BasePreset("root_apps") {
         "de.buttercookie.simbadroid",
         "simple.reboot.com",
         "ru.evgeniy.dpitunnel",
-        "me.zhanghai.android.files",
         "ca.mudar.fairphone.peaceofmind",
         "com.gitlab.giwiniswut.rwremount",
         "com.machiav3lli.backup",
@@ -33,7 +30,9 @@ class RootAppsPreset() : BasePreset("root_apps") {
         "org.nuntius35.wrongpinshutdown",
         "ru.nsu.bobrofon.easysshfs",
         "x1125io.initdlight",
-        "com.lonelycatgames.Xplore",
+        "com.byyoung.setting",
+        "web1n.stopapp",
+        "org.adaway",
 
         // kernel managers
         "flar2.exkernelmanager",
@@ -43,30 +42,25 @@ class RootAppsPreset() : BasePreset("root_apps") {
         "ccc71.st.cpu",
     )
 
+    val libNames = arrayOf(
+        "libkernelsu.so",
+        "libapd.so",
+        "libmagisk.so",
+        "libmagiskboot.so",
+        "libmmrl-kernelsu.so",
+        "libzakoboot.so",
+    )
+
+    val assetNames = arrayOf(
+        "gamma_profiles.json",
+        "main.jar",
+    )
+
     override fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean {
         val packageName = appInfo.packageName
 
-        if (containsPackage(packageName)) {
-            return false
-        }
-
-        // FX File Manager
-        if (packageName.startsWith("nextapp.fx")) {
-            return true
-        }
-
-        // TotalCommander and its plugins
-        if (packageName.startsWith("com.ghisler.")) {
-            return true
-        }
-
-        // ZDevs apps (ZArchiver etc.)
-        if (packageName.startsWith("ru.zdevs.")) {
-            return true
-        }
-
-        // MiXplorer, MiXplorer Silver and its plugins
-        if (packageName.startsWith("com.mixplorer")) {
+        // All libxzr apps (konabess, hkf, ...)
+        if (Utils.startsWithMultiple(packageName, "xzr.", "moe.xzr.")) {
             return true
         }
 
@@ -82,11 +76,6 @@ class RootAppsPreset() : BasePreset("root_apps") {
 
         // MMRL
         if (packageName.startsWith("com.dergoogler.mmrl")) {
-            return true
-        }
-
-        // MT Manager
-        if (packageName.startsWith("bin.mt.plus")) {
             return true
         }
 
@@ -116,43 +105,7 @@ class RootAppsPreset() : BasePreset("root_apps") {
         }
 
         ZipFile(appInfo.sourceDir).use { zipFile ->
-            if (findAppsFromLibs(zipFile) || findAppsFromAssets(zipFile)) {
-                return true
-            }
-        }
-
-        return false
-    }
-
-    private fun findAppsFromLibs(zipFile: ZipFile): Boolean {
-        val entryNames = listOf(
-            "libkernelsu.so",
-            "libapd.so",
-            "libmagisk.so",
-            "libmmrl-kernelsu.so",
-            "liblsplant.so",
-        )
-        val architectures = listOf("arm64-v8a", "armeabi-v7a")
-
-        for (entry in entryNames) {
-            for (arch in architectures) {
-                if (zipFile.getEntry("lib/$arch/$entry") != null) {
-                    return true
-                }
-            }
-        }
-
-        return false
-    }
-
-    private fun findAppsFromAssets(zipFile: ZipFile): Boolean {
-        val entryNames = listOf(
-            "gamma_profiles.json",
-            "main.jar",
-        )
-
-        for (entry in entryNames) {
-            if (zipFile.getEntry("assets/$entry") != null) {
+            if (findAppsFromLibs(zipFile, libNames) || findAppsFromAssets(zipFile, assetNames)) {
                 return true
             }
         }

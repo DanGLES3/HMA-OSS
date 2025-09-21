@@ -15,9 +15,9 @@ import icu.nullptr.hidemyapplist.hmaApp
 import icu.nullptr.hidemyapplist.service.PrefManager
 import icu.nullptr.hidemyapplist.service.ServiceClient
 import icu.nullptr.hidemyapplist.ui.adapter.LogAdapter
-import icu.nullptr.hidemyapplist.ui.util.makeToast
 import icu.nullptr.hidemyapplist.ui.util.navController
 import icu.nullptr.hidemyapplist.ui.util.setupToolbar
+import icu.nullptr.hidemyapplist.ui.util.showToast
 import kotlinx.coroutines.launch
 import org.frknkrc44.hma_oss.R
 import org.frknkrc44.hma_oss.databinding.FragmentLogsBinding
@@ -36,14 +36,14 @@ class LogsFragment : Fragment(R.layout.fragment_logs) {
         registerForActivityResult(ActivityResultContracts.CreateDocument("text/x-log")) save@{ uri ->
             if (uri == null) return@save
             if (logCache.isNullOrEmpty()) {
-                makeToast(R.string.logs_empty)
+                showToast(R.string.logs_empty)
                 return@save
             }
             hmaApp.contentResolver.openOutputStream(uri).use { output ->
-                if (output == null) makeToast(R.string.home_export_failed)
+                if (output == null) showToast(R.string.home_export_failed)
                 else output.write(logCache!!.toByteArray())
             }
-            makeToast(R.string.logs_saved)
+            showToast(R.string.logs_saved)
         }
 
     private fun updateLogs() {

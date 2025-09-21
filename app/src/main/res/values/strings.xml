@@ -104,12 +104,16 @@
     <string name="app_exclude_target_installation_source">Exclude the target app</string>
     <string name="app_exclude_target_installation_source_desc">You can enable it if this app is not available at Play Store</string>
     <string name="app_force_stop_warning">Don\'t forget to force stop the target app after saving the configuration</string>
+    <string name="app_invert_activity_launch_protection">Invert Activity launch protection</string>
+    <string name="app_invert_activity_launch_protection_desc">This option will invert \"Disable Activity launch protection\" selection in Settings.</string>
+    <string name="app_global_activity_launch_protection_state">Protection is %s globally</string>
 
     <!-- Presets -->
     <string name="title_preset_manage">Show presets</string>
     <string name="preset_xposed">LSPosed/Xposed modules</string>
     <string name="preset_root_apps">Root managers/Rooted apps</string>
     <string name="preset_custom_rom">Custom ROM apps</string>
+    <string name="preset_sus_apps">Suspicious apps</string>
 
     <!-- Settings preset names -->
     <string name="settings_preset_accessibility">Accessibility</string>
@@ -123,6 +127,10 @@
 
     <!-- Settings -->
     <string name="settings_module">Module</string>
+    <string name="settings_overwrite">Overwrite</string>
+    <string name="settings_overwritten">Overwritten</string>
+    <string name="settings_overwrite_summary">This category items will be forced as enabled if the switches are checked</string>
+    <string name="settings_default_value">Default value: %s</string>
     <string name="settings_data_isolation">Data isolation</string>
     <string name="settings_data_isolation_summary">App data: %s\nVold app data: %s\nForce mount: %s</string>
     <string name="settings_data_isolation_unsupported">This option is only available on Android 11 and above</string>
@@ -141,6 +149,8 @@
     <string name="settings_hide_icon_summary">You can still open the app in Xposed manager</string>
     <string name="settings_bypass_risky_package_warning">Bypass risky package warning</string>
     <string name="settings_bypass_risky_package_warning_summary">Note that the devs are not responsible for risky package related issues before or after you enabled this feature</string>
+    <string name="settings_disable_activity_launch_protection">Disable Activity launch protection</string>
+    <string name="settings_disable_activity_launch_protection_summary">This toggle will lift all startActivity protections. If you\'re unsure, don\'t enable it.</string>
 
     <string name="settings_language">Language</string>
     <string name="settings_translate">Participate in translation</string>

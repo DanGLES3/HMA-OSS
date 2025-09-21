@@ -1,23 +1,24 @@
 package org.frknkrc44.hma_oss.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import icu.nullptr.hidemyapplist.common.AppPresets
-import icu.nullptr.hidemyapplist.hmaApp
 import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.ui.view.ListItemView
 import org.frknkrc44.hma_oss.BuildConfig
 import org.frknkrc44.hma_oss.R
 
 class AppPresetListAdapter(
+    context: Context,
     private val onClickListener: ((ConfigManager.PresetInfo) -> Unit)?
 ) : RecyclerView.Adapter<AppPresetListAdapter.ViewHolder>() {
 
     private lateinit var list: List<ConfigManager.PresetInfo>
 
     init {
-        updateList()
+        updateList(context)
     }
 
     inner class ViewHolder(view: ListItemView) : RecyclerView.ViewHolder(view) {
@@ -50,18 +51,18 @@ class AppPresetListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(list[position].translation)
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList() {
+    @SuppressLint("NotifyDataSetChanged", "DiscouragedApi")
+    private fun updateList(context: Context) {
         val presetNames = AppPresets.instance.getAllPresetNames()
         val presetTranslations = presetNames.map { name ->
             try {
-                val id = hmaApp.resources.getIdentifier(
+                val id = context.resources.getIdentifier(
                     "preset_${name}",
                     "string",
                     BuildConfig.APPLICATION_ID
                 )
 
-                return@map if (id != 0) { hmaApp.resources.getString(id) } else { name }
+                return@map if (id != 0) { context.resources.getString(id) } else { name }
             } catch (_: Throwable) {}
 
             name

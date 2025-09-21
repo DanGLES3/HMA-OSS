@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_home">首页</string>
+    <string name="title_home">主页</string>
     <string name="title_logs">日志</string>
     <string name="title_settings">设置</string>
     <string name="title_template_manage">模板管理</string>
@@ -62,8 +62,9 @@
     <string name="list_sort_by_update_time">按更新时间</string>
     <string name="list_empty_no_enabled">尝试使用此模板的工作模式为应用程序启用隐藏，应用程序将显示在此处</string>
     <string name="list_empty_no_apps">未找到应用程序，可能您未允许此应用程序查询所有软件包</string>
+    <string name="list_empty_preset">此预设中未添加任何应用程序</string>
     <!-- Manage templates -->
-    <string name="template_usage_hint">为“不安分”的应用建立模板，控制可获取的应用列表。\n\n黑名单（推荐）：模板中选中的应用对应用模板的应用不可见。\n白名单：模板中未选中的应用对应用模板的应用不可见。</string>
+    <string name="template_usage_hint">为“不安分”的应用程序建立模板，控制他们可以获得的应用程序。黑名单（推荐）：在模板中选择的应用程序将对应用模板的应用程序不可见。白名单：未在模板中选择的应用程序将对应用模板的应用程序不可见。</string>
     <string name="template_new_blacklist">创建黑名单模板</string>
     <string name="template_new_whitelist">创建白名单模板</string>
     <string name="template_delete">你确定要删除此模板吗？</string>
@@ -96,7 +97,11 @@
     <string name="app_exclude_target_installation_source">排除目标应用</string>
     <string name="app_exclude_target_installation_source_desc">如果此应用程序在Play商店不可用，您可以启用它</string>
     <string name="app_force_stop_warning">保存配置后强制停止目标应用程序</string>
-    <!-- Preset names -->
+    <string name="app_invert_activity_launch_protection">反向活动启动保护</string>
+    <string name="app_invert_activity_launch_protection_desc">此选项将反转 “设置 ”中的 “禁用活动启动保护”选项。</string>
+    <string name="app_global_activity_launch_protection_state">保护范围为 %s 全局</string>
+    <!-- Presets -->
+    <string name="title_preset_manage">显示预设</string>
     <string name="preset_xposed">LSPosed/Xposed 模块</string>
     <string name="preset_root_apps">Root 管理器/Root 应用程序</string>
     <string name="preset_custom_rom">自定义 ROM 应用程序</string>
@@ -110,6 +115,10 @@
     <string name="logs_saved">日志已保存</string>
     <!-- Settings -->
     <string name="settings_module">模块</string>
+    <string name="settings_overwrite">覆盖</string>
+    <string name="settings_overwritten">已覆盖</string>
+    <string name="settings_overwrite_summary">如果开启开关，则此类项目将被强制启用</string>
+    <string name="settings_default_value">默认值：%s</string>
     <string name="settings_data_isolation">数据隔离</string>
     <string name="settings_data_isolation_summary">App data：%s\nVold app data：%s\n强制挂载：%s</string>
     <string name="settings_data_isolation_unsupported">此选项仅适用于 Android 11 及以上版本的系统</string>
@@ -128,6 +137,8 @@
     <string name="settings_hide_icon_summary">你仍然可以在 Xposed 管理器中打开此应用</string>
     <string name="settings_bypass_risky_package_warning">绕过风险软件包警告</string>
     <string name="settings_bypass_risky_package_warning_summary">请注意，对于启用此功能之前或之后出现的与风险软件包相关的问题，开发人员概不负责</string>
+    <string name="settings_disable_activity_launch_protection">关闭活动启动保护</string>
+    <string name="settings_disable_activity_launch_protection_summary">此切换将解除所有startActivity保护，如果你不确定，不要启用它。</string>
     <string name="settings_language">语言</string>
     <string name="settings_translate">参与翻译</string>
     <string name="settings_translate_summary">帮助我们把 %s 翻译到你的语言</string>
@@ -151,9 +162,9 @@
     <string name="settings_receive_beta_update_summary">注意：测试版可能不稳定</string>
     <!-- About -->
     <string name="about_description">虽然检测特定的应用程序安装是不正确的，但并非每个使用root的应用程序都提供随机包名支持。在这种情况下，检测到的使用root的应用程序（如假位置和存储隔离）等于检测到的root本身。与此同时，一些智能应用程序使用各种漏洞来获取您的应用程序列表，以便它可以为您绘制一个角色。此模块提供了一些方法来测试您是否已经很好地隐藏了应用程序。此外，它还可以作为Xposed模块来隐藏一些应用程序或拒绝应用程序列表请求，以保护您的隐私。</string>
-    <string name="about_fork_description">最初的HMA项目已经成为闭源代码，他们的最新代码不包含一些最新的更改，所以我创建了这个分支，再次将其作为开源代码继续使用</string>
+    <string name="about_fork_description">最初的HMA项目已经成为闭源代码，他们的最新代码不包含一些最新的更改，所以我创建了这个分支，再次将其作为开源代码继续使用。</string>
     <string name="about_how_to_use_title">如何使用此模块</string>
-    <string name="about_how_to_use_description_1">您可以在“管理模板”中创建模板。然后在“管理应用程序”中将模板应用于应用程序。（您还可以为目标选择额外的应用程序。）您应该并且只应该在Xposed模块范围/白名单中选中“系统框架”。Xposed模块用于隐藏某些应用程序或拒绝应用程序列表请求，以保护您的隐私。</string>
+    <string name="about_how_to_use_description_1">您可以在“模板管理”中创建模板。然后在“应用管理”中将模板应用于应用程序。（您还可以为目标选择额外的应用程序。）您应该并且只应该在Xposed模块范围/白名单中选中“系统框架”。Xposed模块用于隐藏某些应用程序或拒绝应用程序列表请求，以保护您的隐私。</string>
     <string name="about_how_to_use_description_2">配置修改实时有效</string>
     <string name="about_developer">开发者</string>
     <string name="about_support">支持与反馈</string>
