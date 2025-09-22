@@ -9,16 +9,13 @@ class XposedModulesPreset() : BasePreset("xposed") {
 
     override fun canBeAddedIntoPreset(appInfo: ApplicationInfo): Boolean {
         ZipFile(appInfo.sourceDir).use { zipFile ->
-            val manifestFile = zipFile.getInputStream(
-                zipFile.getEntry("AndroidManifest.xml"))
-            val manifestBytes = manifestFile.use { it.readBytes() }
-            val manifestStr = String(manifestBytes, Charsets.US_ASCII)
-
-            // Checking with binary because the Android system sucks
-            if (manifestStr.contains(CommonUtils.XPOSED_PROP1) ||
-                manifestStr.contains(CommonUtils.XPOSED_PROP2)) {
+            // Legacy Xposed method
+            if (zipFile.getEntry("assets/xposed_init") != null) {
                 return true
-            } else if (zipFile.getEntry("META-INF/xposed/module.prop") != null) {
+            }
+
+            // New LSPosed method
+            if (zipFile.getEntry("META-INF/xposed/module.prop") != null) {
                 return true
             }
         }

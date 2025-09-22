@@ -105,6 +105,7 @@
     <string name="preset_xposed">LSPosed/Xposed modülleri</string>
     <string name="preset_root_apps">Root yöneticileri/Rootlu uygulamalar</string>
     <string name="preset_custom_rom">Özel ROM uygulamaları</string>
+    <string name="preset_sus_apps">Şüpheli uygulamalar</string>
     <!-- Settings preset names -->
     <string name="settings_preset_accessibility">Erişilebilirlik</string>
     <string name="settings_preset_dev_options">Geliştirici seçenekleri</string>

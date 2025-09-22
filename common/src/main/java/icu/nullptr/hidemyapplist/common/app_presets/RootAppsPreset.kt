@@ -34,6 +34,9 @@ class RootAppsPreset() : BasePreset("root_apps") {
         "web1n.stopapp",
         "org.adaway",
 
+        // Scene's "Core Edition" cannot be detected in the Xposed preset
+        "com.omarea.vtools",
+
         // kernel managers
         "flar2.exkernelmanager",
         "com.franco.kernel",

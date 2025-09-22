@@ -32,6 +32,11 @@ class SuspiciousAppsPreset : BasePreset("sus_apps") {
             return true
         }
 
+        // All Shizuku apps
+        if (packageName.startsWith("moe.shizuku.")) {
+            return true
+        }
+
         // All RealVNC apps (categorized as suspicious, because some of apps checking for them)
         if (packageName.startsWith("com.realvnc.")) {
             return true
