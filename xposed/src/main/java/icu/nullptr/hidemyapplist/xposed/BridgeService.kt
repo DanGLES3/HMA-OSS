@@ -53,8 +53,8 @@ object BridgeService {
             } else {
                 logW(TAG, "Someone else trying to get my binder?")
             }
-            data.setDataPosition(0)
-            reply?.setDataPosition(0)
+            //data.setDataPosition(0)
+            //reply?.setDataPosition(0)
         }
         return false
     }
