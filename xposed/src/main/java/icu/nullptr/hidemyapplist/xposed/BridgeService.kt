@@ -26,32 +26,32 @@ object BridgeService {
         pms.javaClass.findMethod(true) {
             name == "onTransact"
         }.hookBefore { param ->
-            val code = param.args[0] as Int
-            val data = param.args[1] as Parcel
-            val reply = param.args[2] as Parcel?
-            if (myTransact(code, data, reply)) param.result = true
+            if (Binder.getCallingUid() == appUid) {
+                val code = param.args[0] as Int
+                val data = param.args[1] as Parcel
+                val reply = param.args[2] as Parcel?
+                if (myTransact(code, data, reply)) param.result = true
+            } else {
+                logW(TAG, "Someone else trying to get my binder?")
+            }
         }
     }
 
     private fun myTransact(code: Int, data: Parcel, reply: Parcel?): Boolean {
         if (code == Constants.TRANSACTION) {
-            if (Binder.getCallingUid() == appUid) {
-                logD(TAG, "Transaction from client")
-                runCatching {
-                    data.enforceInterface(Constants.DESCRIPTOR)
-                    when (data.readInt()) {
-                        Constants.ACTION_GET_BINDER -> {
-                            reply?.writeNoException()
-                            reply?.writeStrongBinder(HMAService.instance)
-                            return true
-                        }
-                        else -> logW(TAG, "Unknown action")
+            logD(TAG, "Transaction from client")
+            runCatching {
+                data.enforceInterface(Constants.DESCRIPTOR)
+                when (data.readInt()) {
+                    Constants.ACTION_GET_BINDER -> {
+                        reply?.writeNoException()
+                        reply?.writeStrongBinder(HMAService.instance)
+                        return true
                     }
-                }.onFailure {
-                    logE(TAG, "Transaction error", it)
+                    else -> logW(TAG, "Unknown action")
                 }
-            } else {
-                logW(TAG, "Someone else trying to get my binder?")
+            }.onFailure {
+                logE(TAG, "Transaction error", it)
             }
             //data.setDataPosition(0)
             //reply?.setDataPosition(0)
